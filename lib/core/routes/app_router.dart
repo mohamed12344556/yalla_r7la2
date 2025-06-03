@@ -1,0 +1,84 @@
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:get_it/get_it.dart';
+import 'package:p1/core/routes/routes.dart';
+import 'package:p1/features/auth/ui/logic/login_cubit.dart';
+import 'package:p1/features/auth/ui/logic/register_cubit.dart';
+import 'package:p1/features/auth/ui/screens/login_screen.dart';
+import 'package:p1/features/auth/ui/screens/register_screen.dart';
+import 'package:p1/features/home/ui/screens/home_screen.dart';
+import 'package:p1/features/home/ui/screens/host_screen.dart';
+import 'package:p1/features/profile/ui/logic/profile_cubit.dart';
+import 'package:p1/features/profile/ui/screens/Profile_edit_screen.dart';
+import 'package:p1/features/profile/ui/screens/profile_view_screen.dart';
+
+final sl = GetIt.instance;
+
+class AppRouter {
+  static Route? generateRoute(RouteSettings settings) {
+    final arguments = settings.arguments;
+
+    switch (settings.name) {
+      case Routes.login:
+        return MaterialPageRoute(
+          builder:
+              (_) => BlocProvider(
+                create: (context) => sl<LoginCubit>(),
+                child: const LoginScreen(),
+              ),
+        );
+
+      case Routes.register:
+        return MaterialPageRoute(
+          builder:
+              (_) => BlocProvider(
+                create: (context) => sl<RegisterCubit>(),
+                child: const RegisterScreen(),
+              ),
+        );
+
+      case Routes.host:
+        return MaterialPageRoute(builder: (_) => const HostScreen());
+
+      case Routes.home:
+        return MaterialPageRoute(builder: (_) => const HomeScreen());
+
+      case Routes.profile:
+        return MaterialPageRoute(
+          builder:
+              (_) => BlocProvider(
+                create: (context) => sl<ProfileCubit>(),
+                child: const ProfileViewScreen(),
+              ),
+        );
+
+      case Routes.editProfile:
+        return MaterialPageRoute(
+          builder: (context) {
+            return BlocProvider.value(
+              value: sl<ProfileCubit>(),
+              child: const ProfileEditScreen(),
+            );
+          },
+        );
+
+      default:
+        return MaterialPageRoute(
+          builder:
+              (_) => Scaffold(
+                appBar: AppBar(title: const Text('Error')),
+                body: const Center(
+                  child: Text(
+                    'Page not found!',
+                    style: TextStyle(
+                      fontSize: 20,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.red,
+                    ),
+                  ),
+                ),
+              ),
+        );
+    }
+  }
+}
