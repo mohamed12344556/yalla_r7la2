@@ -67,6 +67,3 @@ void _initProfile() {
 /// | Number of Instances | One                  | One                     | New instance every time |
 /// | State Sharing       | Supported            | Supported               | Not supported           |
 /// | Common Use Cases    | Settings, Sessions   | Heavy Services          | Temporary Objects       |
-
-
-// flutter build --release
