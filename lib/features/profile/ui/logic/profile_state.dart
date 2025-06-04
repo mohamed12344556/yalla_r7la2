@@ -1,6 +1,6 @@
 import 'dart:io';
 
-import 'package:p1/features/profile/data/models/user_model.dart';
+import '../../data/models/user_model.dart';
 
 abstract class ProfileState {}
 

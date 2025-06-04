@@ -1,7 +1,7 @@
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
-import 'package:p1/core/api/api_constants.dart';
-import 'package:p1/features/auth/data/models/auth_model.dart';
+import '../../../../core/api/api_constants.dart';
+import '../models/auth_model.dart';
 
 class AuthRepo {
   final Dio dio;

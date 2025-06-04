@@ -1,8 +1,8 @@
 import 'dart:developer';
 
-import 'package:p1/core/api/api_constants.dart';
-import 'package:p1/core/cache/shared_pref_helper.dart';
-import 'package:p1/core/routes/routes.dart';
+import '../api/api_constants.dart';
+import '../cache/shared_pref_helper.dart';
+import '../routes/routes.dart';
 
 class AuthGuard {
   // Check if user is logged in

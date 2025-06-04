@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:p1/features/home/data/model/destination_model.dart';
+import '../../data/model/destination_model.dart';
 
 class DestinationDetailsScreen extends StatefulWidget {
   final DestinationModel card;

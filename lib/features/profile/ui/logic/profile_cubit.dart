@@ -4,11 +4,11 @@ import 'dart:typed_data';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:p1/core/cache/shared_pref_helper.dart';
-import 'package:p1/core/utils/image_helper.dart';
-import 'package:p1/features/profile/data/models/user_model.dart';
-import 'package:p1/features/profile/data/repos/profile_repo.dart';
-import 'package:p1/features/profile/ui/logic/profile_state.dart';
+import '../../../../core/cache/shared_pref_helper.dart';
+import '../../../../core/utils/image_helper.dart';
+import '../../data/models/user_model.dart';
+import '../../data/repos/profile_repo.dart';
+import 'profile_state.dart';
 import 'package:path_provider/path_provider.dart';
 
 class ProfileCubit extends Cubit<ProfileState> {

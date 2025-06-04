@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:p1/features/payment/data/ui/screens/payment.dart';
+import '../../../../payment/data/ui/screens/payment.dart';
 
 class BookingScreen extends StatelessWidget {
   const BookingScreen({super.key, required this.location});

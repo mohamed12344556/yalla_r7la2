@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:p1/features/auth/ui/widgets/image_picker_option.dart';
+import 'image_picker_option.dart';
 
 import '../logic/register_cubit.dart';
 

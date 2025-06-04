@@ -5,15 +5,15 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:p1/core/api/api_constants.dart';
-import 'package:p1/core/cache/shared_pref_helper.dart';
-import 'package:p1/core/routes/routes.dart';
-import 'package:p1/core/utils/extensions.dart';
-import 'package:p1/core/utils/image_helper.dart';
-import 'package:p1/core/widgets/app_loading_indicator.dart';
-import 'package:p1/features/profile/data/models/user_model.dart';
-import 'package:p1/features/profile/ui/logic/profile_cubit.dart';
-import 'package:p1/features/profile/ui/logic/profile_state.dart';
+import '../../../../core/api/api_constants.dart';
+import '../../../../core/cache/shared_pref_helper.dart';
+import '../../../../core/routes/routes.dart';
+import '../../../../core/utils/extensions.dart';
+import '../../../../core/utils/image_helper.dart';
+import '../../../../core/widgets/app_loading_indicator.dart';
+import '../../data/models/user_model.dart';
+import '../logic/profile_cubit.dart';
+import '../logic/profile_state.dart';
 
 class ProfileViewScreen extends StatefulWidget {
   const ProfileViewScreen({super.key});

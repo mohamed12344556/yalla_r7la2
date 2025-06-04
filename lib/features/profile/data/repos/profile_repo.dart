@@ -2,8 +2,8 @@ import 'dart:developer';
 import 'dart:io';
 
 import 'package:dio/dio.dart';
-import 'package:p1/core/api/api_constants.dart';
-import 'package:p1/features/profile/data/models/user_model.dart';
+import '../../../../core/api/api_constants.dart';
+import '../models/user_model.dart';
 
 class ProfileRepo {
   final Dio dio;

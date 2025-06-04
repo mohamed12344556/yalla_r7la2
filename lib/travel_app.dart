@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:p1/core/routes/app_router.dart';
-import 'package:p1/core/themes/app_theme.dart';
+import 'core/routes/app_router.dart';
+import 'core/themes/app_theme.dart';
 
 class TravelApp extends StatelessWidget {
   final String initialRoute;

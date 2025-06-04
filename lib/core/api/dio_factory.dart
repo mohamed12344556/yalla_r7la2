@@ -1,6 +1,6 @@
 import 'package:dio/dio.dart';
-import 'package:p1/core/api/api_constants.dart';
-import 'package:p1/core/cache/shared_pref_helper.dart';
+import 'api_constants.dart';
+import '../cache/shared_pref_helper.dart';
 import 'package:pretty_dio_logger/pretty_dio_logger.dart';
 
 class DioFactory {

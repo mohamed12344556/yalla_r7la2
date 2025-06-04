@@ -2,10 +2,10 @@ import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:hydrated_bloc/hydrated_bloc.dart';
-import 'package:p1/core/di/dependency_injection.dart';
-import 'package:p1/core/utils/auth_guard.dart';
-import 'package:p1/core/utils/bloc_setup.dart';
-import 'package:p1/travel_app.dart';
+import 'core/di/dependency_injection.dart';
+import 'core/utils/auth_guard.dart';
+import 'core/utils/bloc_setup.dart';
+import 'travel_app.dart';
 import 'package:path_provider/path_provider.dart';
 
 void main() async {

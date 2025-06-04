@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:p1/features/destinations/data/ui/screens/flight_booking_screen.dart';
+import 'flight_booking_screen.dart';
 
 import 'DescriptionScreen.dart';
 

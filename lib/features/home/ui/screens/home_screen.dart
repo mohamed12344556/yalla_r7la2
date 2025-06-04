@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:p1/features/home/ui/widgets/home_header.dart';
-import 'package:p1/features/home/ui/widgets/search_and_categories_section.dart';
-import 'package:p1/features/home/ui/widgets/top_destinations_section.dart';
+import '../widgets/home_header.dart';
+import '../widgets/search_and_categories_section.dart';
+import '../widgets/top_destinations_section.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});

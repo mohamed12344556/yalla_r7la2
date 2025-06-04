@@ -1,8 +1,8 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
-import 'package:p1/core/utils/image_helper.dart';
-import 'package:p1/features/profile/data/models/user_model.dart';
+import '../../../../core/utils/image_helper.dart';
+import '../../data/models/user_model.dart';
 
 class ProfileImageWidget extends StatelessWidget {
   final UserModel? user;

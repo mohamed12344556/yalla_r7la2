@@ -1,10 +1,10 @@
 import 'package:dio/dio.dart';
 import 'package:get_it/get_it.dart';
-import 'package:p1/features/auth/data/repos/auth_repo.dart';
-import 'package:p1/features/auth/ui/logic/login_cubit.dart';
-import 'package:p1/features/auth/ui/logic/register_cubit.dart';
-import 'package:p1/features/profile/data/repos/profile_repo.dart';
-import 'package:p1/features/profile/ui/logic/profile_cubit.dart';
+import '../../features/auth/data/repos/auth_repo.dart';
+import '../../features/auth/ui/logic/login_cubit.dart';
+import '../../features/auth/ui/logic/register_cubit.dart';
+import '../../features/profile/data/repos/profile_repo.dart';
+import '../../features/profile/ui/logic/profile_cubit.dart';
 
 import '../api/dio_factory.dart';
 

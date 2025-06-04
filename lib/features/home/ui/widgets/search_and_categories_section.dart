@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:p1/features/destinations/data/models/category_model.dart';
+
+import '../../../destinations/data/models/category_model.dart';
 
 class SearchAndCategoriesSection extends StatefulWidget {
   const SearchAndCategoriesSection({super.key});

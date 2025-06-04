@@ -4,11 +4,11 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:p1/core/utils/extensions.dart';
-import 'package:p1/core/utils/image_helper.dart';
-import 'package:p1/core/widgets/app_loading_indicator.dart';
-import 'package:p1/features/profile/ui/logic/profile_cubit.dart';
-import 'package:p1/features/profile/ui/logic/profile_state.dart';
+import '../../../../core/utils/extensions.dart';
+import '../../../../core/utils/image_helper.dart';
+import '../../../../core/widgets/app_loading_indicator.dart';
+import '../logic/profile_cubit.dart';
+import '../logic/profile_state.dart';
 
 class ProfileEditScreen extends StatefulWidget {
   const ProfileEditScreen({super.key});
@@ -29,8 +29,6 @@ class _ProfileEditScreenState extends State<ProfileEditScreen> {
   final _cityController = TextEditingController();
   final _preferenceCityController = TextEditingController();
   final _birthDateController = TextEditingController();
-
-  String? _selectedGender;
   DateTime? _selectedDate;
   File? _selectedImage;
   final bool _isImageUploading = false;
@@ -381,60 +379,6 @@ class _ProfileEditScreenState extends State<ProfileEditScreen> {
     );
   }
 
-  // Widget _buildGenderDropdown() {
-  //   return Column(
-  //     crossAxisAlignment: CrossAxisAlignment.start,
-  //     children: [
-  //       const Text(
-  //         'Gender',
-  //         style: TextStyle(
-  //           fontSize: 16,
-  //           fontWeight: FontWeight.w600,
-  //           color: Colors.black87,
-  //         ),
-  //       ),
-  //       // const SizedBox(height: 8),
-  //       // DropdownButtonFormField<String>(
-  //       //   value: _selectedGender,
-  //       //   style: const TextStyle(fontSize: 16, color: Colors.black87),
-  //       //   decoration: InputDecoration(
-  //       //     hintText: 'Select your gender',
-  //       //     filled: true,
-  //       //     fillColor: Colors.grey[50],
-  //       //     border: OutlineInputBorder(
-  //       //       borderRadius: BorderRadius.circular(15),
-  //       //       borderSide: BorderSide(color: Colors.grey[300]!),
-  //       //     ),
-  //       //     enabledBorder: OutlineInputBorder(
-  //       //       borderRadius: BorderRadius.circular(15),
-  //       //       borderSide: BorderSide(color: Colors.grey[300]!),
-  //       //     ),
-  //       //     focusedBorder: OutlineInputBorder(
-  //       //       borderRadius: BorderRadius.circular(15),
-  //       //       borderSide: const BorderSide(color: Color(0xFF30B0C7), width: 2),
-  //       //     ),
-  //       //     contentPadding: const EdgeInsets.symmetric(
-  //       //       horizontal: 16,
-  //       //       vertical: 16,
-  //       //     ),
-  //       //   ),
-  //       //   items:
-  //       //       _genderOptions.map((String gender) {
-  //       //         return DropdownMenuItem<String>(
-  //       //           value: gender,
-  //       //           child: Text(gender),
-  //       //         );
-  //       //       }).toList(),
-  //       //   onChanged: (String? newValue) {
-  //       //     setState(() {
-  //       //       _selectedGender = newValue;
-  //       //     });
-  //       //   },
-  //       // ),
-  //     ],
-  //   );
-  // }
-
   bool _validateForm() {
     if (!_formKey.currentState!.validate()) {
       return false;
@@ -442,79 +386,6 @@ class _ProfileEditScreenState extends State<ProfileEditScreen> {
 
     return true;
   }
-
-  // Future<void> _saveProfile() async {
-  //   if (!_validateForm()) {
-  //     return;
-  //   }
-
-  //   try {
-  //     final currentUser = context.read<ProfileCubit>().currentUser;
-  //     if (currentUser == null) {
-  //       context.showErrorSnackBar('User data not found');
-  //       return;
-  //     }
-
-  //     // Validate required fields
-  //     final name = _nameController.text.trim();
-  //     final email = _emailController.text.trim();
-  //     final city = _cityController.text.trim();
-  //     final prefrance = _preferenceCityController.text.trim();
-  //     final phone = _phoneController.text.trim();
-  //     final password = _passwordController.text.trim();
-
-  //     if (name.isEmpty) {
-  //       context.showErrorSnackBar('Name is required');
-  //       return;
-  //     }
-  //     if (email.isEmpty) {
-  //       context.showErrorSnackBar('Email is required');
-  //       return;
-  //     }
-  //     if (city.isEmpty) {
-  //       context.showErrorSnackBar('City is required');
-  //       return;
-  //     }
-  //     if (prefrance.isEmpty) {
-  //       context.showErrorSnackBar('Preferred city is required');
-  //       return;
-  //     }
-  //     // تأكد إن الباسورد مطلوب
-  //     if (password.isEmpty) {
-  //       context.showErrorSnackBar('Password is required');
-  //       return;
-  //     }
-  //     if (password.length < 6) {
-  //       context.showErrorSnackBar('Password must be at least 6 characters');
-  //       return;
-  //     }
-
-  //     // Create updated user model with all required fields
-  //     final updatedUser = currentUser.copyWith(
-  //       name: name,
-  //       email: email,
-  //       city: city,
-  //       prefrance: prefrance,
-  //       phoneNumber: phone,
-  //       age:
-  //           _selectedDate != null
-  //               ? _calculateAge(_selectedDate!)
-  //               : currentUser.age,
-  //       password: password,
-  //       imageData: currentUser.imageData,
-  //       imageBytes: currentUser.imageBytes,
-  //     );
-
-  //     await context.read<ProfileCubit>().updateProfileComplete(
-  //       updatedUser: updatedUser,
-  //       newImageFile: _selectedImage,
-  //     );
-  //   } catch (e) {
-  //     if (mounted) {
-  //       context.showErrorSnackBar('Failed to update profile: ${e.toString()}');
-  //     }
-  //   }
-  // }
 
   Future<void> _saveProfile() async {
     if (!_validateForm()) {

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:p1/core/themes/app_colors.dart';
+import '../themes/app_colors.dart';
 
 extension ScreenSizeExtension on BuildContext {
   double get screenWidth => MediaQuery.of(this).size.width;

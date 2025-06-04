@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_it/get_it.dart';
-import 'package:p1/core/routes/routes.dart';
-import 'package:p1/features/auth/ui/logic/login_cubit.dart';
-import 'package:p1/features/auth/ui/logic/register_cubit.dart';
-import 'package:p1/features/auth/ui/screens/login_screen.dart';
-import 'package:p1/features/auth/ui/screens/register_screen.dart';
-import 'package:p1/features/home/ui/screens/home_screen.dart';
-import 'package:p1/features/home/ui/screens/host_screen.dart';
-import 'package:p1/features/profile/ui/logic/profile_cubit.dart';
-import 'package:p1/features/profile/ui/screens/Profile_edit_screen.dart';
-import 'package:p1/features/profile/ui/screens/profile_view_screen.dart';
+import 'routes.dart';
+import '../../features/auth/ui/logic/login_cubit.dart';
+import '../../features/auth/ui/logic/register_cubit.dart';
+import '../../features/auth/ui/screens/login_screen.dart';
+import '../../features/auth/ui/screens/register_screen.dart';
+import '../../features/home/ui/screens/home_screen.dart';
+import '../../features/home/ui/screens/host_screen.dart';
+import '../../features/profile/ui/logic/profile_cubit.dart';
+import '../../features/profile/ui/screens/Profile_edit_screen.dart';
+import '../../features/profile/ui/screens/profile_view_screen.dart';
 
 final sl = GetIt.instance;
 

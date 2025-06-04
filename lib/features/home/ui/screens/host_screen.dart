@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:p1/core/di/dependency_injection.dart';
-import 'package:p1/features/chat/data/ui/screens/chat_bot_screen.dart';
-import 'package:p1/features/destinations/data/ui/screens/explore_screen.dart';
-import 'package:p1/features/favorites/ui/screens/favorites_screen.dart';
-import 'package:p1/features/home/ui/screens/home_screen.dart';
-import 'package:p1/features/profile/ui/logic/profile_cubit.dart';
-import 'package:p1/features/profile/ui/screens/profile_view_screen.dart';
+import '../../../../core/di/dependency_injection.dart';
+import '../../../chat/data/ui/screens/chat_bot_screen.dart';
+import '../../../destinations/data/ui/screens/explore_screen.dart';
+import '../../../favorites/ui/screens/favorites_screen.dart';
+import 'home_screen.dart';
+import '../../../profile/ui/logic/profile_cubit.dart';
+import '../../../profile/ui/screens/profile_view_screen.dart';
 
 class HostScreen extends StatefulWidget {
   const HostScreen({super.key});

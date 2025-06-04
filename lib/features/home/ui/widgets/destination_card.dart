@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:p1/features/home/data/model/destination_model.dart';
-import 'package:p1/features/home/ui/screens/destination_details_screen.dart';
-import 'package:p1/features/home/ui/widgets/destination_card_content.dart';
+import '../../data/model/destination_model.dart';
+import '../screens/destination_details_screen.dart';
+import 'destination_card_content.dart';
 
 class DestinationCard extends StatelessWidget {
   final DestinationModel cardData;

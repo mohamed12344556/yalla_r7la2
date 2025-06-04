@@ -2,12 +2,12 @@ import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:p1/core/routes/routes.dart';
-import 'package:p1/core/utils/extensions.dart';
-import 'package:p1/core/utils/validators.dart';
-import 'package:p1/core/widgets/app_button.dart';
-import 'package:p1/core/widgets/app_text_field.dart';
 
+import '../../../../core/routes/routes.dart';
+import '../../../../core/utils/extensions.dart';
+import '../../../../core/utils/validators.dart';
+import '../../../../core/widgets/app_button.dart';
+import '../../../../core/widgets/app_text_field.dart';
 import '../logic/register_cubit.dart';
 import '../widgets/image_picker_bottom_sheet.dart';
 import '../widgets/profile_image_section.dart';
