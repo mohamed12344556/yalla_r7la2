@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+
 import '../widgets/home_header.dart';
 import '../widgets/search_and_categories_section.dart';
 import '../widgets/top_destinations_section.dart';
@@ -9,7 +10,7 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xFFF5F5F5),
+      backgroundColor: const Color.fromARGB(255, 0, 255, 195),
       body: SafeArea(
         child: CustomScrollView(
           slivers: [

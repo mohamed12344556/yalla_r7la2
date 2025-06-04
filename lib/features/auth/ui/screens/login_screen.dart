@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+
 import '../../../../core/api/api_constants.dart';
 import '../../../../core/cache/shared_pref_helper.dart';
 import '../../../../core/routes/routes.dart';
@@ -7,7 +8,6 @@ import '../../../../core/utils/extensions.dart';
 import '../../../../core/utils/validators.dart';
 import '../../../../core/widgets/app_button.dart';
 import '../../../../core/widgets/app_text_field.dart';
-
 import '../logic/login_cubit.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -35,7 +35,7 @@ class _LoginScreenState extends State<LoginScreen> {
   Widget build(BuildContext context) {
     final cubit = context.read<LoginCubit>();
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: Colors.red,
       body: SafeArea(
         child: SingleChildScrollView(
           padding: const EdgeInsets.all(24),
