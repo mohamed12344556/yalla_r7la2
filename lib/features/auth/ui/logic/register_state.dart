@@ -27,3 +27,6 @@ final class RegisterError extends RegisterState {
 final class RegisterImageSelected extends RegisterState {}
 
 final class RegisterImageRemoved extends RegisterState {}
+
+// Preferred city state
+final class RegisterPreferredCityChanged extends RegisterState {}

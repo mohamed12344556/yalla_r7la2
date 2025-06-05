@@ -64,8 +64,8 @@ class ProfileRepo {
         formDataMap['City'] = user.city!;
       }
 
-      if (user.prefrance != null && user.prefrance!.isNotEmpty) {
-        formDataMap['Prefrance'] = user.prefrance!;
+      if (user.preference != null && user.preference!.isNotEmpty) {
+        formDataMap['Prefrance'] = user.preference!;
       }
 
       // إضافة Password (Required) - تأكد من وجودها
@@ -238,8 +238,8 @@ class ProfileRepo {
       formDataMap['City'] = user.city!;
     }
 
-    if (user.prefrance != null && user.prefrance!.isNotEmpty) {
-      formDataMap['Prefrance'] = user.prefrance!;
+    if (user.preference != null && user.preference!.isNotEmpty) {
+      formDataMap['Prefrance'] = user.preference!;
     }
 
     // Required fields

@@ -7,11 +7,11 @@ class UserModel {
   final String? email;
   final String? city;
   final int? age;
-  final String? prefrance;
-  final String? imageData; // Base64 string or URL
-  final Uint8List? imageBytes; // Raw byte data
-  final String? phoneNumber; // Added phone Stringber
-  final String? password; // Added password
+  final String? preference;
+  final String? imageData;
+  final Uint8List? imageBytes;
+  final String? phoneNumber;
+  final String? password;
 
   UserModel({
     this.id,
@@ -19,11 +19,11 @@ class UserModel {
     this.email,
     this.city,
     this.age,
-    this.prefrance,
+    this.preference,
     this.imageData,
     this.imageBytes,
-    this.phoneNumber, // Added phone Stringber
-    this.password, // Added password
+    this.phoneNumber,
+    this.password,
   });
 
   factory UserModel.fromJson(Map<String, dynamic> json) {
@@ -31,8 +31,8 @@ class UserModel {
     String? imageDataString;
 
     // معالجة البيانات المختلفة للصورة
-    if (json['imageData'] != null) {
-      final imageValue = json['imageData'];
+    if (json['imageBase64'] != null) {
+      final imageValue = json['imageBase64'];
 
       if (imageValue is String) {
         imageDataString = imageValue;
@@ -62,11 +62,11 @@ class UserModel {
       email: json['email'],
       city: json['city'],
       age: json['age'],
-      prefrance: json['prefrance'],
+      preference: json['prefrance'],
       imageData: imageDataString,
       imageBytes: bytes,
-      phoneNumber: json['phoneNumber'], // Added phone Stringber
-      password: json['password'], // Added password
+      phoneNumber: json['phoneNumber'],
+      password: json['password'],
     );
   }
 
@@ -77,10 +77,10 @@ class UserModel {
       'email': email,
       'city': city,
       'age': age,
-      'prefrance': prefrance,
-      'imageData': imageData,
-      'phoneNumber': phoneNumber, // Added phone Stringber
-      'password': password, // Added password
+      'prefrance': preference,
+      'imageBase64': imageData,
+      'phoneNumber': phoneNumber,
+      'password': password,
       // لا نرسل imageBytes في JSON
     };
   }
@@ -94,8 +94,8 @@ class UserModel {
     String? prefrance,
     String? imageData,
     Uint8List? imageBytes,
-    String? phoneNumber, // Added phone Stringber
-    String? password, // Added password
+    String? phoneNumber,
+    String? password,
   }) {
     return UserModel(
       id: id ?? this.id,
@@ -103,7 +103,7 @@ class UserModel {
       email: email ?? this.email,
       city: city ?? this.city,
       age: age ?? this.age,
-      prefrance: prefrance ?? this.prefrance,
+      preference: prefrance ?? preference,
       imageData: imageData ?? this.imageData,
       imageBytes: imageBytes ?? this.imageBytes,
       phoneNumber: phoneNumber ?? this.phoneNumber,

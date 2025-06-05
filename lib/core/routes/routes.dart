@@ -22,4 +22,8 @@ class Routes {
   static const String categoryView = "/category-view";
   static const String settings = "/settings";
   static const String notifications = "/notifications";
+  static const String enhancedThemeSwitchTile = "/EnhancedThemeSwitchTile";
+  static const String aboutUs = "/about-us";
+  static const String termsAndConditions = "/terms-and-conditions";
+  static const String privacyPolicy = "/privacy-policy";
 }

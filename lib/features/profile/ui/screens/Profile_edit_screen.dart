@@ -4,6 +4,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:image_picker/image_picker.dart';
+
 import '../../../../core/utils/extensions.dart';
 import '../../../../core/utils/image_helper.dart';
 import '../../../../core/widgets/app_loading_indicator.dart';
@@ -48,7 +49,7 @@ class _ProfileEditScreenState extends State<ProfileEditScreen> {
       _emailController.text = user.email ?? '';
       _phoneController.text = user.phoneNumber?.toString() ?? '';
       _cityController.text = user.city ?? '';
-      _preferenceCityController.text = user.prefrance ?? '';
+      _preferenceCityController.text = user.preference ?? '';
       // حط الباسورد الحالي (لو موجود)
       _passwordController.text = user.password?.toString() ?? '';
 
@@ -227,27 +228,6 @@ class _ProfileEditScreenState extends State<ProfileEditScreen> {
     );
   }
 
-  // Future<void> _pickImage(ImageSource source) async {
-  //   try {
-  //     final picker = ImagePicker();
-  //     final pickedFile = await picker.pickImage(
-  //       source: source,
-  //       maxWidth: 1024,
-  //       maxHeight: 1024,
-  //       imageQuality: 85,
-  //     );
-
-  //     if (pickedFile != null) {
-  //       setState(() {
-  //         _selectedImage = File(pickedFile.path);
-  //       });
-  //     }
-  //   } catch (e) {
-  //     if (mounted) {
-  //       context.showErrorSnackBar('Failed to pick image: ${e.toString()}');
-  //     }
-  //   }
-  // }
   Future<void> _pickImage() async {
     try {
       final picker = ImagePicker();
@@ -531,7 +511,7 @@ class _ProfileEditScreenState extends State<ProfileEditScreen> {
         ),
         leading: IconButton(
           icon: const Icon(Icons.arrow_back_ios, color: Colors.white),
-          onPressed: () => Navigator.pop(context),
+          onPressed: () => Navigator.pop(context, true),
         ),
         actions: [
           TextButton(

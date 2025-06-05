@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_it/get_it.dart';
-import 'routes.dart';
+import 'package:yalla_r7la2/features/favorites/ui/logic/favorites_cubit.dart';
+import 'package:yalla_r7la2/features/favorites/ui/screens/favorites_screen.dart';
+
 import '../../features/auth/ui/logic/login_cubit.dart';
 import '../../features/auth/ui/logic/register_cubit.dart';
 import '../../features/auth/ui/screens/login_screen.dart';
@@ -11,6 +13,7 @@ import '../../features/home/ui/screens/host_screen.dart';
 import '../../features/profile/ui/logic/profile_cubit.dart';
 import '../../features/profile/ui/screens/Profile_edit_screen.dart';
 import '../../features/profile/ui/screens/profile_view_screen.dart';
+import 'routes.dart';
 
 final sl = GetIt.instance;
 
@@ -42,6 +45,15 @@ class AppRouter {
 
       case Routes.home:
         return MaterialPageRoute(builder: (_) => const HomeScreen());
+
+      case Routes.favorites:
+        return MaterialPageRoute(
+          builder:
+              (_) => BlocProvider.value(
+                value: sl<FavoritesCubit>(),
+                child: const FavoritesScreen(),
+              ),
+        );
 
       case Routes.profile:
         return MaterialPageRoute(

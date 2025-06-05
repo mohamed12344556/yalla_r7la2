@@ -1,30 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:yalla_r7la2/features/favorites/ui/logic/favorites_cubit.dart';
+
 import '../../../../core/di/dependency_injection.dart';
 import '../../../chat/data/ui/screens/chat_bot_screen.dart';
 import '../../../destinations/data/ui/screens/explore_screen.dart';
 import '../../../favorites/ui/screens/favorites_screen.dart';
-import 'home_screen.dart';
 import '../../../profile/ui/logic/profile_cubit.dart';
 import '../../../profile/ui/screens/profile_view_screen.dart';
+import 'home_screen.dart';
 
 class HostScreen extends StatefulWidget {
   const HostScreen({super.key});
 
   @override
   State<HostScreen> createState() => _HostScreenState();
-}
-
-class HostScreenWrapper extends StatelessWidget {
-  const HostScreenWrapper({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (_) => sl<ProfileCubit>(),
-      child: const HostScreen(),
-    );
-  }
 }
 
 class _HostScreenState extends State<HostScreen> {
@@ -38,22 +28,9 @@ class _HostScreenState extends State<HostScreen> {
 
   @override
   Widget build(BuildContext context) {
-    // Provide ProfileCubit to the entire HostScreen widget tree
     return Scaffold(
       backgroundColor: const Color(0xFFF5F5F5),
-      body: IndexedStack(
-        index: _selectedIndex,
-        children: [
-          const HomeScreen(),
-          const ExploreScreen(),
-          const FavoritesScreen(),
-          const ChatBotScreen(),
-          BlocProvider.value(
-            value: sl<ProfileCubit>(),
-            child: const ProfileViewScreen(),
-          ),
-        ],
-      ),
+      body: _buildCurrentScreen(),
       bottomNavigationBar: BottomNavigationBar(
         type: BottomNavigationBarType.fixed,
         backgroundColor: Colors.white,
@@ -94,5 +71,31 @@ class _HostScreenState extends State<HostScreen> {
         ],
       ),
     );
+  }
+
+  Widget _buildCurrentScreen() {
+    switch (_selectedIndex) {
+      case 0:
+        return BlocProvider.value(
+          value: sl<FavoritesCubit>(),
+          child: const HomeScreen(),
+        );
+      case 1:
+        return const ExploreScreen();
+      case 2:
+        return BlocProvider.value(
+          value: sl<FavoritesCubit>(),
+          child: const FavoritesScreen(),
+        );
+      case 3:
+        return const ChatBotScreen();
+      case 4:
+        return BlocProvider.value(
+          value: sl<ProfileCubit>(),
+          child: const ProfileViewScreen(),
+        );
+      default:
+        return const HomeScreen();
+    }
   }
 }

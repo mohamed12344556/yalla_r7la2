@@ -27,19 +27,21 @@ class _RegisterScreenState extends State<RegisterScreen> {
       return;
     }
 
-    context.read<RegisterCubit>().register(
-      fullName:
-          context.read<RegisterCubit>().registerFullNameController.text.trim(),
-      email: context.read<RegisterCubit>().registerEmailController.text.trim(),
-      phoneNumber:
-          context.read<RegisterCubit>().registerPhoneController.text.trim(),
-      dateOfBirth:
-          context.read<RegisterCubit>().registerDobController.text.trim(),
-      password:
-          context.read<RegisterCubit>().registerPasswordController.text.trim(),
-      city: context.read<RegisterCubit>().registerCityController.text.trim(),
-      prefrance:
-          context.read<RegisterCubit>().registerPrefranceController.text.trim(),
+    // Check if preferred city is selected
+    final cubit = context.read<RegisterCubit>();
+    if (cubit.selectedPreferredCity == null) {
+      context.showErrorSnackBar('Please select your preferred city');
+      return;
+    }
+
+    cubit.register(
+      fullName: cubit.registerFullNameController.text.trim(),
+      email: cubit.registerEmailController.text.trim(),
+      phoneNumber: cubit.registerPhoneController.text.trim(),
+      dateOfBirth: cubit.registerDobController.text.trim(),
+      password: cubit.registerPasswordController.text.trim(),
+      city: cubit.registerCityController.text.trim(),
+      prefrance: cubit.selectedPreferredCity!,
     );
   }
 
@@ -154,16 +156,46 @@ class _RegisterScreenState extends State<RegisterScreen> {
                   ),
                   const SizedBox(height: 16),
 
-                  // Preferred City Field
-                  AppTextField(
-                    controller: cubit.registerPrefranceController,
-                    hintText: 'Preferred City',
-                    prefixIcon: const Icon(Icons.favorite),
-                    validator:
-                        (value) => Validators.validateRequired(
-                          value,
-                          "Preferred City",
+                  // Preferred City Dropdown
+                  BlocBuilder<RegisterCubit, RegisterState>(
+                    builder: (context, state) {
+                      return Container(
+                        decoration: BoxDecoration(
+                          border: Border.all(color: Colors.grey[300]!),
+                          borderRadius: BorderRadius.circular(8),
                         ),
+                        child: DropdownButtonFormField<String>(
+                          value: cubit.selectedPreferredCity,
+                          decoration: const InputDecoration(
+                            hintText: 'Select Preferred City',
+                            prefixIcon: Icon(Icons.favorite),
+                            border: InputBorder.none,
+                            contentPadding: EdgeInsets.symmetric(
+                              horizontal: 16,
+                              vertical: 12,
+                            ),
+                          ),
+                          items:
+                              cubit.preferredCities.map((String city) {
+                                return DropdownMenuItem<String>(
+                                  value: city,
+                                  child: Text(city),
+                                );
+                              }).toList(),
+                          onChanged: (String? value) {
+                            cubit.setPreferredCity(value);
+                          },
+                          validator: (value) {
+                            if (value == null || value.isEmpty) {
+                              return 'Please select your preferred city';
+                            }
+                            return null;
+                          },
+                          isExpanded: true,
+                          icon: const Icon(Icons.arrow_drop_down),
+                        ),
+                      );
+                    },
                   ),
                   const SizedBox(height: 16),
 

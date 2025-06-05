@@ -4,12 +4,13 @@ import 'dart:typed_data';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:path_provider/path_provider.dart';
+
 import '../../../../core/cache/shared_pref_helper.dart';
 import '../../../../core/utils/image_helper.dart';
 import '../../data/models/user_model.dart';
 import '../../data/repos/profile_repo.dart';
 import 'profile_state.dart';
-import 'package:path_provider/path_provider.dart';
 
 class ProfileCubit extends Cubit<ProfileState> {
   final ProfileRepo profileRepository;
@@ -50,7 +51,7 @@ class ProfileCubit extends Cubit<ProfileState> {
         // حفظ البيانات كملف مؤقت
         cachedImage = await ImageHelper.saveBytesToFile(
           user.imageBytes!,
-          'profile_image_${user.id ?? 'default'}.jpg',
+          'profile_image_${user.name ?? 'default'}.jpg',
         );
 
         // حفظ مسار الملف في SharedPreferences
@@ -111,7 +112,7 @@ class ProfileCubit extends Cubit<ProfileState> {
       email: updatedUser.email ?? current.email,
       city: updatedUser.city ?? current.city,
       age: updatedUser.age ?? current.age,
-      prefrance: updatedUser.prefrance ?? current.prefrance,
+      prefrance: updatedUser.preference ?? current.preference,
       phoneNumber: updatedUser.phoneNumber ?? current.phoneNumber,
       password: updatedUser.password ?? current.password,
     );

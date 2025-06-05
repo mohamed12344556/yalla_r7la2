@@ -4,7 +4,9 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:image_picker/image_picker.dart';
+import 'package:yalla_r7la2/core/di/dependency_injection.dart';
+import 'package:yalla_r7la2/core/themes/cubit/theme_cubit.dart';
+
 import '../../../../core/api/api_constants.dart';
 import '../../../../core/cache/shared_pref_helper.dart';
 import '../../../../core/routes/routes.dart';
@@ -24,7 +26,7 @@ class ProfileViewScreen extends StatefulWidget {
 
 class _ProfileViewScreenState extends State<ProfileViewScreen> {
   bool _notificationsEnabled = true;
-  bool _isDarkMode = false;
+  final bool _isDarkMode = false;
   final bool _hasLoadedProfile = false;
   File? _selectedImage;
 
@@ -139,20 +141,20 @@ class _ProfileViewScreenState extends State<ProfileViewScreen> {
     final user = context.read<ProfileCubit>().currentUser;
     final cachedImage = context.read<ProfileCubit>().cachedProfileImage;
 
-    // 1. أولوية للصورة المحددة محلياً
-    if (_selectedImage != null) {
-      return FileImage(_selectedImage!);
-    }
+    // // 1. أولوية للصورة المحددة محلياً
+    // if (_selectedImage != null) {
+    //   return FileImage(_selectedImage!);
+    // }
 
-    // 2. الصورة المحفوظة محلياً
-    if (cachedImage != null && cachedImage.existsSync()) {
-      return FileImage(cachedImage);
-    }
+    // // 2. الصورة المحفوظة محلياً
+    // if (cachedImage != null && cachedImage.existsSync()) {
+    //   return FileImage(cachedImage);
+    // }
 
-    // 3. معالجة البيانات من الـ API
-    if (user?.imageBytes != null) {
-      return MemoryImage(user!.imageBytes!);
-    }
+    // // 3. معالجة البيانات من الـ API
+    // if (user?.imageBytes != null) {
+    //   return MemoryImage(user!.imageBytes!);
+    // }
 
     // 4. إذا كانت الصورة URL
     if (user?.imageData != null &&
@@ -171,91 +173,91 @@ class _ProfileViewScreenState extends State<ProfileViewScreen> {
       }
     }
 
-    // 6. الصورة الافتراضية
+    // 6. Default image
     return const AssetImage('assets/default_profile.png');
   }
 
-  Future<void> _showImageSourceDialog() async {
-    showModalBottomSheet(
-      context: context,
-      shape: const RoundedRectangleBorder(
-        borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
-      ),
-      builder: (BuildContext context) {
-        return SafeArea(
-          child: Padding(
-            padding: const EdgeInsets.all(16.0),
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                const Text(
-                  'Select Profile Photo',
-                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-                ),
-                const SizedBox(height: 20),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: [
-                    _buildImageSourceOption(
-                      icon: Icons.camera_alt,
-                      label: 'Camera',
-                      onTap: () {
-                        Navigator.pop(context);
-                        context.read<ProfileCubit>().pickAndCacheProfileImage(
-                          source: ImageSource.camera,
-                        );
-                      },
-                    ),
-                    _buildImageSourceOption(
-                      icon: Icons.photo_library,
-                      label: 'Gallery',
-                      onTap: () {
-                        Navigator.pop(context);
-                        context.read<ProfileCubit>().pickAndCacheProfileImage(
-                          source: ImageSource.gallery,
-                        );
-                      },
-                    ),
-                  ],
-                ),
-                const SizedBox(height: 20),
-              ],
-            ),
-          ),
-        );
-      },
-    );
-  }
+  // Future<void> _showImageSourceDialog() async {
+  //   showModalBottomSheet(
+  //     context: context,
+  //     shape: const RoundedRectangleBorder(
+  //       borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
+  //     ),
+  //     builder: (BuildContext context) {
+  //       return SafeArea(
+  //         child: Padding(
+  //           padding: const EdgeInsets.all(16.0),
+  //           child: Column(
+  //             mainAxisSize: MainAxisSize.min,
+  //             children: [
+  //               const Text(
+  //                 'Select Profile Photo',
+  //                 style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+  //               ),
+  //               const SizedBox(height: 20),
+  //               Row(
+  //                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+  //                 children: [
+  //                   _buildImageSourceOption(
+  //                     icon: Icons.camera_alt,
+  //                     label: 'Camera',
+  //                     onTap: () {
+  //                       Navigator.pop(context);
+  //                       context.read<ProfileCubit>().pickAndCacheProfileImage(
+  //                         source: ImageSource.camera,
+  //                       );
+  //                     },
+  //                   ),
+  //                   _buildImageSourceOption(
+  //                     icon: Icons.photo_library,
+  //                     label: 'Gallery',
+  //                     onTap: () {
+  //                       Navigator.pop(context);
+  //                       context.read<ProfileCubit>().pickAndCacheProfileImage(
+  //                         source: ImageSource.gallery,
+  //                       );
+  //                     },
+  //                   ),
+  //                 ],
+  //               ),
+  //               const SizedBox(height: 20),
+  //             ],
+  //           ),
+  //         ),
+  //       );
+  //     },
+  //   );
+  // }
 
-  Widget _buildImageSourceOption({
-    required IconData icon,
-    required String label,
-    required VoidCallback onTap,
-  }) {
-    return GestureDetector(
-      onTap: onTap,
-      child: Container(
-        width: 100,
-        height: 100,
-        decoration: BoxDecoration(
-          color: Colors.grey[100],
-          borderRadius: BorderRadius.circular(15),
-          border: Border.all(color: Colors.grey[300]!),
-        ),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Icon(icon, size: 30, color: const Color(0xFF30B0C7)),
-            const SizedBox(height: 8),
-            Text(
-              label,
-              style: const TextStyle(fontSize: 14, fontWeight: FontWeight.w500),
-            ),
-          ],
-        ),
-      ),
-    );
-  }
+  // Widget _buildImageSourceOption({
+  //   required IconData icon,
+  //   required String label,
+  //   required VoidCallback onTap,
+  // }) {
+  //   return GestureDetector(
+  //     onTap: onTap,
+  //     child: Container(
+  //       width: 100,
+  //       height: 100,
+  //       decoration: BoxDecoration(
+  //         color: Colors.grey[100],
+  //         borderRadius: BorderRadius.circular(15),
+  //         border: Border.all(color: Colors.grey[300]!),
+  //       ),
+  //       child: Column(
+  //         mainAxisAlignment: MainAxisAlignment.center,
+  //         children: [
+  //           Icon(icon, size: 30, color: const Color(0xFF30B0C7)),
+  //           const SizedBox(height: 8),
+  //           Text(
+  //             label,
+  //             style: const TextStyle(fontSize: 14, fontWeight: FontWeight.w500),
+  //           ),
+  //         ],
+  //       ),
+  //     ),
+  //   );
+  // }
 
   void _handleLogout() {
     showDialog(
@@ -399,16 +401,15 @@ class _ProfileViewScreenState extends State<ProfileViewScreen> {
           IconButton(
             icon: const Icon(Icons.edit, color: Colors.white),
             onPressed: () {
-              // Navigate using named route instead of direct MaterialPageRoute
-              // This ensures the ProfileCubit context is maintained
-              Navigator.pushNamed(context, Routes.editProfile);
+              Navigator.pushNamed(context, Routes.editProfile).then((value) {
+                if (value != null) {
+                  context.read<ProfileCubit>().loadUserProfile();
+                }
+              });
             },
           ),
         ],
-        leading: IconButton(
-          icon: const Icon(Icons.arrow_back_ios, color: Colors.white),
-          onPressed: () => context.pushNamed(Routes.host),
-        ),
+        leading: SizedBox.shrink(),
       ),
       body: BlocConsumer<ProfileCubit, ProfileState>(
         listener: (context, state) {
@@ -477,28 +478,6 @@ class _ProfileViewScreenState extends State<ProfileViewScreen> {
                               child: CircleAvatar(
                                 radius: 70,
                                 backgroundImage: _getProfileImage(),
-                              ),
-                            ),
-                            Positioned(
-                              bottom: 0,
-                              right: 0,
-                              child: Container(
-                                decoration: BoxDecoration(
-                                  color: Colors.white,
-                                  shape: BoxShape.circle,
-                                  border: Border.all(
-                                    color: const Color(0xFF30B0C7),
-                                    width: 2,
-                                  ),
-                                ),
-                                child: IconButton(
-                                  icon: const Icon(
-                                    Icons.camera_alt,
-                                    color: Color(0xFF30B0C7),
-                                    size: 20,
-                                  ),
-                                  onPressed: _showImageSourceDialog,
-                                ),
                               ),
                             ),
                           ],
@@ -575,12 +554,12 @@ class _ProfileViewScreenState extends State<ProfileViewScreen> {
                             subtitle: '${user!.age} years old',
                           ),
 
-                        if (user?.prefrance != null &&
-                            user!.prefrance!.isNotEmpty)
+                        if (user?.preference != null &&
+                            user!.preference!.isNotEmpty)
                           _buildInfoCard(
                             icon: Icons.favorite,
                             title: 'Preferred City',
-                            subtitle: user.prefrance!,
+                            subtitle: user.preference!,
                           ),
                       ],
                     ),
@@ -622,42 +601,93 @@ class _ProfileViewScreenState extends State<ProfileViewScreen> {
                           title: const Text("Push Notifications"),
                           subtitle: const Text("Receive app notifications"),
                           value: _notificationsEnabled,
-                          activeColor: const Color(0xFF30B0C7),
+                          activeColor: Colors.white,
                           onChanged: (value) {
                             setState(() {
                               _notificationsEnabled = value;
                             });
+                            if (value) {
+                              context.showComingSoonFeature();
+                            }
                           },
                         ),
 
                         ListTile(
                           title: const Text("Language"),
                           subtitle: const Text("App language preference"),
-                          trailing: const Row(
+                          trailing: Row(
                             mainAxisSize: MainAxisSize.min,
                             children: [
                               Text(
-                                "English",
-                                style: TextStyle(color: Colors.grey),
+                                SharedPrefHelper.getString(
+                                          SharedPrefKeys.language,
+                                        ) ==
+                                        'ar'
+                                    ? "العربية"
+                                    : "English",
+                                style: const TextStyle(color: Colors.grey),
                               ),
-                              SizedBox(width: 8),
-                              Icon(Icons.chevron_right, color: Colors.grey),
+                              const SizedBox(width: 8),
+                              const Icon(
+                                Icons.chevron_right,
+                                color: Colors.grey,
+                              ),
                             ],
                           ),
-                          onTap: () {
-                            // Handle language selection
+                          onTap: () async {
+                            final currentLanguage =
+                                SharedPrefHelper.getString(
+                                  SharedPrefKeys.language,
+                                ) ??
+                                'en';
+                            final newLanguage =
+                                currentLanguage == 'ar' ? 'en' : 'ar';
+
+                            await SharedPrefHelper.setData(
+                              SharedPrefKeys.language,
+                              newLanguage,
+                            );
+
+                            if (mounted) {
+                              context.showSuccessSnackBar(
+                                newLanguage == 'ar'
+                                    ? "تم تغيير اللغة إلى العربية"
+                                    : "Language changed to English",
+                              );
+                              // Restart the app or reload the UI to apply the language change
+                              setState(() {});
+                            }
                           },
                         ),
 
-                        SwitchListTile(
-                          title: const Text("Dark Mode"),
-                          subtitle: const Text("Switch to dark theme"),
-                          value: _isDarkMode,
-                          activeColor: const Color(0xFF30B0C7),
-                          onChanged: (value) {
-                            setState(() {
-                              _isDarkMode = value;
-                            });
+                        BlocBuilder<ThemeCubit, ThemeMode>(
+                          bloc: sl<ThemeCubit>(),
+                          builder: (context, themeMode) {
+                            // فحص إذا كان الثيم مظلم (مع مراعاة النظام)
+                            final isDarkMode =
+                                themeMode == ThemeMode.dark ||
+                                (themeMode == ThemeMode.system &&
+                                    MediaQuery.of(context).platformBrightness ==
+                                        Brightness.dark);
+
+                            return SwitchListTile(
+                              title: const Text("Dark Mode"),
+                              subtitle: Text(
+                                themeMode == ThemeMode.system
+                                    ? "Following system theme (${isDarkMode ? 'Dark' : 'Light'})"
+                                    : "Switch to ${isDarkMode ? 'light' : 'dark'} theme",
+                              ),
+                              value: isDarkMode,
+                              activeColor:
+                                  Theme.of(
+                                    context,
+                                  ).primaryColor, // أفضل من Colors.white
+                              onChanged: (value) {
+                                sl<ThemeCubit>().changeTheme(
+                                  value ? ThemeMode.dark : ThemeMode.light,
+                                );
+                              },
+                            );
                           },
                         ),
                       ],

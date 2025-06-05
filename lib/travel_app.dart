@@ -1,6 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:get_it/get_it.dart';
+import 'package:yalla_r7la2/core/themes/cubit/theme_cubit.dart';
+
 import 'core/routes/app_router.dart';
 import 'core/themes/app_theme.dart';
+
+final sl = GetIt.instance;
 
 class TravelApp extends StatelessWidget {
   final String initialRoute;
@@ -9,15 +15,21 @@ class TravelApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Travel Explorer',
-      debugShowCheckedModeBanner: false,
-      theme: AppTheme.light,
-      darkTheme: AppTheme.dark,
-      themeMode: ThemeMode.system,
-      onGenerateRoute: AppRouter.generateRoute,
-      initialRoute: initialRoute,
-      // initialRoute: Routes.host,
+    return BlocProvider.value(
+      value: sl<ThemeCubit>(),
+      child: BlocBuilder<ThemeCubit, ThemeMode>(
+        builder: (context, themeMode) {
+          return MaterialApp(
+            title: 'Travel Explorer',
+            debugShowCheckedModeBanner: false,
+            theme: AppTheme.light,
+            darkTheme: AppTheme.dark,
+            themeMode: themeMode, // ✅ Now responds to cubit changes
+            onGenerateRoute: AppRouter.generateRoute,
+            initialRoute: initialRoute,
+          );
+        },
+      ),
     );
   }
 }

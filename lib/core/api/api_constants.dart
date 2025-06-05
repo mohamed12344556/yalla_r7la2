@@ -19,4 +19,5 @@ class SharedPrefKeys {
   static const String userId = 'user_id';
   static const String userEmail = 'user_email';
   static const String isFirstTime = 'is_first_time';
+  static const String language = 'language';
 }

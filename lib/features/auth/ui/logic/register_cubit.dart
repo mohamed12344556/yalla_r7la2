@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:image_picker/image_picker.dart';
+
 import '../../data/models/auth_model.dart';
 import '../../data/repos/auth_repo.dart';
 
@@ -22,7 +23,6 @@ class RegisterCubit extends Cubit<RegisterState> {
   final registerPasswordController = TextEditingController();
   final registerConfirmPasswordController = TextEditingController();
   final registerCityController = TextEditingController();
-  final registerPrefranceController = TextEditingController();
 
   // Password visibility states
   bool _obscurePassword = true;
@@ -32,21 +32,40 @@ class RegisterCubit extends Cubit<RegisterState> {
   File? _selectedImage;
   String? _imagePath;
 
+  // Preferred city dropdown
+  String? _selectedPreferredCity;
+  final List<String> preferredCities = [
+    'Leisure Tourism',
+    'Cultural & Historical Tourism',
+    'Medical Tourism',
+    'Adventure & Eco Tourism',
+    'Shopping Tourism',
+    'Religious Tourism',
+    'Business & MICE Tourism',
+  ];
+
   // Getters
   bool get obscurePassword => _obscurePassword;
   bool get obscureConfirmPassword => _obscureConfirmPassword;
   File? get selectedImage => _selectedImage;
   String? get imagePath => _imagePath;
+  String? get selectedPreferredCity => _selectedPreferredCity;
+
+  // Preferred city methods
+  void setPreferredCity(String? city) {
+    _selectedPreferredCity = city;
+    emit(RegisterPreferredCityChanged());
+  }
 
   // Password visibility methods
   void togglePasswordVisibility() {
     _obscurePassword = !_obscurePassword;
-    emit(RegisterPasswordVisibilityChanged()); // Changed state name
+    emit(RegisterPasswordVisibilityChanged());
   }
 
   void toggleConfirmPasswordVisibility() {
     _obscureConfirmPassword = !_obscureConfirmPassword;
-    emit(RegisterConfirmPasswordVisibilityChanged()); // Changed state name
+    emit(RegisterConfirmPasswordVisibilityChanged());
   }
 
   // Password validation
@@ -71,7 +90,7 @@ class RegisterCubit extends Cubit<RegisterState> {
       // Format date for display in the field
       registerDobController.text =
           "${picked.day}/${picked.month}/${picked.year}";
-      emit(RegisterDateSelected()); // Emit state change
+      emit(RegisterDateSelected());
     }
   }
 
@@ -141,6 +160,10 @@ class RegisterCubit extends Cubit<RegisterState> {
 
   // Form validation method
   bool validateForm() {
+    if (_selectedPreferredCity == null) {
+      emit(RegisterError('Please select your preferred city'));
+      return false;
+    }
     return registerFormKey.currentState?.validate() ?? false;
   }
 
@@ -183,7 +206,6 @@ class RegisterCubit extends Cubit<RegisterState> {
   // Alternative register method without parameters
   Future<void> registerWithControllers() async {
     if (!validateForm()) {
-      emit(RegisterError('Please fill all required fields correctly'));
       return;
     }
 
@@ -194,7 +216,7 @@ class RegisterCubit extends Cubit<RegisterState> {
       phoneNumber: registerPhoneController.text.trim(),
       dateOfBirth: registerDobController.text,
       city: registerCityController.text.trim(),
-      prefrance: registerPrefranceController.text.trim(),
+      prefrance: _selectedPreferredCity ?? '',
     );
   }
 
@@ -211,6 +233,7 @@ class RegisterCubit extends Cubit<RegisterState> {
     _imagePath = null;
     _obscurePassword = true;
     _obscureConfirmPassword = true;
+    _selectedPreferredCity = null;
 
     // Clear all controllers
     registerFullNameController.clear();
@@ -220,7 +243,6 @@ class RegisterCubit extends Cubit<RegisterState> {
     registerPasswordController.clear();
     registerConfirmPasswordController.clear();
     registerCityController.clear();
-    registerPrefranceController.clear();
 
     emit(RegisterInitial());
   }
@@ -234,7 +256,6 @@ class RegisterCubit extends Cubit<RegisterState> {
     registerPasswordController.dispose();
     registerConfirmPasswordController.dispose();
     registerCityController.dispose();
-    registerPrefranceController.dispose();
     return super.close();
   }
 }

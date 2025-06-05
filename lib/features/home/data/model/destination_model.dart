@@ -1,4 +1,5 @@
 class DestinationModel {
+  final String destinationId;
   final String name;
   final String imageUrl;
   final List<String>? images;
@@ -12,6 +13,7 @@ class DestinationModel {
   final String? category; // Added category field
 
   DestinationModel({
+    required this.destinationId,
     required this.name,
     required this.imageUrl,
     this.images,
@@ -28,11 +30,13 @@ class DestinationModel {
 
 List<DestinationModel> cards = [
   DestinationModel(
+    destinationId: '1',
     name: 'Cairo, Egypt',
-    imageUrl: 'https://via.placeholder.com/400x300',
+    imageUrl:
+        'https://media.istockphoto.com/id/2149992523/photo/female-tourist-walks-between-pillars-of-the-great-hypostyle-hall-from-karnak-temple-and.jpg?s=612x612&w=0&k=20&c=JM_cvsp7Fj0eSyC6eeIMxifTC_qiJ-9jGklURN8wh6I=',
     images: [
-      'https://via.placeholder.com/400x300',
-      'https://via.placeholder.com/400x300?text=Image+2',
+      'https://media.istockphoto.com/id/1307368749/photo/woman-watches-sunset-at-the-giza-pyramids-she-looks-across-the-sahara-desert.jpg?s=612x612&w=0&k=20&c=QDI8Et6gnibfWzY7XC1q5TZqd9Ayn0ApLTCxSFn7qxg=',
+      'https://media.istockphoto.com/id/1327507461/photo/traditional-nile-sailboats-near-the-banks-of-aswan-egypt.jpg?s=612x612&w=0&k=20&c=V_rKmNg0bq1hoU2joWZ_Ov_taWpCYzQ7MbL1f4wIEwA=',
     ],
     location: 'Cairo, Egypt',
     secondaryLocation: 'Africa',
@@ -42,9 +46,10 @@ List<DestinationModel> cards = [
         'Explore ancient pyramids and the rich history of the Nile. Cairo is a vibrant city full of culture and life.',
     features: ['Pyramids', 'Nile River', 'Rich History'],
     isFavorite: false,
-    category: 'Historical', // Added category
+    category: 'Historical',
   ),
   DestinationModel(
+    destinationId: '2',
     name: 'Paris, France',
     imageUrl: 'https://via.placeholder.com/400x300',
     images: [
@@ -59,9 +64,10 @@ List<DestinationModel> cards = [
         'Visit the Eiffel Tower and stroll through romantic streets. Paris is the heart of fashion and art.',
     features: ['Eiffel Tower', 'Art Museums', 'Romantic Streets'],
     isFavorite: false,
-    category: 'Romantic', // Added category
+    category: 'Romantic',
   ),
   DestinationModel(
+    destinationId: '3',
     name: 'Tokyo, Japan',
     imageUrl: 'https://via.placeholder.com/400x300',
     images: [
@@ -76,9 +82,10 @@ List<DestinationModel> cards = [
         'Experience the blend of tradition and technology. Tokyo offers temples, sushi, and neon nights.',
     features: ['Temples', 'Sushi', 'Neon Nights'],
     isFavorite: false,
-    category: 'Modern', // Added category
+    category: 'Modern',
   ),
   DestinationModel(
+    destinationId: '4',
     name: 'New York, USA',
     imageUrl: 'https://via.placeholder.com/400x300',
     images: [
@@ -93,9 +100,10 @@ List<DestinationModel> cards = [
         'See Times Square and Central Park in the city that never sleeps. New York is always buzzing with energy.',
     features: ['Times Square', 'Central Park', 'Broadway Shows'],
     isFavorite: false,
-    category: 'Urban', // Added category
+    category: 'Urban',
   ),
   DestinationModel(
+    destinationId: '5',
     name: 'Rome, Italy',
     imageUrl: 'https://via.placeholder.com/400x300',
     images: [
@@ -110,6 +118,6 @@ List<DestinationModel> cards = [
         'Walk through history in the Eternal City. Rome is famous for its architecture and delicious cuisine.',
     features: ['Colosseum', 'Vatican City', 'Italian Cuisine'],
     isFavorite: false,
-    category: 'Cultural', // Added category
+    category: 'Cultural',
   ),
 ];

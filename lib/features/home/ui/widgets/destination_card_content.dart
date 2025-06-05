@@ -1,30 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:yalla_r7la2/features/favorites/ui/logic/favorites_cubit.dart';
 
 import '../../data/model/destination_model.dart';
 
-class DestinationCardContent extends StatefulWidget {
+class DestinationCardContent extends StatelessWidget {
   final DestinationModel cardData;
 
   const DestinationCardContent({super.key, required this.cardData});
-
-  @override
-  _DestinationCardContentState createState() => _DestinationCardContentState();
-}
-
-class _DestinationCardContentState extends State<DestinationCardContent> {
-  late bool isFavorite;
-
-  @override
-  void initState() {
-    super.initState();
-    isFavorite = widget.cardData.isFavorite ?? false;
-  }
-
-  void toggleFavorite() {
-    setState(() {
-      isFavorite = !isFavorite;
-    });
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -56,9 +39,9 @@ class _DestinationCardContentState extends State<DestinationCardContent> {
                 ),
                 child: Stack(
                   children: [
-                    if (widget.cardData.imageUrl.isNotEmpty)
+                    if (cardData.imageUrl.isNotEmpty)
                       Image.network(
-                        widget.cardData.imageUrl,
+                        cardData.imageUrl,
                         width: double.infinity,
                         height: double.infinity,
                         fit: BoxFit.cover,
@@ -133,6 +116,7 @@ class _DestinationCardContentState extends State<DestinationCardContent> {
                         ),
                       ),
 
+                    // Gradient overlay
                     Container(
                       decoration: BoxDecoration(
                         gradient: LinearGradient(
@@ -146,35 +130,73 @@ class _DestinationCardContentState extends State<DestinationCardContent> {
                       ),
                     ),
 
-                    // Heart icon (favorite)
+                    // Heart icon (favorite) - Using BlocBuilder
                     Positioned(
                       top: 8,
                       right: 8,
-                      child: GestureDetector(
-                        onTap: toggleFavorite,
-                        child: Container(
-                          padding: const EdgeInsets.all(6),
-                          decoration: BoxDecoration(
-                            color: Colors.white,
-                            shape: BoxShape.circle,
-                            boxShadow: [
-                              BoxShadow(
-                                color: Colors.black.withOpacity(0.1),
-                                blurRadius: 4,
-                                offset: const Offset(0, 2),
+                      child: BlocBuilder<FavoritesCubit, FavoritesState>(
+                        builder: (context, state) {
+                          final isFavorite = context
+                              .read<FavoritesCubit>()
+                              .isFavorite(cardData.destinationId);
+
+                          return GestureDetector(
+                            onTap: () {
+                              context.read<FavoritesCubit>().toggleFavorite(
+                                cardData,
+                              );
+
+                              // Show feedback
+                              ScaffoldMessenger.of(context).showSnackBar(
+                                SnackBar(
+                                  content: Text(
+                                    isFavorite
+                                        ? 'Removed from favorites'
+                                        : 'Added to favorites',
+                                  ),
+                                  backgroundColor:
+                                      isFavorite ? Colors.orange : Colors.green,
+                                  duration: const Duration(seconds: 1),
+                                  behavior: SnackBarBehavior.floating,
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(10),
+                                  ),
+                                ),
+                              );
+                            },
+                            child: AnimatedContainer(
+                              duration: const Duration(milliseconds: 200),
+                              padding: const EdgeInsets.all(6),
+                              decoration: BoxDecoration(
+                                color: Colors.white,
+                                shape: BoxShape.circle,
+                                boxShadow: [
+                                  BoxShadow(
+                                    color: Colors.black.withOpacity(0.1),
+                                    blurRadius: 4,
+                                    offset: const Offset(0, 2),
+                                  ),
+                                ],
                               ),
-                            ],
-                          ),
-                          child: Icon(
-                            isFavorite ? Icons.favorite : Icons.favorite_border,
-                            color: isFavorite ? Colors.red : Colors.grey,
-                            size: 16,
-                          ),
-                        ),
+                              child: AnimatedSwitcher(
+                                duration: const Duration(milliseconds: 200),
+                                child: Icon(
+                                  isFavorite
+                                      ? Icons.favorite
+                                      : Icons.favorite_border,
+                                  color: isFavorite ? Colors.red : Colors.grey,
+                                  size: 16,
+                                  key: ValueKey(isFavorite),
+                                ),
+                              ),
+                            ),
+                          );
+                        },
                       ),
                     ),
 
-                    if (widget.cardData.rating != null)
+                    // Rating badge
+                    if (cardData.rating != null)
                       Positioned(
                         top: 8,
                         left: 8,
@@ -197,7 +219,7 @@ class _DestinationCardContentState extends State<DestinationCardContent> {
                               ),
                               const SizedBox(width: 4),
                               Text(
-                                widget.cardData.rating!.toStringAsFixed(1),
+                                cardData.rating!.toStringAsFixed(1),
                                 style: const TextStyle(
                                   color: Colors.white,
                                   fontSize: 12,
@@ -227,7 +249,7 @@ class _DestinationCardContentState extends State<DestinationCardContent> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        widget.cardData.name ?? 'Destination',
+                        cardData.name ?? 'Destination',
                         style: const TextStyle(
                           fontSize: 16,
                           fontWeight: FontWeight.bold,
@@ -247,7 +269,7 @@ class _DestinationCardContentState extends State<DestinationCardContent> {
                           const SizedBox(width: 4),
                           Expanded(
                             child: Text(
-                              widget.cardData.location ?? 'Unknown Location',
+                              cardData.location ?? 'Unknown Location',
                               style: const TextStyle(
                                 fontSize: 12,
                                 color: Colors.grey,
@@ -268,7 +290,7 @@ class _DestinationCardContentState extends State<DestinationCardContent> {
                         text: TextSpan(
                           children: [
                             TextSpan(
-                              text: '\$${widget.cardData.price ?? 0}',
+                              text: '\$${cardData.price ?? 0}',
                               style: const TextStyle(
                                 fontSize: 16,
                                 fontWeight: FontWeight.bold,
@@ -285,7 +307,7 @@ class _DestinationCardContentState extends State<DestinationCardContent> {
                           ],
                         ),
                       ),
-                      if (widget.cardData.category != null)
+                      if (cardData.category != null)
                         Container(
                           padding: const EdgeInsets.symmetric(
                             horizontal: 8,
@@ -296,7 +318,7 @@ class _DestinationCardContentState extends State<DestinationCardContent> {
                             borderRadius: BorderRadius.circular(8),
                           ),
                           child: Text(
-                            widget.cardData.category!,
+                            cardData.category!,
                             style: const TextStyle(
                               fontSize: 10,
                               color: Colors.blueAccent,
