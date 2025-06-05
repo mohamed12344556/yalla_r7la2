@@ -501,9 +501,10 @@ class FavoritesScreen extends StatelessWidget {
   }
 
   void _showClearAllDialog(BuildContext context) {
+    final favoritesScreenContext = context;
     showDialog(
       context: context,
-      builder: (BuildContext context) {
+      builder: (BuildContext dialogContext) {
         return AlertDialog(
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(20),
@@ -517,13 +518,15 @@ class FavoritesScreen extends StatelessWidget {
           ),
           actions: [
             TextButton(
-              onPressed: () => Navigator.of(context).pop(),
+              onPressed: () => Navigator.of(dialogContext).pop(),
               child: Text('Cancel', style: TextStyle(color: Colors.grey[600])),
             ),
             ElevatedButton(
               onPressed: () {
-                context.read<FavoritesCubit>().clearAllFavorites();
-                Navigator.of(context).pop();
+                favoritesScreenContext
+                    .read<FavoritesCubit>()
+                    .clearAllFavorites();
+                Navigator.of(dialogContext).pop();
               },
               style: ElevatedButton.styleFrom(
                 backgroundColor: Colors.red,
@@ -531,6 +534,13 @@ class FavoritesScreen extends StatelessWidget {
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(12),
                 ),
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 14,
+                  vertical: 12,
+                ),
+                elevation: 0,
+                shadowColor: Colors.transparent,
+                side: const BorderSide(color: Colors.red, width: 2),
               ),
               child: const Text('Clear All'),
             ),

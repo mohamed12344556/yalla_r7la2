@@ -22,9 +22,6 @@ class HomeScreen extends StatelessWidget {
 
             // Top Destinations
             const SliverToBoxAdapter(child: TopDestinationsSection()),
-
-            // Add some bottom padding
-            const SliverToBoxAdapter(child: SizedBox(height: 20)),
           ],
         ),
       ),

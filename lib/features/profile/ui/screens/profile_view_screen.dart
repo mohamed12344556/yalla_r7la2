@@ -25,7 +25,7 @@ class ProfileViewScreen extends StatefulWidget {
 }
 
 class _ProfileViewScreenState extends State<ProfileViewScreen> {
-  bool _notificationsEnabled = true;
+  bool _notificationsEnabled = false;
   final bool _isDarkMode = false;
   final bool _hasLoadedProfile = false;
   File? _selectedImage;
@@ -437,8 +437,7 @@ class _ProfileViewScreenState extends State<ProfileViewScreen> {
             color: const Color(0xFF30B0C7),
             backgroundColor: Colors.white,
             child: SingleChildScrollView(
-              physics:
-                  const AlwaysScrollableScrollPhysics(), // يضمن إمكانية السحب دائماً
+              physics: const AlwaysScrollableScrollPhysics(),
               child: Column(
                 children: [
                   // Profile Header Section

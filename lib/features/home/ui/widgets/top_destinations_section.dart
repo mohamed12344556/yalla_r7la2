@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+
 import '../../data/model/destination_model.dart';
 import 'destination_card.dart';
 
@@ -17,7 +18,11 @@ class TopDestinationsSection extends StatelessWidget {
             style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
           ),
           const SizedBox(height: 12),
-          SizedBox(height: 220, child: topDestinationsWidget(cards)),
+          SizedBox(
+            height: MediaQuery.of(context).size.height * 0.5,
+            child: topDestinationsWidget(cards),
+          ),
+          // Expanded(flex: 2, child: topDestinationsWidget(cards)),
         ],
       ),
     );
@@ -26,7 +31,7 @@ class TopDestinationsSection extends StatelessWidget {
 
 Widget topDestinationsWidget(List<DestinationModel> items) {
   return ListView.builder(
-    scrollDirection: Axis.horizontal,
+    // scrollDirection: Axis.horizontal,
     itemCount: items.length,
     padding: const EdgeInsets.symmetric(horizontal: 4),
     itemBuilder: (context, index) {
