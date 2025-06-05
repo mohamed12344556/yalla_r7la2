@@ -44,6 +44,7 @@ dependencies:
   path_provider: ^2.1.5
   pretty_dio_logger: ^1.4.0
   shared_preferences: ^2.5.3
+  shorebird_code_push: ^2.0.4
 
 dev_dependencies:
   flutter_lints: ^5.0.0

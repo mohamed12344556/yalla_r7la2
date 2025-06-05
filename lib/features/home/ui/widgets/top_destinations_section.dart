@@ -22,7 +22,6 @@ class TopDestinationsSection extends StatelessWidget {
             height: MediaQuery.of(context).size.height * 0.5,
             child: topDestinationsWidget(cards),
           ),
-          // Expanded(flex: 2, child: topDestinationsWidget(cards)),
         ],
       ),
     );

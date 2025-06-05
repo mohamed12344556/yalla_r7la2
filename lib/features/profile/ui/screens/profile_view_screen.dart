@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:yalla_r7la2/core/di/dependency_injection.dart';
 import 'package:yalla_r7la2/core/themes/cubit/theme_cubit.dart';
+import 'package:yalla_r7la2/core/widgets/app_update_widget.dart';
 
 import '../../../../core/api/api_constants.dart';
 import '../../../../core/cache/shared_pref_helper.dart';
@@ -176,88 +177,6 @@ class _ProfileViewScreenState extends State<ProfileViewScreen> {
     // 6. Default image
     return const AssetImage('assets/default_profile.png');
   }
-
-  // Future<void> _showImageSourceDialog() async {
-  //   showModalBottomSheet(
-  //     context: context,
-  //     shape: const RoundedRectangleBorder(
-  //       borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
-  //     ),
-  //     builder: (BuildContext context) {
-  //       return SafeArea(
-  //         child: Padding(
-  //           padding: const EdgeInsets.all(16.0),
-  //           child: Column(
-  //             mainAxisSize: MainAxisSize.min,
-  //             children: [
-  //               const Text(
-  //                 'Select Profile Photo',
-  //                 style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-  //               ),
-  //               const SizedBox(height: 20),
-  //               Row(
-  //                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-  //                 children: [
-  //                   _buildImageSourceOption(
-  //                     icon: Icons.camera_alt,
-  //                     label: 'Camera',
-  //                     onTap: () {
-  //                       Navigator.pop(context);
-  //                       context.read<ProfileCubit>().pickAndCacheProfileImage(
-  //                         source: ImageSource.camera,
-  //                       );
-  //                     },
-  //                   ),
-  //                   _buildImageSourceOption(
-  //                     icon: Icons.photo_library,
-  //                     label: 'Gallery',
-  //                     onTap: () {
-  //                       Navigator.pop(context);
-  //                       context.read<ProfileCubit>().pickAndCacheProfileImage(
-  //                         source: ImageSource.gallery,
-  //                       );
-  //                     },
-  //                   ),
-  //                 ],
-  //               ),
-  //               const SizedBox(height: 20),
-  //             ],
-  //           ),
-  //         ),
-  //       );
-  //     },
-  //   );
-  // }
-
-  // Widget _buildImageSourceOption({
-  //   required IconData icon,
-  //   required String label,
-  //   required VoidCallback onTap,
-  // }) {
-  //   return GestureDetector(
-  //     onTap: onTap,
-  //     child: Container(
-  //       width: 100,
-  //       height: 100,
-  //       decoration: BoxDecoration(
-  //         color: Colors.grey[100],
-  //         borderRadius: BorderRadius.circular(15),
-  //         border: Border.all(color: Colors.grey[300]!),
-  //       ),
-  //       child: Column(
-  //         mainAxisAlignment: MainAxisAlignment.center,
-  //         children: [
-  //           Icon(icon, size: 30, color: const Color(0xFF30B0C7)),
-  //           const SizedBox(height: 8),
-  //           Text(
-  //             label,
-  //             style: const TextStyle(fontSize: 14, fontWeight: FontWeight.w500),
-  //           ),
-  //         ],
-  //       ),
-  //     ),
-  //   );
-  // }
 
   void _handleLogout() {
     showDialog(
@@ -769,6 +688,8 @@ class _ProfileViewScreenState extends State<ProfileViewScreen> {
                             // Navigate to help & support
                           },
                         ),
+
+                        const AppUpdateWidget(),
 
                         ListTile(
                           leading: const Icon(Icons.logout, color: Colors.red),

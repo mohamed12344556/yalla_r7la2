@@ -24,7 +24,7 @@ class TravelApp extends StatelessWidget {
             debugShowCheckedModeBanner: false,
             theme: AppTheme.light,
             darkTheme: AppTheme.dark,
-            themeMode: themeMode, // ✅ Now responds to cubit changes
+            themeMode: themeMode,
             onGenerateRoute: AppRouter.generateRoute,
             initialRoute: initialRoute,
           );
