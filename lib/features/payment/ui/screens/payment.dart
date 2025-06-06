@@ -14,7 +14,7 @@ class PaymentPageState extends State<PaymentPage> {
   String cardHolderName = '';
   String cvvCode = '';
   bool isCvvFocused = false;
-  bool useGlassMorphism = true;
+  bool useGlassMorphism = false;
   bool useBackgroundImage = false;
   bool isLoading = false;
 

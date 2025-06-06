@@ -331,11 +331,7 @@ class ChatBotScreenState extends State<ChatBotScreen>
                 ),
               ],
             ),
-            child: const Icon(
-              Icons.smart_toy_rounded,
-              color: Colors.white,
-              size: 22,
-            ),
+            child: const Icon(Icons.smart_toy, color: Colors.white, size: 22),
           ),
           const SizedBox(width: 12),
 
@@ -365,22 +361,6 @@ class ChatBotScreenState extends State<ChatBotScreen>
           ),
         ],
       ),
-      actions: [
-        // Menu Button
-        Container(
-          margin: const EdgeInsets.only(right: 8),
-          decoration: BoxDecoration(
-            color: Colors.grey[100],
-            shape: BoxShape.circle,
-          ),
-          child: IconButton(
-            icon: const Icon(Icons.more_vert, color: Colors.black87),
-            onPressed: () {
-              // Show menu options
-            },
-          ),
-        ),
-      ],
     );
   }
 
@@ -596,7 +576,7 @@ class ChatBotScreenState extends State<ChatBotScreen>
         ),
         shape: BoxShape.circle,
       ),
-      child: const Icon(Icons.smart_toy_rounded, color: Colors.white, size: 18),
+      child: const Icon(Icons.smart_toy, color: Colors.white, size: 18),
     );
   }
 
@@ -692,7 +672,7 @@ class ChatBotScreenState extends State<ChatBotScreen>
               ),
               child: IconButton(
                 icon: const Icon(
-                  Icons.camera_alt_rounded,
+                  Icons.camera_alt,
                   color: Color(0xFF2FB0C6),
                   size: 22,
                 ),
@@ -748,11 +728,7 @@ class ChatBotScreenState extends State<ChatBotScreen>
                 ],
               ),
               child: IconButton(
-                icon: const Icon(
-                  Icons.send_rounded,
-                  color: Colors.white,
-                  size: 20,
-                ),
+                icon: const Icon(Icons.send, color: Colors.white, size: 20),
                 onPressed: _sendMessage,
               ),
             ),
