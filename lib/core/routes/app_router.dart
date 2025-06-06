@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_it/get_it.dart';
+import 'package:yalla_r7la2/features/booking/ui/logic/bookings_cubit.dart';
+import 'package:yalla_r7la2/features/booking/ui/screens/bookings_screen.dart';
 import 'package:yalla_r7la2/features/chat/ui/screens/chat_bot_screen.dart';
 import 'package:yalla_r7la2/features/favorites/ui/logic/favorites_cubit.dart';
 import 'package:yalla_r7la2/features/favorites/ui/screens/favorites_screen.dart';
 import 'package:yalla_r7la2/features/home/data/model/destination_model.dart';
-import 'package:yalla_r7la2/features/home/ui/screens/flight_booking_screen.dart';
+import 'package:yalla_r7la2/features/booking/ui/screens/flight_booking_screen.dart';
 
 import '../../features/auth/ui/logic/login_cubit.dart';
 import '../../features/auth/ui/logic/register_cubit.dart';
@@ -58,6 +60,15 @@ class AppRouter {
             final destination = arguments as DestinationModel;
             return FlightBookingScreen(destination: destination);
           },
+        );
+
+      case Routes.bookings:
+        return MaterialPageRoute(
+          builder:
+              (_) => BlocProvider(
+                create: (context) => sl<BookingsCubit>(),
+                child: const BookingsScreen(),
+              ),
         );
 
       case Routes.favorites:

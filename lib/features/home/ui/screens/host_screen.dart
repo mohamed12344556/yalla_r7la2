@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:yalla_r7la2/features/booking/ui/logic/bookings_cubit.dart';
+import 'package:yalla_r7la2/features/booking/ui/screens/bookings_screen.dart';
 import 'package:yalla_r7la2/features/favorites/ui/logic/favorites_cubit.dart';
 
 import '../../../../core/di/dependency_injection.dart';
@@ -53,6 +55,11 @@ class _HostScreenState extends State<HostScreen> {
             label: "Favorites",
           ),
           BottomNavigationBarItem(
+            icon: Icon(Icons.book_online_outlined),
+            activeIcon: Icon(Icons.book_online),
+            label: "Bookings",
+          ),
+          BottomNavigationBarItem(
             icon: Icon(Icons.chat_bubble_outline),
             activeIcon: Icon(Icons.chat_bubble),
             label: "Chat",
@@ -80,8 +87,13 @@ class _HostScreenState extends State<HostScreen> {
           child: const FavoritesScreen(),
         );
       case 2:
-        return const ChatBotScreen();
+        return BlocProvider.value(
+          value: sl<BookingsCubit>(),
+          child: const BookingsScreen(),
+        );
       case 3:
+        return const ChatBotScreen();
+      case 4:
         return BlocProvider.value(
           value: sl<ProfileCubit>(),
           child: const ProfileViewScreen(),

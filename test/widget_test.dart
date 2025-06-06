@@ -7,8 +7,8 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:p1/core/routes/routes.dart';
-import 'package:p1/travel_app.dart';
+import 'package:yalla_r7la2/core/routes/routes.dart';
+import 'package:yalla_r7la2/travel_app.dart';
 
 void main() {
   testWidgets('Counter increments smoke test', (WidgetTester tester) async {

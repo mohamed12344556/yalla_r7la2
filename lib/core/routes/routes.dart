@@ -14,6 +14,7 @@ class Routes {
   static const String favorites = "/favorites";
   static const String preferences = '/preferences';
   static const String flightBooking = '/flight-booking-screen';
+  static const String bookings = "/bookings";
 
   // Feature Routes
   static const String destinationDetails = "/destination-details";

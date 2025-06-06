@@ -1,6 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:get_it/get_it.dart';
 import 'package:yalla_r7la2/core/themes/cubit/theme_cubit.dart';
+import 'package:yalla_r7la2/features/booking/ui/logic/bookings_cubit.dart';
 import 'package:yalla_r7la2/features/favorites/ui/logic/favorites_cubit.dart';
 
 import '../../features/auth/data/repos/auth_repo.dart';
@@ -20,6 +21,7 @@ Future<void> setupGetIt() async {
   _initCore();
   _initAuth();
   _initProfile();
+  _initBookings();
   _initFavorites();
 }
 
@@ -55,6 +57,12 @@ void _initFavorites() {
   // FavoritesCubit - استخدم Singleton عشان نفس الـ instance يتشارك في كل التطبيق
   // وده مهم عشان الـ favorites تكون متسقة في كل مكان
   sl.registerLazySingleton(() => FavoritesCubit());
+}
+
+void _initBookings() {
+  // BookingsCubit - استخدم Singleton عشان نفس الـ instance يتشارك في كل التطبيق
+  // وده مهم عشان الـ bookings تكون متسقة في كل مكان وتحافظ على البيانات
+  sl.registerLazySingleton(() => BookingsCubit());
 }
 
 ///! 1. `registerSingleton`
