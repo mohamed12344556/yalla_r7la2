@@ -540,7 +540,7 @@ class _FlightBookingScreenState extends State<FlightBookingScreen>
                             ? () => setState(() => passengers--)
                             : null,
                     icon: Icon(
-                      Icons.remove_circle_outline,
+                      Icons.remove_circle_outline_rounded,
                       color: passengers > 1 ? Colors.blueAccent : Colors.grey,
                     ),
                   ),
@@ -568,7 +568,7 @@ class _FlightBookingScreenState extends State<FlightBookingScreen>
                             ? () => setState(() => passengers++)
                             : null,
                     icon: Icon(
-                      Icons.add_circle_outline,
+                      Icons.add_circle_outline_rounded,
                       color: passengers < 10 ? Colors.blueAccent : Colors.grey,
                     ),
                   ),

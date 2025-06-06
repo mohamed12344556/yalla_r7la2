@@ -299,8 +299,8 @@ class DestinationCardContent extends StatelessWidget {
                             mainAxisSize: MainAxisSize.min,
                             children: [
                               const Icon(
-                                Icons.star_rounded,
-                                color: Color(0xFFFFD700),
+                                Icons.star,
+                                color: Colors.amber,
                                 size: 16,
                               ),
                               const SizedBox(width: 4),
