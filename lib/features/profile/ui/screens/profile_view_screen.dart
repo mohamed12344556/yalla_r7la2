@@ -328,7 +328,17 @@ class _ProfileViewScreenState extends State<ProfileViewScreen> {
             },
           ),
         ],
-        leading: SizedBox.shrink(),
+        leading: IconButton(
+          icon: const Icon(
+            Icons.arrow_back_ios_new_rounded,
+            color: Colors.white,
+          ),
+          onPressed:
+              () => context.pushNamedAndRemoveUntil(
+                Routes.host,
+                predicate: (route) => false,
+              ),
+        ),
       ),
       body: BlocConsumer<ProfileCubit, ProfileState>(
         listener: (context, state) {

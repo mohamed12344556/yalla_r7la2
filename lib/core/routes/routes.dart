@@ -6,14 +6,14 @@ class Routes {
   // Main App Routes
   static const String host = "/host";
   static const String home = "/home";
-  static const String chat = "/chat";
+  static const String chatBot = "/chat-bot";
   static const String explore = "/explore";
   static const String payment = '/payment';
   static const String profile = "/profile";
   static const String editProfile = "/edit-profile";
   static const String favorites = "/favorites";
   static const String preferences = '/preferences';
-  static const String flightBooking = '/flight-booking';
+  static const String flightBooking = '/flight-booking-screen';
 
   // Feature Routes
   static const String destinationDetails = "/destination-details";

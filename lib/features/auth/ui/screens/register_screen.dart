@@ -72,15 +72,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
             return Form(
               key: _formKey,
               child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  const SizedBox(height: 50),
-                  // Logo/Image
-                  Image.asset(
-                    'assets/undraw_adventure_map_hnin2(1).png',
-                    height: 200,
-                  ),
-                  const SizedBox(height: 30),
                   // Welcome Text
                   const Text(
                     'Sign Up',

@@ -2,6 +2,8 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:yalla_r7la2/core/routes/routes.dart';
+import 'package:yalla_r7la2/core/utils/extensions.dart';
 
 class ChatBotScreen extends StatefulWidget {
   const ChatBotScreen({super.key});
@@ -66,7 +68,18 @@ class ChatBotScreenState extends State<ChatBotScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(centerTitle: true, title: Text("Chat Bot")),
+      appBar: AppBar(
+        centerTitle: true,
+        title: Text("Chat Bot"),
+        leading: IconButton(
+          icon: Icon(Icons.arrow_back_ios_new_rounded, color: Colors.black),
+          onPressed:
+              () => context.pushNamedAndRemoveUntil(
+                Routes.host,
+                predicate: (route) => false,
+              ),
+        ),
+      ),
       body: Column(
         children: [
           Expanded(

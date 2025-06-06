@@ -3,8 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:yalla_r7la2/features/favorites/ui/logic/favorites_cubit.dart';
 
 import '../../../../core/di/dependency_injection.dart';
-import '../../../chat/data/ui/screens/chat_bot_screen.dart';
-import '../../../destinations/data/ui/screens/explore_screen.dart';
+import '../../../chat/ui/screens/chat_bot_screen.dart';
 import '../../../favorites/ui/screens/favorites_screen.dart';
 import '../../../profile/ui/logic/profile_cubit.dart';
 import '../../../profile/ui/screens/profile_view_screen.dart';
@@ -49,11 +48,6 @@ class _HostScreenState extends State<HostScreen> {
             label: "Home",
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.explore_outlined),
-            activeIcon: Icon(Icons.explore),
-            label: "Explore",
-          ),
-          BottomNavigationBarItem(
             icon: Icon(Icons.favorite_outline),
             activeIcon: Icon(Icons.favorite),
             label: "Favorites",
@@ -81,15 +75,13 @@ class _HostScreenState extends State<HostScreen> {
           child: const HomeScreen(),
         );
       case 1:
-        return const ExploreScreen();
-      case 2:
         return BlocProvider.value(
           value: sl<FavoritesCubit>(),
           child: const FavoritesScreen(),
         );
-      case 3:
+      case 2:
         return const ChatBotScreen();
-      case 4:
+      case 3:
         return BlocProvider.value(
           value: sl<ProfileCubit>(),
           child: const ProfileViewScreen(),

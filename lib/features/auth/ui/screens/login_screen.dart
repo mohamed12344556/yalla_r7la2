@@ -62,7 +62,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
-                    const SizedBox(height: 50),
+                    const SizedBox(height: 80),
                     // Logo/Image
                     Image.asset(
                       'assets/undraw_adventure_map_hnin2(1).png',

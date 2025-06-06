@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:yalla_r7la2/core/utils/extensions.dart';
+import 'package:yalla_r7la2/core/routes/routes.dart';
 import 'package:yalla_r7la2/features/favorites/ui/logic/favorites_cubit.dart';
 
 import '../../data/model/destination_model.dart';
@@ -205,6 +205,7 @@ class _DestinationDetailsScreenState extends State<DestinationDetailsScreen>
         slivers: [
           // Enhanced App Bar with Image Navigation
           SliverAppBar(
+            scrolledUnderElevation: 0,
             expandedHeight: 320,
             pinned: true,
             backgroundColor: Colors.white,
@@ -966,9 +967,11 @@ class _DestinationDetailsScreenState extends State<DestinationDetailsScreen>
                 ),
                 child: ElevatedButton(
                   onPressed: () {
-                    // _showBookingDialog(context);
-                    context.showComingSoonFeature(
-                      message: ' 🫠💔لسه شغال عليها',
+                    // Book Now Button - Updated to navigate to BookingScreen
+                    Navigator.pushNamed(
+                      context,
+                      Routes.flightBooking,
+                      arguments: widget.card,
                     );
                   },
                   style: ElevatedButton.styleFrom(
@@ -1071,80 +1074,6 @@ class _DestinationDetailsScreenState extends State<DestinationDetailsScreen>
           },
         ),
       ),
-    );
-  }
-
-  void _showBookingDialog(BuildContext context) {
-    showDialog(
-      context: context,
-      builder: (BuildContext context) {
-        return AlertDialog(
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(20),
-          ),
-          title: Row(
-            children: [
-              Icon(Icons.flight_takeoff, color: Colors.blueAccent),
-              const SizedBox(width: 12),
-              const Text(
-                'Book Trip',
-                style: TextStyle(fontWeight: FontWeight.bold),
-              ),
-            ],
-          ),
-          content: Column(
-            mainAxisSize: MainAxisSize.min,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                'Ready to book ${widget.card.name}?',
-                style: const TextStyle(fontSize: 16),
-              ),
-              const SizedBox(height: 16),
-              Container(
-                padding: const EdgeInsets.all(16),
-                decoration: BoxDecoration(
-                  color: Colors.blueAccent.withOpacity(0.1),
-                  borderRadius: BorderRadius.circular(12),
-                ),
-                child: Row(
-                  children: [
-                    Icon(Icons.info_outline, color: Colors.blueAccent),
-                    const SizedBox(width: 12),
-                    const Expanded(
-                      child: Text(
-                        'Booking feature coming soon! You can save this destination to favorites for now.',
-                        style: TextStyle(fontSize: 14),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-            ],
-          ),
-          actions: [
-            TextButton(
-              onPressed: () => Navigator.of(context).pop(),
-              child: Text('Cancel', style: TextStyle(color: Colors.grey[600])),
-            ),
-            ElevatedButton(
-              onPressed: () {
-                Navigator.of(context).pop();
-                context.read<FavoritesCubit>().toggleFavorite(widget.card);
-                _showFeedbackSnackBar(context, true);
-              },
-              style: ElevatedButton.styleFrom(
-                backgroundColor: Colors.blueAccent,
-                foregroundColor: Colors.white,
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(12),
-                ),
-              ),
-              child: const Text('Add to Favorites'),
-            ),
-          ],
-        );
-      },
     );
   }
 }

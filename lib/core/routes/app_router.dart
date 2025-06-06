@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_it/get_it.dart';
+import 'package:yalla_r7la2/features/chat/ui/screens/chat_bot_screen.dart';
 import 'package:yalla_r7la2/features/favorites/ui/logic/favorites_cubit.dart';
 import 'package:yalla_r7la2/features/favorites/ui/screens/favorites_screen.dart';
+import 'package:yalla_r7la2/features/home/data/model/destination_model.dart';
+import 'package:yalla_r7la2/features/home/ui/screens/flight_booking_screen.dart';
 
 import '../../features/auth/ui/logic/login_cubit.dart';
 import '../../features/auth/ui/logic/register_cubit.dart';
@@ -46,6 +49,17 @@ class AppRouter {
       case Routes.home:
         return MaterialPageRoute(builder: (_) => const HomeScreen());
 
+      case Routes.chatBot:
+        return MaterialPageRoute(builder: (_) => const ChatBotScreen());
+
+      case Routes.flightBooking:
+        return MaterialPageRoute(
+          builder: (context) {
+            final destination = arguments as DestinationModel;
+            return FlightBookingScreen(destination: destination);
+          },
+        );
+
       case Routes.favorites:
         return MaterialPageRoute(
           builder:
@@ -74,23 +88,24 @@ class AppRouter {
           },
         );
 
-      default:
-        return MaterialPageRoute(
-          builder:
-              (_) => Scaffold(
-                appBar: AppBar(title: const Text('Error')),
-                body: const Center(
-                  child: Text(
-                    'Page not found!',
-                    style: TextStyle(
-                      fontSize: 20,
-                      fontWeight: FontWeight.bold,
-                      color: Colors.red,
-                    ),
-                  ),
-                ),
-              ),
-        );
+      // default:
+      //   return MaterialPageRoute(
+      //     builder:
+      //         (_) => Scaffold(
+      //           appBar: AppBar(title: const Text('Error')),
+      //           body: const Center(
+      //             child: Text(
+      //               'Page not found!',
+      //               style: TextStyle(
+      //                 fontSize: 20,
+      //                 fontWeight: FontWeight.bold,
+      //                 color: Colors.red,
+      //               ),
+      //             ),
+      //           ),
+      //         ),
+      //   );
     }
+    return null;
   }
 }

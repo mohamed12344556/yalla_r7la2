@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:yalla_r7la2/core/di/dependency_injection.dart';
+import 'package:yalla_r7la2/core/routes/routes.dart';
+import 'package:yalla_r7la2/core/utils/extensions.dart';
 import 'package:yalla_r7la2/features/home/data/model/destination_model.dart';
 import 'package:yalla_r7la2/features/home/ui/screens/destination_details_screen.dart';
 
@@ -37,7 +39,11 @@ class FavoritesScreen extends StatelessWidget {
         ],
         leading: IconButton(
           icon: const Icon(Icons.arrow_back_ios, color: Colors.black),
-          onPressed: () => Navigator.pop(context, true),
+          onPressed:
+              () => context.pushNamedAndRemoveUntil(
+                Routes.host,
+                predicate: (_) => false,
+              ),
         ),
       ),
       body: BlocBuilder<FavoritesCubit, FavoritesState>(
