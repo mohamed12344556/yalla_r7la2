@@ -3,11 +3,12 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_it/get_it.dart';
 import 'package:yalla_r7la2/features/booking/ui/logic/bookings_cubit.dart';
 import 'package:yalla_r7la2/features/booking/ui/screens/bookings_screen.dart';
+import 'package:yalla_r7la2/features/booking/ui/screens/flight_booking_screen.dart';
 import 'package:yalla_r7la2/features/chat/ui/screens/chat_bot_screen.dart';
 import 'package:yalla_r7la2/features/favorites/ui/logic/favorites_cubit.dart';
 import 'package:yalla_r7la2/features/favorites/ui/screens/favorites_screen.dart';
 import 'package:yalla_r7la2/features/home/data/model/destination_model.dart';
-import 'package:yalla_r7la2/features/booking/ui/screens/flight_booking_screen.dart';
+import 'package:yalla_r7la2/features/home/ui/logic/home_cubit.dart';
 
 import '../../features/auth/ui/logic/login_cubit.dart';
 import '../../features/auth/ui/logic/register_cubit.dart';
@@ -49,7 +50,13 @@ class AppRouter {
         return MaterialPageRoute(builder: (_) => const HostScreen());
 
       case Routes.home:
-        return MaterialPageRoute(builder: (_) => const HomeScreen());
+        return MaterialPageRoute(
+          builder:
+              (_) => BlocProvider(
+                create: (context) => sl<HomeCubit>(),
+                child: const HomeScreen(),
+              ),
+        );
 
       case Routes.chatBot:
         return MaterialPageRoute(builder: (_) => const ChatBotScreen());

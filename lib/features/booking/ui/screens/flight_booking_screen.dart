@@ -348,7 +348,7 @@ class _FlightBookingScreenState extends State<FlightBookingScreen>
                     ),
                     const SizedBox(height: 4),
                     Text(
-                      widget.destination.location,
+                      widget.destination.location ?? 'Unknown Location',
                       style: TextStyle(
                         fontSize: 16,
                         color: Colors.grey[600],
@@ -358,43 +358,42 @@ class _FlightBookingScreenState extends State<FlightBookingScreen>
                   ],
                 ),
               ),
-              if (widget.destination.rating != null)
-                Container(
-                  padding: const EdgeInsets.symmetric(
-                    horizontal: 12,
-                    vertical: 6,
-                  ),
-                  decoration: BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.circular(12),
-                    boxShadow: [
-                      BoxShadow(
-                        color: Colors.black.withOpacity(0.1),
-                        blurRadius: 4,
-                        offset: const Offset(0, 2),
-                      ),
-                    ],
-                  ),
-                  child: Row(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      const Icon(Icons.star, color: Colors.amber, size: 16),
-                      const SizedBox(width: 4),
-                      Text(
-                        widget.destination.rating!.toStringAsFixed(1),
-                        style: const TextStyle(
-                          fontWeight: FontWeight.bold,
-                          fontSize: 14,
-                        ),
-                      ),
-                    ],
-                  ),
+              Container(
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 12,
+                  vertical: 6,
                 ),
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.circular(12),
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.black.withOpacity(0.1),
+                      blurRadius: 4,
+                      offset: const Offset(0, 2),
+                    ),
+                  ],
+                ),
+                child: Row(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    const Icon(Icons.star, color: Colors.amber, size: 16),
+                    const SizedBox(width: 4),
+                    Text(
+                      widget.destination.rating.toStringAsFixed(1),
+                      style: const TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 14,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
             ],
           ),
           const SizedBox(height: 16),
           Text(
-            widget.destination.description,
+            widget.destination.description ?? 'No description available',
             style: TextStyle(
               fontSize: 16,
               color: Colors.grey[700],
@@ -614,7 +613,7 @@ class _FlightBookingScreenState extends State<FlightBookingScreen>
               _buildFlightRoute(
                 'Outbound Flight',
                 'Cairo, Egypt',
-                widget.destination.location,
+                widget.destination.location ?? 'Unknown Location',
                 '08:00',
                 '14:00',
                 '6h 00m',
@@ -626,7 +625,7 @@ class _FlightBookingScreenState extends State<FlightBookingScreen>
               // Return Flight
               _buildFlightRoute(
                 'Return Flight',
-                widget.destination.location,
+                widget.destination.location ?? 'Unknown Location',
                 'Cairo, Egypt',
                 '16:00',
                 '22:00',

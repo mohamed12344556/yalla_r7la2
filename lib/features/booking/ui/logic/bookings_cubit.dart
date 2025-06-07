@@ -54,7 +54,7 @@ class BookingsCubit extends Cubit<BookingsState> {
       final newBooking = BookingModel.fromDestination(
         destinationId: destination.destinationId,
         destinationName: destination.name,
-        destinationLocation: destination.location,
+        destinationLocation: destination.location ?? 'Unknown Location',
         imageUrl: destination.imageUrl,
         price: destination.price,
         passengers: passengers,

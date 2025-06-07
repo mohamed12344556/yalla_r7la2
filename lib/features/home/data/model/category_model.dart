@@ -1,66 +1,126 @@
 import 'package:flutter/material.dart';
 
 class CategoryModel {
-  final String id;
   final String name;
   final IconData icon;
   final Color color;
   final bool isSelected;
 
   CategoryModel({
-    required this.id,
     required this.name,
     required this.icon,
     required this.color,
     this.isSelected = false,
   });
 
-  factory CategoryModel.fromJson(Map<String, dynamic> json) {
-    return CategoryModel(
-      id: json['id']?.toString() ?? '',
-      name: json['name'] ?? '',
-      icon: _getIconFromName(json['iconName'] ?? ''),
-      color: Color(json['color'] ?? 0xFF2196F3),
-      isSelected: json['isSelected'] ?? false,
-    );
-  }
-
-  static IconData _getIconFromName(String iconName) {
-    switch (iconName.toLowerCase()) {
-      case 'mountain':
-        return Icons.terrain;
-      case 'beach':
+  static IconData _getIconFromCategory(String category) {
+    switch (category.toLowerCase()) {
+      case 'leisure tourism':
         return Icons.beach_access;
-      case 'forest':
-        return Icons.park;
-      case 'desert':
-        return Icons.landscape;
-      case 'boat':
-        return Icons.directions_boat;
-      case 'flight':
-        return Icons.flight;
-      case 'hiking':
+      case 'cultural & historical tourism':
+        return Icons.museum;
+      case 'medical tourism':
+      case 'medicine': // Backend sends "Medicine" instead of "Medical Tourism"
+        return Icons.local_hospital;
+      case 'adventure & eco tourism':
         return Icons.hiking;
-      case 'cabin':
-        return Icons.cabin;
+      case 'shopping tourism':
+        return Icons.shopping_bag;
+      case 'religious tourism':
+        return Icons.church;
+      case 'business & mice tourism':
+        return Icons.business;
       default:
         return Icons.place;
     }
   }
 
+  static Color _getColorFromCategory(String category) {
+    switch (category.toLowerCase()) {
+      case 'leisure tourism':
+        return const Color(0xFF2196F3);
+      case 'cultural & historical tourism':
+        return const Color(0xFFFF9800);
+      case 'medical tourism':
+      case 'medicine': // Backend sends "Medicine" instead of "Medical Tourism"
+        return const Color(0xFFF44336);
+      case 'adventure & eco tourism':
+        return const Color(0xFF4CAF50);
+      case 'shopping tourism':
+        return const Color(0xFF9C27B0);
+      case 'religious tourism':
+        return const Color(0xFF795548);
+      case 'business & mice tourism':
+        return const Color(0xFF607D8B);
+      default:
+        return const Color(0xFF2196F3);
+    }
+  }
+
+  factory CategoryModel.fromString(String categoryName) {
+    return CategoryModel(
+      name: categoryName,
+      icon: _getIconFromCategory(categoryName),
+      color: _getColorFromCategory(categoryName),
+    );
+  }
+
   CategoryModel copyWith({
-    String? id,
     String? name,
     IconData? icon,
     Color? color,
     bool? isSelected,
   }) {
     return CategoryModel(
-      id: id ?? this.id,
       name: name ?? this.name,
       icon: icon ?? this.icon,
       color: color ?? this.color,
       isSelected: isSelected ?? this.isSelected,
     );
+  }
+}
+
+// Available categories from backend
+class AppCategories {
+  static const List<String> categories = [
+    'Leisure Tourism',
+    'Cultural & Historical Tourism',
+    'Medical Tourism',
+    'Adventure & Eco Tourism',
+    'Shopping Tourism',
+    'Religious Tourism',
+    'Business & MICE Tourism',
+  ];
+
+  // Backend category mapping - what the backend actually sends
+  static const Map<String, String> backendCategoryMapping = {
+    'Medical Tourism': 'Medicine',
+    'Leisure Tourism': 'Leisure Tourism',
+    'Cultural & Historical Tourism': 'Cultural & Historical Tourism',
+    'Adventure & Eco Tourism': 'Adventure & Eco Tourism',
+    'Shopping Tourism': 'Shopping Tourism',
+    'Religious Tourism': 'Religious Tourism',
+    'Business & MICE Tourism': 'Business & MICE Tourism',
+  };
+
+  static List<CategoryModel> getCategoryModels() {
+    return categories
+        .map((category) => CategoryModel.fromString(category))
+        .toList();
+  }
+
+  // Convert UI category to backend category
+  static String getBackendCategory(String uiCategory) {
+    return backendCategoryMapping[uiCategory] ?? uiCategory;
+  }
+
+  // Convert backend category to UI category
+  static String getUiCategory(String backendCategory) {
+    return backendCategoryMapping.entries
+        .firstWhere(
+          (entry) => entry.value == backendCategory,
+          orElse: () => MapEntry(backendCategory, backendCategory),
+        )
+        .key;
   }
 }

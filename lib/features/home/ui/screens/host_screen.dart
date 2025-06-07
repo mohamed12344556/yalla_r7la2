@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:yalla_r7la2/features/booking/ui/logic/bookings_cubit.dart';
 import 'package:yalla_r7la2/features/booking/ui/screens/bookings_screen.dart';
 import 'package:yalla_r7la2/features/favorites/ui/logic/favorites_cubit.dart';
+import 'package:yalla_r7la2/features/home/ui/logic/home_cubit.dart';
 
 import '../../../../core/di/dependency_injection.dart';
 import '../../../chat/ui/screens/chat_bot_screen.dart';
@@ -77,8 +78,11 @@ class _HostScreenState extends State<HostScreen> {
   Widget _buildCurrentScreen() {
     switch (_selectedIndex) {
       case 0:
-        return BlocProvider.value(
-          value: sl<FavoritesCubit>(),
+        return MultiBlocProvider(
+          providers: [
+            BlocProvider.value(value: sl<HomeCubit>()),
+            BlocProvider.value(value: sl<FavoritesCubit>()),
+          ],
           child: const HomeScreen(),
         );
       case 1:

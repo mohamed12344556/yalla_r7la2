@@ -46,20 +46,22 @@ class FavoritesCubit extends Cubit<FavoritesState> {
         // Remove from favorites
         _favorites.removeAt(existingIndex);
       } else {
-        // Add to favorites
+        // Add to favorites - create a simplified version for storage
         final favoriteDestination = DestinationModel(
           destinationId: destination.destinationId,
           name: destination.name,
-          imageUrl: destination.imageUrl,
-          images: destination.images,
-          location: destination.location,
-          secondaryLocation: destination.secondaryLocation,
-          rating: destination.rating,
-          price: destination.price,
           description: destination.description,
-          features: destination.features,
-          isFavorite: true,
+          location: destination.location,
           category: destination.category,
+          averageRating: destination.averageRating,
+          discount: destination.discount,
+          cost: destination.cost,
+          availableNumber: destination.availableNumber,
+          startDate: destination.startDate,
+          endDate: destination.endDate,
+          isAvailable: destination.isAvailable,
+          businessOwnerId: destination.businessOwnerId,
+          images: destination.images,
         );
         _favorites.add(favoriteDestination);
       }
@@ -94,16 +96,26 @@ class FavoritesCubit extends Cubit<FavoritesState> {
     return {
       'destinationId': destination.destinationId,
       'name': destination.name,
-      'imageUrl': destination.imageUrl,
-      'images': destination.images,
-      'location': destination.location,
-      'secondaryLocation': destination.secondaryLocation,
-      'rating': destination.rating,
-      'price': destination.price,
       'description': destination.description,
-      'features': destination.features,
-      'isFavorite': destination.isFavorite,
+      'location': destination.location,
       'category': destination.category,
+      'averageRating': destination.averageRating,
+      'discount': destination.discount,
+      'cost': destination.cost,
+      'availableNumber': destination.availableNumber,
+      'startDate': destination.startDate?.toIso8601String(),
+      'endDate': destination.endDate?.toIso8601String(),
+      'isAvailable': destination.isAvailable,
+      'businessOwnerId': destination.businessOwnerId,
+      'images':
+          destination.images
+              ?.map(
+                (img) => {
+                  'imageId': img.imageId,
+                  'imageBase64': img.imageBase64,
+                },
+              )
+              .toList(),
     };
   }
 
@@ -111,17 +123,29 @@ class FavoritesCubit extends Cubit<FavoritesState> {
     return DestinationModel(
       destinationId: json['destinationId'] ?? '',
       name: json['name'] ?? '',
-      imageUrl: json['imageUrl'] ?? '',
-      images: json['images'] != null ? List<String>.from(json['images']) : null,
-      location: json['location'] ?? '',
-      secondaryLocation: json['secondaryLocation'] ?? '',
-      rating: json['rating']?.toDouble(),
-      price: json['price']?.toDouble() ?? 0.0,
-      description: json['description'] ?? '',
-      features:
-          json['features'] != null ? List<String>.from(json['features']) : null,
-      isFavorite: json['isFavorite'] ?? false,
+      description: json['description'],
+      location: json['location'],
       category: json['category'],
+      averageRating: json['averageRating']?.toDouble(),
+      discount: json['discount']?.toDouble(),
+      cost: json['cost']?.toDouble(),
+      availableNumber: json['availableNumber'],
+      startDate:
+          json['startDate'] != null ? DateTime.parse(json['startDate']) : null,
+      endDate: json['endDate'] != null ? DateTime.parse(json['endDate']) : null,
+      isAvailable: json['isAvailable'],
+      businessOwnerId: json['businessOwnerId'],
+      images:
+          json['images'] != null
+              ? (json['images'] as List)
+                  .map(
+                    (img) => DestinationImage(
+                      imageId: img['imageId'] ?? '',
+                      imageBase64: img['imageBase64'] ?? '',
+                    ),
+                  )
+                  .toList()
+              : null,
     );
   }
 

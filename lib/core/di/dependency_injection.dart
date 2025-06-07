@@ -3,6 +3,8 @@ import 'package:get_it/get_it.dart';
 import 'package:yalla_r7la2/core/themes/cubit/theme_cubit.dart';
 import 'package:yalla_r7la2/features/booking/ui/logic/bookings_cubit.dart';
 import 'package:yalla_r7la2/features/favorites/ui/logic/favorites_cubit.dart';
+import 'package:yalla_r7la2/features/home/data/repos/destination_repo.dart';
+import 'package:yalla_r7la2/features/home/ui/logic/home_cubit.dart';
 
 import '../../features/auth/data/repos/auth_repo.dart';
 import '../../features/auth/ui/logic/login_cubit.dart';
@@ -20,6 +22,7 @@ Future<void> setupGetIt() async {
 
   _initCore();
   _initAuth();
+  _initHome();
   _initProfile();
   _initBookings();
   _initFavorites();
@@ -40,6 +43,14 @@ void _initAuth() {
   sl.registerFactory(() => LoginCubit(authRepo: sl()));
   // RegisterCubit - Factory عشان كل مرة instance جديدة
   sl.registerFactory(() => RegisterCubit(authRepo: sl()));
+}
+
+void _initHome() {
+  // DestinationRepo
+  sl.registerLazySingleton(() => DestinationRepo(dio: sl()));
+
+  // HomeCubit
+  sl.registerFactory(() => HomeCubit(destinationRepo: sl()));
 }
 
 void _initProfile() {

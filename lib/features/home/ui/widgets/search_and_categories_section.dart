@@ -3,7 +3,18 @@ import 'package:flutter/material.dart';
 import '../../data/model/category_model.dart';
 
 class SearchAndCategoriesSection extends StatefulWidget {
-  const SearchAndCategoriesSection({super.key});
+  final List<CategoryModel> categories;
+  final String? selectedCategory;
+  final Function(String?)? onCategorySelected;
+  final Function(String)? onSearchChanged;
+
+  const SearchAndCategoriesSection({
+    super.key,
+    required this.categories,
+    this.selectedCategory,
+    this.onCategorySelected,
+    this.onSearchChanged,
+  });
 
   @override
   State<SearchAndCategoriesSection> createState() =>
@@ -12,58 +23,13 @@ class SearchAndCategoriesSection extends StatefulWidget {
 
 class _SearchAndCategoriesSectionState
     extends State<SearchAndCategoriesSection> {
-  int selectedCategoryIndex = -1;
+  final TextEditingController _searchController = TextEditingController();
 
-  final List<CategoryModel> categories = [
-    CategoryModel(
-      id: '1',
-      name: "Mountain",
-      icon: Icons.terrain,
-      color: const Color(0xFF30B0C7),
-    ),
-    CategoryModel(
-      id: '2',
-      name: "Beach",
-      icon: Icons.beach_access,
-      color: const Color(0xFF30B0C7),
-    ),
-    CategoryModel(
-      id: '3',
-      name: "Forest",
-      icon: Icons.park,
-      color: const Color(0xFF30B0C7),
-    ),
-    CategoryModel(
-      id: '4',
-      name: "Desert",
-      icon: Icons.landscape,
-      color: const Color(0xFF30B0C7),
-    ),
-    CategoryModel(
-      id: '5',
-      name: "Boat",
-      icon: Icons.directions_boat,
-      color: const Color(0xFF30B0C7),
-    ),
-    CategoryModel(
-      id: '6',
-      name: "Flight",
-      icon: Icons.flight,
-      color: const Color(0xFF30B0C7),
-    ),
-    CategoryModel(
-      id: '7',
-      name: "Hiking",
-      icon: Icons.hiking,
-      color: const Color(0xFF30B0C7),
-    ),
-    CategoryModel(
-      id: '8',
-      name: "Cabin",
-      icon: Icons.cabin,
-      color: const Color(0xFF30B0C7),
-    ),
-  ];
+  @override
+  void dispose() {
+    _searchController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -76,18 +42,35 @@ class _SearchAndCategoriesSectionState
             children: [
               Expanded(
                 child: TextField(
+                  controller: _searchController,
                   decoration: InputDecoration(
                     hintText: 'Search destinations...',
-                    prefixIcon: const Icon(Icons.search),
+                    hintStyle: TextStyle(color: Colors.grey[500], fontSize: 16),
+                    prefixIcon: Icon(Icons.search, color: Colors.grey[600]),
+                    suffixIcon:
+                        _searchController.text.isNotEmpty
+                            ? IconButton(
+                              onPressed: () {
+                                _searchController.clear();
+                                widget.onSearchChanged?.call('');
+                              },
+                              icon: Icon(Icons.clear, color: Colors.grey[600]),
+                            )
+                            : null,
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(12),
                       borderSide: BorderSide.none,
                     ),
                     filled: true,
                     fillColor: Colors.white,
+                    contentPadding: const EdgeInsets.symmetric(
+                      horizontal: 16,
+                      vertical: 12,
+                    ),
                   ),
                   onChanged: (value) {
-                    // Handle search
+                    setState(() {});
+                    widget.onSearchChanged?.call(value);
                   },
                 ),
               ),
@@ -96,10 +79,18 @@ class _SearchAndCategoriesSectionState
                 decoration: BoxDecoration(
                   color: Colors.white,
                   borderRadius: BorderRadius.circular(12),
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.black.withOpacity(0.05),
+                      blurRadius: 10,
+                      offset: const Offset(0, 2),
+                    ),
+                  ],
                 ),
                 child: IconButton(
                   onPressed: () {
                     // Show filter options
+                    _showFilterBottomSheet(context);
                   },
                   icon: const Icon(Icons.tune, color: Color(0xFF30B0C7)),
                 ),
@@ -115,15 +106,24 @@ class _SearchAndCategoriesSectionState
             children: [
               const Text(
                 "Categories",
-                style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                style: TextStyle(
+                  fontSize: 18,
+                  fontWeight: FontWeight.bold,
+                  color: Color(0xFF212121),
+                ),
               ),
               TextButton(
                 onPressed: () {
-                  // Navigate to all categories
+                  // Reset to show all destinations
+                  widget.onCategorySelected?.call(null);
                 },
-                child: const Text(
-                  "See All",
-                  style: TextStyle(color: Color(0xFF30B0C7), fontSize: 14),
+                child: Text(
+                  widget.selectedCategory != null ? "Clear" : "See All",
+                  style: const TextStyle(
+                    color: Color(0xFF30B0C7),
+                    fontSize: 14,
+                    fontWeight: FontWeight.w600,
+                  ),
                 ),
               ),
             ],
@@ -136,33 +136,47 @@ class _SearchAndCategoriesSectionState
             height: 50,
             child: ListView.builder(
               scrollDirection: Axis.horizontal,
-              itemCount: categories.length,
+              itemCount: widget.categories.length,
               itemBuilder: (context, index) {
-                final isSelected = index == selectedCategoryIndex;
-                final category = categories[index];
+                final category = widget.categories[index];
+                final isSelected = category.isSelected;
 
                 return GestureDetector(
                   onTap: () {
-                    setState(() {
-                      selectedCategoryIndex = isSelected ? -1 : index;
-                    });
+                    widget.onCategorySelected?.call(category.name);
                   },
-                  child: Container(
+                  child: AnimatedContainer(
+                    duration: const Duration(milliseconds: 300),
+                    curve: Curves.easeInOut,
                     margin: const EdgeInsets.only(right: 12),
                     padding: const EdgeInsets.symmetric(
                       horizontal: 16,
                       vertical: 8,
                     ),
                     decoration: BoxDecoration(
-                      color:
-                          isSelected ? const Color(0xFF30B0C7) : Colors.white,
+                      color: isSelected ? category.color : Colors.white,
                       borderRadius: BorderRadius.circular(25),
                       border: Border.all(
                         color:
-                            isSelected
-                                ? const Color(0xFF30B0C7)
-                                : Colors.grey.shade300,
+                            isSelected ? category.color : Colors.grey.shade300,
+                        width: 1.5,
                       ),
+                      boxShadow:
+                          isSelected
+                              ? [
+                                BoxShadow(
+                                  color: category.color.withOpacity(0.3),
+                                  blurRadius: 8,
+                                  offset: const Offset(0, 3),
+                                ),
+                              ]
+                              : [
+                                BoxShadow(
+                                  color: Colors.black.withOpacity(0.05),
+                                  blurRadius: 4,
+                                  offset: const Offset(0, 2),
+                                ),
+                              ],
                     ),
                     child: Row(
                       mainAxisSize: MainAxisSize.min,
@@ -170,17 +184,15 @@ class _SearchAndCategoriesSectionState
                         Icon(
                           category.icon,
                           size: 20,
-                          color:
-                              isSelected
-                                  ? Colors.white
-                                  : const Color(0xFF30B0C7),
+                          color: isSelected ? Colors.white : category.color,
                         ),
                         const SizedBox(width: 8),
                         Text(
                           category.name,
                           style: TextStyle(
-                            color: isSelected ? Colors.white : Colors.black87,
-                            fontWeight: FontWeight.w500,
+                            color: isSelected ? Colors.white : Colors.black,
+                            fontWeight: FontWeight.w600,
+                            fontSize: 14,
                           ),
                         ),
                       ],
@@ -192,6 +204,96 @@ class _SearchAndCategoriesSectionState
           ),
         ],
       ),
+    );
+  }
+
+  void _showFilterBottomSheet(BuildContext context) {
+    showModalBottomSheet(
+      context: context,
+      isScrollControlled: true,
+      backgroundColor: Colors.transparent,
+      builder:
+          (context) => Container(
+            decoration: const BoxDecoration(
+              color: Colors.white,
+              borderRadius: BorderRadius.only(
+                topLeft: Radius.circular(20),
+                topRight: Radius.circular(20),
+              ),
+            ),
+            padding: const EdgeInsets.all(20),
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                // Handle bar
+                Center(
+                  child: Container(
+                    width: 40,
+                    height: 4,
+                    decoration: BoxDecoration(
+                      color: Colors.grey[300],
+                      borderRadius: BorderRadius.circular(2),
+                    ),
+                  ),
+                ),
+                const SizedBox(height: 20),
+
+                const Text(
+                  'Filter Options',
+                  style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                ),
+                const SizedBox(height: 20),
+
+                // Price Range
+                const Text(
+                  'Price Range',
+                  style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
+                ),
+                const SizedBox(height: 12),
+
+                // Add filter options here
+                Container(
+                  padding: const EdgeInsets.all(16),
+                  decoration: BoxDecoration(
+                    color: Colors.grey[50],
+                    borderRadius: BorderRadius.circular(12),
+                  ),
+                  child: const Text(
+                    'Filter options will be implemented here',
+                    style: TextStyle(color: Colors.grey),
+                  ),
+                ),
+
+                const SizedBox(height: 20),
+
+                // Apply button
+                SizedBox(
+                  width: double.infinity,
+                  child: ElevatedButton(
+                    onPressed: () {
+                      Navigator.pop(context);
+                    },
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: const Color(0xFF30B0C7),
+                      foregroundColor: Colors.white,
+                      padding: const EdgeInsets.symmetric(vertical: 16),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(12),
+                      ),
+                    ),
+                    child: const Text(
+                      'Apply Filters',
+                      style: TextStyle(
+                        fontSize: 16,
+                        fontWeight: FontWeight.w600,
+                      ),
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
     );
   }
 }

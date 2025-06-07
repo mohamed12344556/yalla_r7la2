@@ -6,12 +6,18 @@ class ApiConstants {
   static const String signup = 'api/Users/Regestriation';
   static const String logout = 'api/Users/Logout';
 
-  // Travel Endpoints (to be added)
-  static const String destinations = 'api/destinations';
-  static const String categories = 'api/categories';
-  static const String bookings = 'api/bookings';
+  // Destinations Endpoints
+  static const String destinations = 'api/Destinations/GetAllDestinations';
+  static const String destinationDetails =
+      'api/Destinations/GetDestinationDetails';
+  static const String destinationsByCategory = 'api/Destinations/GetByCategory';
+
+  // User Profile Endpoints
   static const String userProfile = 'api/Users/GetUserInfo';
   static const String editUserProfile = 'api/Users/EditUserInfo';
+
+  // Bookings Endpoints
+  static const String bookings = 'api/bookings';
 }
 
 class SharedPrefKeys {
