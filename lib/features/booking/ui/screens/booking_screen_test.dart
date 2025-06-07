@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-import '../../../payment/ui/screens/payment.dart';
 import '../../../home/data/model/destination_model.dart';
+import '../../../payment/ui/screens/payment.dart';
 
 class FlightBookingScreen extends StatefulWidget {
   final DestinationModel destination;

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:yalla_r7la2/features/booking/ui/logic/bookings_cubit.dart';
-import 'package:yalla_r7la2/features/booking/ui/screens/bookings_screen.dart';
+import 'package:yalla_r7la2/features/booking/ui/screens/my_bookings_screen.dart';
 import 'package:yalla_r7la2/features/favorites/ui/logic/favorites_cubit.dart';
 import 'package:yalla_r7la2/features/home/ui/logic/home_cubit.dart';
 
@@ -93,7 +93,7 @@ class _HostScreenState extends State<HostScreen> {
       case 2:
         return BlocProvider.value(
           value: sl<BookingsCubit>(),
-          child: const BookingsScreen(),
+          child: const MyBookingsScreen(),
         );
       case 3:
         return const ChatBotScreen();

@@ -94,7 +94,7 @@ class FavoritesScreen extends StatelessWidget {
 
           if (state is FavoritesLoaded) {
             if (state.favorites.isEmpty) {
-              return _buildEmptyState();
+              return _buildEmptyState(context);
             }
 
             return RefreshIndicator(
@@ -154,7 +154,7 @@ class FavoritesScreen extends StatelessWidget {
     );
   }
 
-  Widget _buildEmptyState() {
+  Widget _buildEmptyState(BuildContext context) {
     return Center(
       child: Padding(
         padding: const EdgeInsets.all(32.0),
@@ -201,19 +201,28 @@ class FavoritesScreen extends StatelessWidget {
                 borderRadius: BorderRadius.circular(25),
                 border: Border.all(color: Colors.blueAccent.withOpacity(0.3)),
               ),
-              child: Row(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  const Icon(Icons.explore, color: Colors.blueAccent, size: 20),
-                  const SizedBox(width: 8),
-                  Text(
-                    'Explore Destinations',
-                    style: TextStyle(
+              child: GestureDetector(
+                onTap: () {
+                  Navigator.of(context).pushNamed(Routes.host);
+                },
+                child: Row(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    const Icon(
+                      Icons.explore,
                       color: Colors.blueAccent,
-                      fontWeight: FontWeight.w600,
+                      size: 20,
                     ),
-                  ),
-                ],
+                    const SizedBox(width: 8),
+                    Text(
+                      'Explore Destinations',
+                      style: TextStyle(
+                        color: Colors.blueAccent,
+                        fontWeight: FontWeight.w600,
+                      ),
+                    ),
+                  ],
+                ),
               ),
             ),
           ],

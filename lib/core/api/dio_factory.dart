@@ -1,7 +1,8 @@
 import 'package:dio/dio.dart';
-import 'api_constants.dart';
-import '../cache/shared_pref_helper.dart';
 import 'package:pretty_dio_logger/pretty_dio_logger.dart';
+
+import '../cache/shared_pref_helper.dart';
+import 'api_constants.dart';
 
 class DioFactory {
   static Dio? _dio;
@@ -25,6 +26,8 @@ class DioFactory {
       'Accept': 'application/json',
       if (token.isNotEmpty) 'Authorization': 'Bearer $token',
     };
+    // _dio!.options.connectTimeout = const Duration(seconds: 30);
+    // _dio!.options.receiveTimeout = const Duration(seconds: 30);
   }
 
   static void _addInterceptor() {

@@ -47,10 +47,14 @@ void _initAuth() {
 
 void _initHome() {
   // DestinationRepo
-  sl.registerLazySingleton(() => DestinationRepo(dio: sl()));
+  if (!sl.isRegistered<DestinationRepo>()) {
+    sl.registerLazySingleton(() => DestinationRepo(dio: sl()));
+  }
 
   // HomeCubit
-  sl.registerFactory(() => HomeCubit(destinationRepo: sl()));
+  if (!sl.isRegistered<HomeCubit>()) {
+    sl.registerFactory(() => HomeCubit(destinationRepo: sl()));
+  }
 }
 
 void _initProfile() {
@@ -59,9 +63,6 @@ void _initProfile() {
 
   // ProfileCubit - استخدم Singleton عشان نفس الـ instance يتشارك
   sl.registerLazySingleton(() => ProfileCubit(profileRepository: sl()));
-
-  // أو لو عايز Factory:
-  // sl.registerFactory(() => ProfileCubit(profileRepository: sl()));
 }
 
 void _initFavorites() {
