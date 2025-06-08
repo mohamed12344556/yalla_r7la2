@@ -11,6 +11,7 @@ class DioFactory {
     if (_dio == null) {
       _dio = Dio();
       _dio!.options.baseUrl = ApiConstants.baseUrl;
+
       _addDioHeader();
       _addInterceptor();
       return _dio!;

@@ -3,6 +3,7 @@ import 'package:get_it/get_it.dart';
 import 'package:yalla_r7la2/core/themes/cubit/locale_cubit.dart';
 import 'package:yalla_r7la2/core/themes/cubit/theme_cubit.dart';
 import 'package:yalla_r7la2/features/auth/ui/logic/forgot_password_cubit.dart';
+import 'package:yalla_r7la2/features/booking/data/repos/booking_repo.dart';
 import 'package:yalla_r7la2/features/booking/ui/logic/bookings_cubit.dart';
 import 'package:yalla_r7la2/features/favorites/ui/logic/favorites_cubit.dart';
 import 'package:yalla_r7la2/features/home/data/repos/destination_repo.dart';
@@ -77,9 +78,12 @@ void _initFavorites() {
 }
 
 void _initBookings() {
+  // BookingRepo - Repository for API calls
+  sl.registerLazySingleton(() => BookingRepo(dio: sl()));
+
   // BookingsCubit - استخدم Singleton عشان نفس الـ instance يتشارك في كل التطبيق
   // وده مهم عشان الـ bookings تكون متسقة في كل مكان وتحافظ على البيانات
-  sl.registerLazySingleton(() => BookingsCubit());
+  sl.registerLazySingleton(() => BookingsCubit(bookingRepo: sl()));
 }
 
 ///! 1. `registerSingleton`

@@ -19,6 +19,8 @@ class ApiConstants {
 
   // Bookings Endpoints
   static const String bookings = 'api/bookings';
+  static const String bookDestination = 'api/Destinations/Booking';
+  static const String unbookDestination = 'api/Destinations/UnBookDestination';
 }
 
 class SharedPrefKeys {

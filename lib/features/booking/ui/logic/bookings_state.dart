@@ -21,14 +21,16 @@ class BookingsError extends BookingsState {
 
 class BookingAdded extends BookingsState {
   final BookingModel booking;
+  final int remainingSlots;
 
-  BookingAdded(this.booking);
+  BookingAdded(this.booking, this.remainingSlots);
 }
 
 class BookingCancelled extends BookingsState {
   final String bookingId;
+  final int availableSlots;
 
-  BookingCancelled(this.bookingId);
+  BookingCancelled(this.bookingId, this.availableSlots);
 }
 
 class BookingDeleted extends BookingsState {
