@@ -5,6 +5,7 @@ class ApiConstants {
   static const String login = 'api/Users/Login';
   static const String signup = 'api/Users/Regestriation';
   static const String logout = 'api/Users/Logout';
+  static const String resetPassword = 'api/Users/ResetPassword';
 
   // Destinations Endpoints
   static const String destinations = 'api/Destinations/GetAllDestinations';

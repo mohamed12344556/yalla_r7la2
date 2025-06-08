@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_it/get_it.dart';
+import 'package:yalla_r7la2/features/auth/ui/logic/forgot_password_cubit.dart';
+import 'package:yalla_r7la2/features/auth/ui/screens/forgot_password_screen.dart';
 import 'package:yalla_r7la2/features/booking/ui/logic/bookings_cubit.dart';
 import 'package:yalla_r7la2/features/booking/ui/screens/flight_booking_screen.dart';
 import 'package:yalla_r7la2/features/booking/ui/screens/my_bookings_screen.dart';
@@ -43,6 +45,15 @@ class AppRouter {
               (_) => BlocProvider(
                 create: (context) => sl<RegisterCubit>(),
                 child: const RegisterScreen(),
+              ),
+        );
+
+      case Routes.forgotPassword:
+        return MaterialPageRoute(
+          builder:
+              (_) => BlocProvider(
+                create: (context) => sl<ForgotPasswordCubit>(),
+                child: const ForgotPasswordScreen(),
               ),
         );
 

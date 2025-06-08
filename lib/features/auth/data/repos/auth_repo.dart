@@ -101,4 +101,6 @@ class AuthRepo {
       return Left('Network error: $e');
     }
   }
+
+  // forgot password
 }
