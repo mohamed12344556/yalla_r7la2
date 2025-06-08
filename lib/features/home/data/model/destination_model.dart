@@ -214,7 +214,12 @@ class DestinationModel {
       endDate: null,
       isAvailable: null,
       businessOwnerId: null,
-      images: null,
+      images:
+          json['images'] != null
+              ? (json['imageData'] as List)
+                  .map((img) => DestinationImage.fromJson(img))
+                  .toList()
+              : null,
     );
   }
 

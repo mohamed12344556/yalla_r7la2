@@ -5,8 +5,10 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:yalla_r7la2/core/di/dependency_injection.dart';
+import 'package:yalla_r7la2/core/themes/cubit/locale_cubit.dart';
 import 'package:yalla_r7la2/core/themes/cubit/theme_cubit.dart';
 import 'package:yalla_r7la2/core/widgets/app_update_widget.dart';
+import 'package:yalla_r7la2/core/widgets/language_selection_dialog.dart';
 
 import '../../../../core/api/api_constants.dart';
 import '../../../../core/cache/shared_pref_helper.dart';
@@ -14,6 +16,7 @@ import '../../../../core/routes/routes.dart';
 import '../../../../core/utils/extensions.dart';
 import '../../../../core/utils/image_helper.dart';
 import '../../../../core/widgets/app_loading_indicator.dart';
+import '../../../../generated/l10n.dart';
 import '../../data/models/user_model.dart';
 import '../logic/profile_cubit.dart';
 import '../logic/profile_state.dart';
@@ -526,7 +529,7 @@ class _ProfileViewScreenState extends State<ProfileViewScreen> {
                         ),
 
                         SwitchListTile(
-                          title: const Text("Push Notifications"),
+                          title: Text(S.of(context).Push_Notifications),
                           subtitle: const Text("Receive app notifications"),
                           value: _notificationsEnabled,
                           activeColor: Colors.white,
@@ -541,19 +544,44 @@ class _ProfileViewScreenState extends State<ProfileViewScreen> {
                         ),
 
                         ListTile(
+                          leading: const Icon(
+                            Icons.language,
+                            color: Color(0xFF30B0C7),
+                          ),
                           title: const Text("Language"),
                           subtitle: const Text("App language preference"),
                           trailing: Row(
                             mainAxisSize: MainAxisSize.min,
                             children: [
-                              Text(
-                                SharedPrefHelper.getString(
-                                          SharedPrefKeys.language,
-                                        ) ==
-                                        'ar'
-                                    ? "العربية"
-                                    : "English",
-                                style: const TextStyle(color: Colors.grey),
+                              BlocBuilder<LocaleCubit, Locale>(
+                                builder: (context, locale) {
+                                  // استخدام Extension للحصول على اسم اللغة المناسب
+                                  final currentLanguageName =
+                                      context
+                                          .read<LocaleCubit>()
+                                          .getCurrentLanguageDisplayName();
+
+                                  return Container(
+                                    padding: const EdgeInsets.symmetric(
+                                      horizontal: 8,
+                                      vertical: 4,
+                                    ),
+                                    decoration: BoxDecoration(
+                                      color: const Color(
+                                        0xFF30B0C7,
+                                      ).withOpacity(0.1),
+                                      borderRadius: BorderRadius.circular(12),
+                                    ),
+                                    child: Text(
+                                      currentLanguageName,
+                                      style: const TextStyle(
+                                        color: Color(0xFF30B0C7),
+                                        fontSize: 12,
+                                        fontWeight: FontWeight.w500,
+                                      ),
+                                    ),
+                                  );
+                                },
                               ),
                               const SizedBox(width: 8),
                               const Icon(
@@ -562,29 +590,9 @@ class _ProfileViewScreenState extends State<ProfileViewScreen> {
                               ),
                             ],
                           ),
-                          onTap: () async {
-                            final currentLanguage =
-                                SharedPrefHelper.getString(
-                                  SharedPrefKeys.language,
-                                ) ??
-                                'en';
-                            final newLanguage =
-                                currentLanguage == 'ar' ? 'en' : 'ar';
-
-                            await SharedPrefHelper.setData(
-                              SharedPrefKeys.language,
-                              newLanguage,
-                            );
-
-                            if (mounted) {
-                              context.showSuccessSnackBar(
-                                newLanguage == 'ar'
-                                    ? "تم تغيير اللغة إلى العربية"
-                                    : "Language changed to English",
-                              );
-                              // Restart the app or reload the UI to apply the language change
-                              setState(() {});
-                            }
+                          onTap: () {
+                            // عرض dialog اختيار اللغة
+                            LanguageSelectionDialog.show(context);
                           },
                         ),
 

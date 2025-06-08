@@ -1,5 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:get_it/get_it.dart';
+import 'package:yalla_r7la2/core/themes/cubit/locale_cubit.dart';
 import 'package:yalla_r7la2/core/themes/cubit/theme_cubit.dart';
 import 'package:yalla_r7la2/features/booking/ui/logic/bookings_cubit.dart';
 import 'package:yalla_r7la2/features/favorites/ui/logic/favorites_cubit.dart';
@@ -33,6 +34,7 @@ void external() {
 }
 
 void _initCore() {
+  sl.registerLazySingleton(() => LocaleCubit());
   sl.registerLazySingleton(() => ThemeCubit());
 }
 

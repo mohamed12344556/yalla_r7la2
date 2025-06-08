@@ -16,7 +16,8 @@ class DestinationRepo {
       if (response.statusCode == 200) {
         final List<dynamic> data = response.data;
         // Use fromListJson for list responses as they have limited fields
-        return data.map((json) => DestinationModel.fromListJson(json)).toList();
+        // return data.map((json) => DestinationModel.fromListJson(json)).toList();
+        return data.map((json) => DestinationModel.fromJson(json)).toList();
       } else {
         throw Exception('Failed to load destinations');
       }
