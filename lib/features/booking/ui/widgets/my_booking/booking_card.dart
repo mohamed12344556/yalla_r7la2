@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:yalla_r7la2/features/booking/data/models/booking_models.dart';
-import 'package:yalla_r7la2/features/booking/ui/widgets/my_booking/booking_date_helper.dart';
 import 'package:yalla_r7la2/features/booking/ui/widgets/booking_dialogs.dart';
+import 'package:yalla_r7la2/features/booking/ui/widgets/my_booking/booking_date_helper.dart';
 import 'package:yalla_r7la2/features/booking/ui/widgets/my_booking/booking_status_helper.dart';
 
 import '../../logic/bookings_cubit.dart';
@@ -41,10 +41,11 @@ class BookingCard extends StatelessWidget {
           topRight: Radius.circular(16),
         ),
         image: DecorationImage(
-          image: NetworkImage(booking.imageUrl),
+          image: MemoryImage(booking.imageBytes!),
           fit: BoxFit.cover,
           onError: (exception, stackTrace) {
             // Handle image loading error
+            print('Error loading booking image: $exception');
           },
         ),
       ),

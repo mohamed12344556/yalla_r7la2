@@ -137,8 +137,8 @@ class BookingDetailsSheet extends StatelessWidget {
         children: [
           ClipRRect(
             borderRadius: BorderRadius.circular(12),
-            child: Image.network(
-              booking.imageUrl,
+            child: Image.memory(
+              booking.imageBytes!,
               width: 80,
               height: 80,
               fit: BoxFit.cover,
