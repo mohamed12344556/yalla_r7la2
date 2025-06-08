@@ -34,7 +34,7 @@ class DestinationModel {
     this.images,
   });
 
-  // Helper getters for UI display - FIXED VERSION
+  // Helper getters for UI display
   String get imageUrl {
     if (images != null && images!.isNotEmpty) {
       final base64String = images!.first.imageBase64;
@@ -169,6 +169,7 @@ class DestinationModel {
     }
   }
 
+  // Factory for GetDestinationDetails response (full details)
   factory DestinationModel.fromJson(Map<String, dynamic> json) {
     return DestinationModel(
       destinationId: json['destinationId'] ?? '',
@@ -197,7 +198,7 @@ class DestinationModel {
     );
   }
 
-  // Factory for creating from list response (GetAllDestinations & GetByCategory)
+  // Factory for GetAllDestinations response (limited fields, no imageData)
   factory DestinationModel.fromListJson(Map<String, dynamic> json) {
     return DestinationModel(
       destinationId: json['destinationId'] ?? '',
@@ -214,9 +215,37 @@ class DestinationModel {
       endDate: null,
       isAvailable: null,
       businessOwnerId: null,
+      // For GetAllDestinations, images only contain imageId
       images:
           json['images'] != null
-              ? (json['imageData'] as List)
+              ? (json['images'] as List)
+                  .map((img) => DestinationImage.fromJson(img))
+                  .toList()
+              : null,
+    );
+  }
+
+  // Factory for GetByCategory response (includes imageData)
+  factory DestinationModel.fromCategoryJson(Map<String, dynamic> json) {
+    return DestinationModel(
+      destinationId: json['destinationId'] ?? '',
+      name: json['name'] ?? '',
+      description: json['description'],
+      location: json['location'],
+      category: json['category'],
+      averageRating: json['averageRating']?.toDouble(),
+      discount: json['discount']?.toDouble(),
+      cost: json['cost']?.toDouble(),
+      // These fields are not present in category responses
+      availableNumber: null,
+      startDate: null,
+      endDate: null,
+      isAvailable: null,
+      businessOwnerId: null,
+      // For GetByCategory, images contain both imageId and imageData
+      images:
+          json['images'] != null
+              ? (json['images'] as List)
                   .map((img) => DestinationImage.fromJson(img))
                   .toList()
               : null,
@@ -298,14 +327,23 @@ class DestinationImage {
     }
   }
 
+  // Factory for detailed responses (GetDestinationDetails, GetByCategory)
   factory DestinationImage.fromJson(Map<String, dynamic> json) {
     return DestinationImage(
       imageId: json['imageId'] ?? '',
-      imageBase64: json['imageBase64'] ?? '',
+      imageBase64: json['imageData'] ?? '',
+    );
+  }
+
+  // Factory for list responses (GetAllDestinations) - no imageData included
+  factory DestinationImage.fromListJson(Map<String, dynamic> json) {
+    return DestinationImage(
+      imageId: json['imageId'] ?? '',
+      imageBase64: '', // Empty as GetAllDestinations doesn't include imageData
     );
   }
 
   Map<String, dynamic> toJson() {
-    return {'imageId': imageId, 'imageBase64': imageBase64};
+    return {'imageId': imageId, 'imageData': imageBase64};
   }
 }

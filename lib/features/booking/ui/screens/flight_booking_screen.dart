@@ -125,7 +125,7 @@ class _FlightBookingScreenState extends State<FlightBookingScreen>
                             features: widget.destination.features!,
                           ),
 
-                        const SizedBox(height: 100), // Space for bottom button
+                        const SizedBox(height: 100),
                       ],
                     ),
                   ),
@@ -202,7 +202,7 @@ class _FlightBookingScreenState extends State<FlightBookingScreen>
               child: Container(
                 decoration: BoxDecoration(
                   image: DecorationImage(
-                    image: NetworkImage(widget.destination.imageUrl),
+                    image: MemoryImage(widget.destination.imageBytes!),
                     fit: BoxFit.cover,
                   ),
                 ),
