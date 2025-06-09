@@ -76,8 +76,8 @@ class AppRouter {
         return MaterialPageRoute(
           builder: (context) {
             final destination = arguments as DestinationModel;
-            return BlocProvider(
-              create: (context) => sl<BookingsCubit>(),
+            return BlocProvider.value(
+              value: sl<BookingsCubit>(),
               child: FlightBookingScreen(destination: destination),
             );
           },

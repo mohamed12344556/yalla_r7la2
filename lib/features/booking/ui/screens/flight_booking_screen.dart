@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:yalla_r7la2/core/routes/routes.dart';
 import 'package:yalla_r7la2/core/utils/extensions.dart';
+import 'package:yalla_r7la2/features/booking/data/models/booking_models.dart';
 import 'package:yalla_r7la2/features/booking/ui/widgets/booking/booking_destination_info.dart';
 import 'package:yalla_r7la2/features/booking/ui/widgets/booking/booking_flight_details.dart';
 import 'package:yalla_r7la2/features/booking/ui/widgets/booking/booking_included_features.dart';
@@ -39,7 +40,13 @@ class _FlightBookingScreenState extends State<FlightBookingScreen>
   void initState() {
     super.initState();
     _initializeAnimations();
-    _checkExistingBooking();
+    // _checkExistingBooking();
+
+    WidgetsBinding.instance.addPostFrameCallback((_) async {
+      final cubit = context.read<BookingsCubit>();
+      await cubit.loadBookings();
+      _checkExistingBooking();
+    });
   }
 
   void _initializeAnimations() {
@@ -83,6 +90,11 @@ class _FlightBookingScreenState extends State<FlightBookingScreen>
         _showAlreadyBookedDialog();
       });
     }
+    // final cubit = context.read<BookingsCubit>();
+    // final already = cubit.isDestinationBooked(widget.destination.destinationId);
+    // if (already) {
+    //   _showAlreadyBookedDialog();
+    // }
   }
 
   @override
@@ -535,8 +547,13 @@ class _FlightBookingScreenState extends State<FlightBookingScreen>
       setState(() => _isBookingInProgress = false);
     }
 
-    if (state is BookingAdded) {
-      _showBookingSuccessDialog(state.remainingSlots);
+    if (state is BookingsLoaded &&
+        state.bookings.any(
+          (b) =>
+              b.destinationId == widget.destination.destinationId &&
+              b.status == BookingStatus.confirmed,
+        )) {
+      // _showAlreadyBookedDialog();
     } else if (state is BookingsError) {
       _showErrorDialog(state.message);
     }
@@ -771,6 +788,15 @@ class _FlightBookingScreenState extends State<FlightBookingScreen>
                 style: ElevatedButton.styleFrom(
                   backgroundColor: const Color(0xFF2196F3),
                   foregroundColor: Colors.white,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(12),
+                  ),
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 14,
+                    vertical: 12,
+                  ),
+                  elevation: 0,
+                  shadowColor: Colors.transparent,
                 ),
                 child: const Text('View Bookings'),
               ),

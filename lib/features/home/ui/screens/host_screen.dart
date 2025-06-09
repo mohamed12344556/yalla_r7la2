@@ -91,8 +91,11 @@ class _HostScreenState extends State<HostScreen> {
           child: const FavoritesScreen(),
         );
       case 2:
-        return BlocProvider.value(
-          value: sl<BookingsCubit>(),
+        return MultiBlocProvider(
+          providers: [
+            BlocProvider.value(value: sl<HomeCubit>()),
+            BlocProvider.value(value: sl<BookingsCubit>()),
+          ],
           child: const MyBookingsScreen(),
         );
       case 3:

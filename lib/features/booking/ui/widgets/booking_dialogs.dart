@@ -65,6 +65,15 @@ class BookingDialogs {
               style: ElevatedButton.styleFrom(
                 backgroundColor: Colors.orange,
                 foregroundColor: Colors.white,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(12),
+                ),
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 14,
+                  vertical: 12,
+                ),
+                elevation: 0,
+                shadowColor: Colors.transparent,
               ),
               child: const Text('Cancel Booking'),
             ),

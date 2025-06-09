@@ -83,7 +83,7 @@ void _initBookings() {
 
   // BookingsCubit - استخدم Singleton عشان نفس الـ instance يتشارك في كل التطبيق
   // وده مهم عشان الـ bookings تكون متسقة في كل مكان وتحافظ على البيانات
-  sl.registerLazySingleton(() => BookingsCubit(bookingRepo: sl()));
+  sl.registerFactory(() => BookingsCubit(bookingRepo: sl()));
 }
 
 ///! 1. `registerSingleton`
