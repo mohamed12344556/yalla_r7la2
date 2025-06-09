@@ -495,9 +495,13 @@ class _FlightBookingScreenState extends State<FlightBookingScreen>
                                   ? Row(
                                     mainAxisAlignment: MainAxisAlignment.center,
                                     children: [
-                                      const CircularProgressIndicator(
-                                        color: Colors.white,
-                                        strokeWidth: 2.5,
+                                      SizedBox(
+                                        width: 16,
+                                        height: 16,
+                                        child: CircularProgressIndicator(
+                                          color: Colors.white,
+                                          strokeWidth: 2,
+                                        ),
                                       ),
                                       const SizedBox(width: 12),
                                       const Text(
