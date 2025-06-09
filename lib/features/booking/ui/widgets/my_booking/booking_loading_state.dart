@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:yalla_r7la2/core/widgets/app_loading_indicator.dart';
 
 class BookingLoadingState extends StatelessWidget {
   final String? message;
@@ -7,18 +8,6 @@ class BookingLoadingState extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Center(
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          const CircularProgressIndicator(color: Colors.blueAccent),
-          const SizedBox(height: 16),
-          Text(
-            message ?? 'Loading your bookings...',
-            style: const TextStyle(fontSize: 16, color: Colors.grey),
-          ),
-        ],
-      ),
-    );
+    return Center(child: AppLoadingIndicator());
   }
 }

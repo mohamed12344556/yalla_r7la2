@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:lottie/lottie.dart';
+
 import '../themes/app_colors.dart';
 
 class AppLoadingIndicator extends StatelessWidget {
@@ -9,7 +11,7 @@ class AppLoadingIndicator extends StatelessWidget {
 
   const AppLoadingIndicator({
     super.key,
-    this.size = 40,
+    this.size = 250,
     this.color,
     this.message,
     this.showBackground = false,
@@ -18,7 +20,6 @@ class AppLoadingIndicator extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final bool isDarkMode = Theme.of(context).brightness == Brightness.dark;
-    final Color indicatorColor = color ?? AppColors.primary;
 
     final Widget loadingIndicator = Center(
       child: Column(
@@ -27,10 +28,9 @@ class AppLoadingIndicator extends StatelessWidget {
           SizedBox(
             width: size,
             height: size,
-            child: CircularProgressIndicator(
-              color: indicatorColor,
-              backgroundColor: AppColors.secondary.withValues(alpha: 51),
-              strokeWidth: isDarkMode ? 4 : 2,
+            child: Lottie.asset(
+              'assets/animations/loading_animation.json',
+              fit: BoxFit.contain,
             ),
           ),
           if (message != null) ...[

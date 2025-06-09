@@ -495,16 +495,9 @@ class _FlightBookingScreenState extends State<FlightBookingScreen>
                                   ? Row(
                                     mainAxisAlignment: MainAxisAlignment.center,
                                     children: [
-                                      SizedBox(
-                                        width: 20,
-                                        height: 20,
-                                        child: CircularProgressIndicator(
-                                          strokeWidth: 2,
-                                          valueColor:
-                                              AlwaysStoppedAnimation<Color>(
-                                                Colors.white,
-                                              ),
-                                        ),
+                                      const CircularProgressIndicator(
+                                        color: Colors.white,
+                                        strokeWidth: 2.5,
                                       ),
                                       const SizedBox(width: 12),
                                       const Text(
@@ -614,6 +607,15 @@ class _FlightBookingScreenState extends State<FlightBookingScreen>
                     style: ElevatedButton.styleFrom(
                       backgroundColor: const Color(0xFF2196F3),
                       foregroundColor: Colors.white,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(12),
+                      ),
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 14,
+                        vertical: 12,
+                      ),
+                      elevation: 0,
+                      shadowColor: Colors.transparent,
                     ),
                     child: const Text('Confirm'),
                   ),

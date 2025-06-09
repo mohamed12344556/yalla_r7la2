@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:yalla_r7la2/core/utils/extensions.dart';
 import 'package:yalla_r7la2/core/utils/shorebird_update_service.dart';
+import 'package:yalla_r7la2/core/widgets/app_loading_indicator.dart';
 
 class AppUpdateWidget extends StatefulWidget {
   const AppUpdateWidget({super.key});
@@ -200,11 +201,7 @@ class _AppUpdateWidgetState extends State<AppUpdateWidget> {
                       _isChecking || _isUpdating ? null : _checkForUpdates,
                   icon:
                       _isChecking
-                          ? const SizedBox(
-                            width: 16,
-                            height: 16,
-                            child: CircularProgressIndicator(strokeWidth: 2),
-                          )
+                          ? AppLoadingIndicator()
                           : const Icon(Icons.search),
                   label: Text(_isChecking ? 'فحص...' : 'فحص التحديثات'),
                   style: OutlinedButton.styleFrom(
@@ -226,14 +223,7 @@ class _AppUpdateWidgetState extends State<AppUpdateWidget> {
                     onPressed: _isUpdating ? null : _downloadUpdate,
                     icon:
                         _isUpdating
-                            ? const SizedBox(
-                              width: 16,
-                              height: 16,
-                              child: CircularProgressIndicator(
-                                strokeWidth: 2,
-                                color: Colors.white,
-                              ),
-                            )
+                            ? AppLoadingIndicator()
                             : const Icon(Icons.download),
                     label: Text(_isUpdating ? 'تحديث...' : 'تحميل'),
                     style: ElevatedButton.styleFrom(

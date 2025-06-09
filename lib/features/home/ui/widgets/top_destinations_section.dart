@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:yalla_r7la2/core/widgets/app_loading_indicator.dart';
 
 import '../../data/model/destination_model.dart';
 import '../logic/home_cubit.dart';
@@ -154,7 +155,7 @@ class _TopDestinationsSectionState extends State<TopDestinationsSection> {
       child: const Center(
         child: Column(
           children: [
-            CircularProgressIndicator(color: Color(0xFF30B0C7), strokeWidth: 2),
+            AppLoadingIndicator(),
             SizedBox(height: 8),
             Text(
               'Loading more destinations...',
@@ -214,14 +215,7 @@ class _TopDestinationsSectionState extends State<TopDestinationsSection> {
                     },
             icon:
                 context.read<HomeCubit>().isLoadingMore
-                    ? const SizedBox(
-                      width: 16,
-                      height: 16,
-                      child: CircularProgressIndicator(
-                        strokeWidth: 2,
-                        valueColor: AlwaysStoppedAnimation<Color>(Colors.white),
-                      ),
-                    )
+                    ? AppLoadingIndicator()
                     : const Icon(Icons.add, size: 18),
             label: Text(
               context.read<HomeCubit>().isLoadingMore

@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:yalla_r7la2/core/di/dependency_injection.dart';
 import 'package:yalla_r7la2/core/routes/routes.dart';
 import 'package:yalla_r7la2/core/utils/extensions.dart';
+import 'package:yalla_r7la2/core/widgets/app_loading_indicator.dart';
 import 'package:yalla_r7la2/features/home/data/model/destination_model.dart';
 import 'package:yalla_r7la2/features/home/ui/logic/home_cubit.dart';
 import 'package:yalla_r7la2/features/home/ui/screens/destination_details_screen.dart';
@@ -51,9 +52,7 @@ class FavoritesScreen extends StatelessWidget {
       body: BlocBuilder<FavoritesCubit, FavoritesState>(
         builder: (context, state) {
           if (state is FavoritesLoading) {
-            return const Center(
-              child: CircularProgressIndicator(color: Colors.blueAccent),
-            );
+            return const Center(child: AppLoadingIndicator());
           }
 
           if (state is FavoritesError) {

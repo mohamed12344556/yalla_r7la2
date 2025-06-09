@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:yalla_r7la2/core/themes/booking_constants.dart';
+import 'package:yalla_r7la2/core/widgets/app_loading_indicator.dart';
 import 'package:yalla_r7la2/features/booking/data/models/booking_models.dart';
 
 /// Shared widgets used across booking screens
@@ -195,7 +196,7 @@ class BookingSharedWidgets {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          const CircularProgressIndicator(color: Colors.blueAccent),
+          AppLoadingIndicator(),
           const SizedBox(height: 16),
           Text(
             message ?? 'Loading...',
@@ -436,12 +437,7 @@ class BookingSharedWidgets {
               color: Colors.grey[200],
               borderRadius: borderRadius ?? BorderRadius.circular(8),
             ),
-            child: const Center(
-              child: CircularProgressIndicator(
-                strokeWidth: 2,
-                valueColor: AlwaysStoppedAnimation<Color>(Colors.blueAccent),
-              ),
-            ),
+            child: const Center(child: AppLoadingIndicator()),
           );
         },
       ),

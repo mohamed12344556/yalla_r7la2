@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_credit_card/flutter_credit_card.dart';
+import 'package:yalla_r7la2/core/widgets/app_loading_indicator.dart';
 
 class PaymentPage extends StatefulWidget {
   const PaymentPage({super.key});
@@ -339,12 +340,7 @@ class PaymentPageState extends State<PaymentPage> {
                           SizedBox(
                             width: 20,
                             height: 20,
-                            child: CircularProgressIndicator(
-                              strokeWidth: 2,
-                              valueColor: AlwaysStoppedAnimation<Color>(
-                                Colors.white,
-                              ),
-                            ),
+                            child: AppLoadingIndicator(),
                           ),
                           SizedBox(width: 12),
                           Text(

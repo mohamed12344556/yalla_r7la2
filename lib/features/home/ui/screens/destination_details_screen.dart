@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:yalla_r7la2/core/routes/routes.dart';
+import 'package:yalla_r7la2/core/widgets/app_loading_indicator.dart';
 import 'package:yalla_r7la2/features/home/ui/logic/home_cubit.dart';
 import 'package:yalla_r7la2/features/home/ui/widgets/bottom_action_bar_widget.dart';
 import 'package:yalla_r7la2/features/home/ui/widgets/content_section_widget.dart';
@@ -117,19 +118,7 @@ class _DestinationDetailsScreenState extends State<DestinationDetailsScreen>
       body: BlocBuilder<HomeCubit, HomeState>(
         builder: (context, state) {
           if (state is HomeDetailsLoading) {
-            return const Center(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  CircularProgressIndicator(color: Color(0xFF30B0C7)),
-                  SizedBox(height: 16),
-                  Text(
-                    'Loading destination details...',
-                    style: TextStyle(color: Color(0xFF666666), fontSize: 16),
-                  ),
-                ],
-              ),
-            );
+            return const Center(child: AppLoadingIndicator());
           }
 
           if (state is HomeError) {

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:yalla_r7la2/core/widgets/app_loading_indicator.dart';
 import 'package:yalla_r7la2/features/home/ui/widgets/home_header.dart';
 
 import '../logic/home_cubit.dart';
@@ -32,19 +33,7 @@ class _HomeScreenState extends State<HomeScreen> {
       body: BlocBuilder<HomeCubit, HomeState>(
         builder: (context, state) {
           if (state is HomeLoading) {
-            return const Center(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  CircularProgressIndicator(color: Color(0xFF30B0C7)),
-                  SizedBox(height: 16),
-                  Text(
-                    'Loading destinations...',
-                    style: TextStyle(color: Color(0xFF666666), fontSize: 16),
-                  ),
-                ],
-              ),
-            );
+            return const Center(child: AppLoadingIndicator());
           }
 
           if (state is HomeError) {
