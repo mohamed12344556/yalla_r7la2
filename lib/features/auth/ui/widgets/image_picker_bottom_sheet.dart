@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'image_picker_option.dart';
 
 import '../logic/register_cubit.dart';
+import 'image_picker_option.dart';
 
 void showImagePickerBottomSheet(BuildContext context) {
   // Store the cubit reference before showing the bottom sheet

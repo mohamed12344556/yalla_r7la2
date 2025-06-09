@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:yalla_r7la2/core/utils/extensions.dart';
-import 'package:yalla_r7la2/core/utils/shorebird_update_service.dart';
-import 'package:yalla_r7la2/core/widgets/app_loading_indicator.dart';
+import '../utils/extensions.dart';
+import '../utils/shorebird_update_service.dart';
+import 'app_loading_indicator.dart';
 
 class AppUpdateWidget extends StatefulWidget {
   const AppUpdateWidget({super.key});

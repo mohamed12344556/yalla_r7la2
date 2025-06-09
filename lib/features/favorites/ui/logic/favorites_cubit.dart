@@ -2,8 +2,8 @@ import 'dart:convert';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:meta/meta.dart';
-import 'package:yalla_r7la2/core/cache/shared_pref_helper.dart';
-import 'package:yalla_r7la2/features/home/data/model/destination_model.dart';
+import '../../../../core/cache/shared_pref_helper.dart';
+import '../../../home/data/model/destination_model.dart';
 
 part 'favorites_state.dart';
 

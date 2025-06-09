@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:yalla_r7la2/features/booking/data/models/booking_models.dart';
-import 'package:yalla_r7la2/features/booking/ui/widgets/booking_dialogs.dart';
-import 'package:yalla_r7la2/features/booking/ui/widgets/my_booking/booking_date_helper.dart';
-import 'package:yalla_r7la2/features/booking/ui/widgets/my_booking/booking_status_helper.dart';
+import '../../../data/models/booking_models.dart';
+import '../booking_dialogs.dart';
+import 'booking_date_helper.dart';
+import 'booking_status_helper.dart';
 
 import '../../logic/bookings_cubit.dart';
 import 'booking_details_sheet.dart';

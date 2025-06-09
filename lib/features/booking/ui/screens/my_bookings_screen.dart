@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:yalla_r7la2/core/routes/routes.dart';
-import 'package:yalla_r7la2/core/utils/extensions.dart';
+import '../../../../core/routes/routes.dart';
+import '../../../../core/utils/extensions.dart';
 
 import '../logic/bookings_cubit.dart';
 import '../widgets/my_booking/booking_app_bar.dart';

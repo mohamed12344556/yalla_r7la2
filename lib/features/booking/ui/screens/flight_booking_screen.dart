@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:yalla_r7la2/core/routes/routes.dart';
-import 'package:yalla_r7la2/core/utils/extensions.dart';
-import 'package:yalla_r7la2/features/booking/data/models/booking_models.dart';
-import 'package:yalla_r7la2/features/booking/ui/widgets/booking/booking_destination_info.dart';
-import 'package:yalla_r7la2/features/booking/ui/widgets/booking/booking_flight_details.dart';
-import 'package:yalla_r7la2/features/booking/ui/widgets/booking/booking_included_features.dart';
-import 'package:yalla_r7la2/features/booking/ui/widgets/booking/booking_passengers.dart';
-import 'package:yalla_r7la2/features/booking/ui/widgets/booking/booking_price_breakdown.dart';
-import 'package:yalla_r7la2/features/booking/ui/widgets/booking/booking_travel_dates.dart';
+import '../../../../core/routes/routes.dart';
+import '../../../../core/utils/extensions.dart';
+import '../../data/models/booking_models.dart';
+import '../widgets/booking/booking_destination_info.dart';
+import '../widgets/booking/booking_flight_details.dart';
+import '../widgets/booking/booking_included_features.dart';
+import '../widgets/booking/booking_passengers.dart';
+import '../widgets/booking/booking_price_breakdown.dart';
+import '../widgets/booking/booking_travel_dates.dart';
 
 import '../../../home/data/model/destination_model.dart';
 import '../logic/bookings_cubit.dart';

@@ -2,10 +2,10 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:yalla_r7la2/core/cache/shared_pref_helper.dart';
-import 'package:yalla_r7la2/features/booking/data/models/booking_models.dart';
-import 'package:yalla_r7la2/features/booking/data/repos/booking_repo.dart';
-import 'package:yalla_r7la2/features/home/data/model/destination_model.dart';
+import '../../../../core/cache/shared_pref_helper.dart';
+import '../../data/models/booking_models.dart';
+import '../../data/repos/booking_repo.dart';
+import '../../../home/data/model/destination_model.dart';
 
 part 'bookings_state.dart';
 

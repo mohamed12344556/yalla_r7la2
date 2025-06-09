@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:yalla_r7la2/core/di/dependency_injection.dart';
-import 'package:yalla_r7la2/core/routes/routes.dart';
-import 'package:yalla_r7la2/core/utils/extensions.dart';
-import 'package:yalla_r7la2/core/widgets/app_loading_indicator.dart';
-import 'package:yalla_r7la2/features/home/data/model/destination_model.dart';
-import 'package:yalla_r7la2/features/home/ui/logic/home_cubit.dart';
-import 'package:yalla_r7la2/features/home/ui/screens/destination_details_screen.dart';
-import 'package:yalla_r7la2/features/home/ui/widgets/destination_card_content.dart';
+import '../../../../core/di/dependency_injection.dart';
+import '../../../../core/routes/routes.dart';
+import '../../../../core/utils/extensions.dart';
+import '../../../../core/widgets/app_loading_indicator.dart';
+import '../../../home/data/model/destination_model.dart';
+import '../../../home/ui/logic/home_cubit.dart';
+import '../../../home/ui/screens/destination_details_screen.dart';
+import '../../../home/ui/widgets/destination_card_content.dart';
 
 import '../logic/favorites_cubit.dart';
 

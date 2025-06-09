@@ -1,7 +1,7 @@
 import 'dart:convert';
 import 'dart:typed_data';
 
-import 'package:yalla_r7la2/features/home/data/model/destination_model.dart';
+import '../../../home/data/model/destination_model.dart';
 
 class BookingModel {
   final String bookingId;

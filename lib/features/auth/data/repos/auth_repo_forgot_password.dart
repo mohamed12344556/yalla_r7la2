@@ -1,6 +1,6 @@
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
-import 'package:yalla_r7la2/features/auth/data/repos/auth_repo.dart';
+import 'auth_repo.dart';
 
 import '../../../../core/api/api_constants.dart';
 import '../models/forgot_password_model.dart';

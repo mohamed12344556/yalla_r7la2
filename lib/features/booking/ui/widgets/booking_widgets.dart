@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:yalla_r7la2/features/booking/data/models/booking_models.dart';
+import '../../data/models/booking_models.dart';
 
 class BookingWidgets {
   /// Status chip widget used in both screens

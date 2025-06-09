@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:yalla_r7la2/features/auth/data/models/forgot_password_model.dart';
+import '../../data/models/forgot_password_model.dart';
 
 @immutable
 sealed class ForgotPasswordState {}

@@ -4,11 +4,11 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:yalla_r7la2/core/di/dependency_injection.dart';
-import 'package:yalla_r7la2/core/themes/cubit/locale_cubit.dart';
-import 'package:yalla_r7la2/core/themes/cubit/theme_cubit.dart';
-import 'package:yalla_r7la2/core/widgets/app_update_widget.dart';
-import 'package:yalla_r7la2/core/widgets/language_selection_dialog.dart';
+import '../../../../core/di/dependency_injection.dart';
+import '../../../../core/themes/cubit/locale_cubit.dart';
+import '../../../../core/themes/cubit/theme_cubit.dart';
+import '../../../../core/widgets/app_update_widget.dart';
+import '../../../../core/widgets/language_selection_dialog.dart';
 
 import '../../../../core/api/api_constants.dart';
 import '../../../../core/cache/shared_pref_helper.dart';

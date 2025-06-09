@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:yalla_r7la2/core/themes/cubit/locale_cubit.dart';
-import 'package:yalla_r7la2/core/utils/extensions.dart';
+import '../themes/cubit/locale_cubit.dart';
+import '../utils/extensions.dart';
 
 // تحديث الـ LocaleCubit لإضافة دالة للحصول على اسم اللغة
 extension LocaleCubitExtension on LocaleCubit {

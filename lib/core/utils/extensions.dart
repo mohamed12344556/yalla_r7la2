@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:yalla_r7la2/core/themes/app_colors.dart';
+import '../themes/app_colors.dart';
 
 extension BuildContextExtensions on BuildContext {
   //! Theme

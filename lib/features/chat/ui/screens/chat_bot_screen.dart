@@ -2,8 +2,8 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:yalla_r7la2/core/routes/routes.dart';
-import 'package:yalla_r7la2/core/utils/extensions.dart';
+import '../../../../core/routes/routes.dart';
+import '../../../../core/utils/extensions.dart';
 
 class ChatBotScreen extends StatefulWidget {
   const ChatBotScreen({super.key});

@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:yalla_r7la2/core/routes/routes.dart';
-import 'package:yalla_r7la2/core/widgets/app_loading_indicator.dart';
-import 'package:yalla_r7la2/features/home/ui/logic/home_cubit.dart';
-import 'package:yalla_r7la2/features/home/ui/widgets/bottom_action_bar_widget.dart';
-import 'package:yalla_r7la2/features/home/ui/widgets/content_section_widget.dart';
-import 'package:yalla_r7la2/features/home/ui/widgets/image_carousel_widget.dart';
+import '../../../../core/routes/routes.dart';
+import '../../../../core/widgets/app_loading_indicator.dart';
+import '../logic/home_cubit.dart';
+import '../widgets/bottom_action_bar_widget.dart';
+import '../widgets/content_section_widget.dart';
+import '../widgets/image_carousel_widget.dart';
 
 class DestinationDetailsScreen extends StatefulWidget {
   final String destinationId;

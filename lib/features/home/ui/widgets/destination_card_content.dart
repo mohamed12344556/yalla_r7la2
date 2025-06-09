@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:yalla_r7la2/features/favorites/ui/logic/favorites_cubit.dart';
+import '../../../favorites/ui/logic/favorites_cubit.dart';
 
 import '../../data/model/category_model.dart';
 import '../../data/model/destination_model.dart';

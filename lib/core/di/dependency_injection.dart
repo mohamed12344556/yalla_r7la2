@@ -1,13 +1,13 @@
 import 'package:dio/dio.dart';
 import 'package:get_it/get_it.dart';
-import 'package:yalla_r7la2/core/themes/cubit/locale_cubit.dart';
-import 'package:yalla_r7la2/core/themes/cubit/theme_cubit.dart';
-import 'package:yalla_r7la2/features/auth/ui/logic/forgot_password_cubit.dart';
-import 'package:yalla_r7la2/features/booking/data/repos/booking_repo.dart';
-import 'package:yalla_r7la2/features/booking/ui/logic/bookings_cubit.dart';
-import 'package:yalla_r7la2/features/favorites/ui/logic/favorites_cubit.dart';
-import 'package:yalla_r7la2/features/home/data/repos/destination_repo.dart';
-import 'package:yalla_r7la2/features/home/ui/logic/home_cubit.dart';
+import '../themes/cubit/locale_cubit.dart';
+import '../themes/cubit/theme_cubit.dart';
+import '../../features/auth/ui/logic/forgot_password_cubit.dart';
+import '../../features/booking/data/repos/booking_repo.dart';
+import '../../features/booking/ui/logic/bookings_cubit.dart';
+import '../../features/favorites/ui/logic/favorites_cubit.dart';
+import '../../features/home/data/repos/destination_repo.dart';
+import '../../features/home/ui/logic/home_cubit.dart';
 
 import '../../features/auth/data/repos/auth_repo.dart';
 import '../../features/auth/ui/logic/login_cubit.dart';

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:yalla_r7la2/core/utils/booking_utils.dart';
+
+import '../../../../../core/utils/booking_utils.dart';
 
 class BookingTravelDates extends StatelessWidget {
   final DateTime selectedDate;

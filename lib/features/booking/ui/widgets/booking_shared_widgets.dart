@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:yalla_r7la2/core/themes/booking_constants.dart';
-import 'package:yalla_r7la2/core/widgets/app_loading_indicator.dart';
-import 'package:yalla_r7la2/features/booking/data/models/booking_models.dart';
+import '../../../../core/themes/booking_constants.dart';
+import '../../../../core/widgets/app_loading_indicator.dart';
+import '../../data/models/booking_models.dart';
 
 /// Shared widgets used across booking screens
 class BookingSharedWidgets {

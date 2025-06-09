@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:yalla_r7la2/features/home/data/model/destination_model.dart';
-import 'package:yalla_r7la2/features/home/ui/widgets/image_thumbnails_widget.dart';
+import '../../data/model/destination_model.dart';
+import 'image_thumbnails_widget.dart';
 
 import 'image_gallery_dialog.dart';
 

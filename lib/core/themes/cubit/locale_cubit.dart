@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:yalla_r7la2/core/api/api_constants.dart';
-import 'package:yalla_r7la2/core/cache/shared_pref_helper.dart';
+import '../../api/api_constants.dart';
+import '../../cache/shared_pref_helper.dart';
 
 class LocaleCubit extends Cubit<Locale> {
   LocaleCubit() : super(const Locale('en')) {

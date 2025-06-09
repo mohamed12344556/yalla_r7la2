@@ -1,4 +1,4 @@
-import 'package:yalla_r7la2/core/themes/booking_constants.dart';
+import '../themes/booking_constants.dart';
 
 class BookingUtils {
   /// Get day name from weekday number

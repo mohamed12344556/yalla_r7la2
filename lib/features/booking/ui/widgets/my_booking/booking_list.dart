@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:yalla_r7la2/core/routes/routes.dart';
-import 'package:yalla_r7la2/features/booking/data/models/booking_models.dart';
+import '../../../../../core/routes/routes.dart';
+import '../../../data/models/booking_models.dart';
 
 import 'booking_card.dart';
 import 'booking_empty_state.dart';

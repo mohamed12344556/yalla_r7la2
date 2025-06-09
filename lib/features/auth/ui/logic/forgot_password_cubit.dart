@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:yalla_r7la2/features/auth/data/repos/auth_repo_forgot_password.dart';
+import '../../data/repos/auth_repo_forgot_password.dart';
 
 import '../../data/repos/auth_repo.dart';
 import 'forgot_password_state.dart';

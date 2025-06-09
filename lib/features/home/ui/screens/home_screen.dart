@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:yalla_r7la2/core/widgets/app_loading_indicator.dart';
-import 'package:yalla_r7la2/features/home/ui/widgets/home_header.dart';
+import '../../../../core/widgets/app_loading_indicator.dart';
+import '../widgets/home_header.dart';
 
 import '../logic/home_cubit.dart';
 import '../widgets/search_and_categories_section.dart';

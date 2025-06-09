@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:yalla_r7la2/core/themes/booking_constants.dart';
+import '../../../../../core/themes/booking_constants.dart';
 
 class BookingPassengers extends StatelessWidget {
   final int passengers;

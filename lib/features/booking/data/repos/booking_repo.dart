@@ -1,7 +1,7 @@
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
-import 'package:yalla_r7la2/core/api/api_constants.dart';
-import 'package:yalla_r7la2/core/cache/shared_pref_helper.dart';
+import '../../../../core/api/api_constants.dart';
+import '../../../../core/cache/shared_pref_helper.dart';
 
 class BookingRepo {
   final Dio dio;

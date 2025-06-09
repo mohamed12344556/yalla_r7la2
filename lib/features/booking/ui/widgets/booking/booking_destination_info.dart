@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:yalla_r7la2/features/home/data/model/destination_model.dart';
+import '../../../../home/data/model/destination_model.dart';
 
 
 class BookingDestinationInfo extends StatelessWidget {

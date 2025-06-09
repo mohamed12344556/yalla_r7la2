@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:yalla_r7la2/core/themes/booking_constants.dart';
-import 'package:yalla_r7la2/features/booking/data/models/booking_models.dart';
+import '../../../../../core/themes/booking_constants.dart';
+import '../../../data/models/booking_models.dart';
 
 import 'booking_date_helper.dart';
 import 'booking_status_helper.dart';
