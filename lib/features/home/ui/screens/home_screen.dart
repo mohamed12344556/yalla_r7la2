@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import '../../../../core/widgets/app_loading_indicator.dart';
-import '../widgets/home_header.dart';
 
+import '../../../../core/widgets/app_loading_indicator.dart';
 import '../logic/home_cubit.dart';
+import '../widgets/home_header.dart';
 import '../widgets/search_and_categories_section.dart';
 import '../widgets/top_destinations_section.dart';
 
@@ -116,6 +116,12 @@ class _HomeScreenState extends State<HomeScreen> {
                             context.read<HomeCubit>().searchDestinations(query);
                           }
                         },
+                        // onImageSearch: (imageResult) {
+                        //   // Handle image search result
+                        //   context
+                        //       .read<HomeCubit>()
+                        //       .searchDestinationsByImageResult(imageResult);
+                        // },
                       ),
                     ),
 

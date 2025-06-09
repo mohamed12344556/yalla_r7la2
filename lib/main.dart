@@ -1,4 +1,5 @@
 import 'dart:developer';
+import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:hydrated_bloc/hydrated_bloc.dart';
@@ -36,8 +37,21 @@ void main() async {
   final initialRoute = await AuthGuard.getInitialRoute();
   log('Initial Route: $initialRoute');
 
+  // Accept self-signed certificates globally (Development only!)
+  HttpOverrides.global = MyHttpOverrides();
+
   runApp(TravelApp(initialRoute: initialRoute));
 }
+
+class MyHttpOverrides extends HttpOverrides {
+  @override
+  HttpClient createHttpClient(SecurityContext? context) {
+    return super.createHttpClient(context)
+      ..badCertificateCallback =
+          (X509Certificate cert, String host, int port) => true;
+  }
+}
+
 
 // Test credentials:
 // Email: a123@gmail.com

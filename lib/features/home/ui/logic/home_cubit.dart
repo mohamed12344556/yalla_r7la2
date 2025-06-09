@@ -174,6 +174,59 @@ class HomeCubit extends Cubit<HomeState> {
     loadDestinations(); // This will load images by default
   }
 
+  // Add this method to your HomeCubit class
+
+  // Search destinations by image result
+  Future<void> searchDestinationsByImageResult(String imageResult) async {
+    emit(HomeLoading());
+    try {
+      // Use the existing server-side search method with the image result
+      final response = await destinationRepo.searchDestinations(
+        imageResult,
+        pageNumber: 1,
+        pageSize: pageSize,
+      );
+
+      allDestinations = response.data;
+      currentPage = response.pageNumber;
+      totalPages = response.totalPages;
+      totalRecords = response.totalRecords;
+      selectedCategory = ''; // Clear category selection
+
+      // Load images for search results if needed
+      if (allDestinations.isNotEmpty) {
+        try {
+          allDestinations = await destinationRepo.loadImagesForDestinations(
+            allDestinations,
+          );
+        } catch (e) {
+          print(
+            'Warning: Failed to load some images for image search results: $e',
+          );
+        }
+      }
+
+      // Update categories to show none selected
+      categories =
+          categories.map((cat) => cat.copyWith(isSelected: false)).toList();
+
+      emit(
+        HomeLoaded(
+          destinations: allDestinations,
+          categories: categories,
+          currentPage: currentPage,
+          totalPages: totalPages,
+          totalRecords: totalRecords,
+          hasMorePages: currentPage < totalPages,
+          isSearching: true,
+          searchQuery: 'Image: $imageResult',
+        ),
+      );
+    } catch (e) {
+      emit(HomeError('Image search failed: $e'));
+    }
+  }
+
   // Get destination details
   Future<void> getDestinationDetails(String destinationId) async {
     emit(HomeDetailsLoading());

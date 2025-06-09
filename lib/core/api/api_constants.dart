@@ -21,6 +21,10 @@ class ApiConstants {
   static const String bookings = 'api/bookings';
   static const String bookDestination = 'api/Destinations/Booking';
   static const String unbookDestination = 'api/Destinations/UnBookDestination';
+
+
+  // AI Endpoints
+  static const String predictAndSearchByImage = 'https://20.74.208.111/api2/predict';
 }
 
 class SharedPrefKeys {
