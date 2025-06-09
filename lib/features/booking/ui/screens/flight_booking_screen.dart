@@ -550,7 +550,8 @@ class _FlightBookingScreenState extends State<FlightBookingScreen>
               b.destinationId == widget.destination.destinationId &&
               b.status == BookingStatus.confirmed,
         )) {
-      // _showAlreadyBookedDialog();
+      final remainingSlots = widget.destination.availableNumber ?? 0;
+      _showBookingSuccessDialog(remainingSlots);
     } else if (state is BookingsError) {
       _showErrorDialog(state.message);
     }
@@ -693,6 +694,15 @@ class _FlightBookingScreenState extends State<FlightBookingScreen>
                 style: ElevatedButton.styleFrom(
                   backgroundColor: const Color(0xFF2196F3),
                   foregroundColor: Colors.white,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(12),
+                  ),
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 14,
+                    vertical: 12,
+                  ),
+                  elevation: 0,
+                  shadowColor: Colors.transparent,
                 ),
                 child: const Text('Done'),
               ),
