@@ -1,9 +1,14 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
-import 'package:image_picker/image_picker.dart';
+import 'package:yalla_r7la2/features/chat/data/models/chat_models.dart';
+import 'package:yalla_r7la2/features/chat/services/chat_bot_service.dart';
+import 'package:yalla_r7la2/features/chat/services/image_picker_service.dart';
+import 'package:yalla_r7la2/features/chat/utils/chat_utils.dart';
+
 import '../../../../core/routes/routes.dart';
 import '../../../../core/utils/extensions.dart';
+import '../widgets/chat_widgets.dart';
 
 class ChatBotScreen extends StatefulWidget {
   const ChatBotScreen({super.key});
@@ -15,10 +20,8 @@ class ChatBotScreen extends StatefulWidget {
 class ChatBotScreenState extends State<ChatBotScreen>
     with TickerProviderStateMixin {
   final TextEditingController _controller = TextEditingController();
-  final List<Map<String, dynamic>> _messages = [];
+  final List<ChatMessage> _messages = [];
   final ScrollController _scrollController = ScrollController();
-  File? _image;
-  final ImagePicker _picker = ImagePicker();
 
   // Animation Controllers
   late AnimationController _fadeController;
@@ -32,8 +35,11 @@ class ChatBotScreenState extends State<ChatBotScreen>
   @override
   void initState() {
     super.initState();
+    _initializeAnimations();
+    _addWelcomeMessage();
+  }
 
-    // Initialize animation controllers
+  void _initializeAnimations() {
     _fadeController = AnimationController(
       duration: const Duration(milliseconds: 600),
       vsync: this,
@@ -53,12 +59,8 @@ class ChatBotScreenState extends State<ChatBotScreen>
       CurvedAnimation(parent: _slideController, curve: Curves.elasticOut),
     );
 
-    // Start animations
     _fadeController.forward();
     _slideController.forward();
-
-    // Add welcome message
-    _addWelcomeMessage();
   }
 
   @override
@@ -74,20 +76,9 @@ class ChatBotScreenState extends State<ChatBotScreen>
     Future.delayed(const Duration(milliseconds: 1000), () {
       if (mounted) {
         setState(() {
-          _messages.add({
-            "type": "bot",
-            "message":
-                "مرحباً بك! 👋\nأنا مساعدك الذكي للسفر والسياحة. كيف يمكنني مساعدتك اليوم؟",
-            "timestamp": DateTime.now(),
-            "suggestions": [
-              "أماكن سياحية مميزة",
-              "نصائح السفر",
-              "حجز الرحلات",
-              "معلومات عن الفنادق",
-            ],
-          });
+          _messages.add(ChatBotService.getWelcomeMessage());
         });
-        _scrollToBottom();
+        ChatUtils.scrollToBottom(_scrollController);
       }
     });
   }
@@ -96,142 +87,82 @@ class ChatBotScreenState extends State<ChatBotScreen>
     if (_controller.text.trim().isNotEmpty) {
       final messageText = _controller.text.trim();
       setState(() {
-        _messages.add({
-          "type": "user",
-          "message": messageText,
-          "timestamp": DateTime.now(),
-        });
+        _messages.add(
+          ChatMessage(
+            type: "user",
+            message: messageText,
+            timestamp: DateTime.now(),
+          ),
+        );
         _isTyping = true;
       });
       _controller.clear();
-      _scrollToBottom();
+      ChatUtils.scrollToBottom(_scrollController);
       _getBotResponse(messageText);
     }
   }
 
-  void _getBotResponse(String userMessage) {
-    // Simulate different response types based on user input
-    Future.delayed(const Duration(seconds: 2), () {
+  void _getBotResponse(String userMessage) async {
+    try {
+      final response = await ChatBotService.getBotResponse(userMessage);
       if (mounted) {
         setState(() {
           _isTyping = false;
-
-          String botResponse;
-          List<String>? suggestions;
-
-          if (userMessage.contains('أماكن') || userMessage.contains('سياحة')) {
-            botResponse =
-                "إليك بعض الأماكن السياحية المميزة:\n\n🏖️ شرم الشيخ - للاستجمام والغوص\n🏛️ الأقصر - للتاريخ والآثار\n🏙️ القاهرة - للثقافة والتراث\n\nهل تريد معلومات أكثر عن أي منها؟";
-            suggestions = [
-              "شرم الشيخ",
-              "الأقصر",
-              "القاهرة",
-              "المزيد من الأماكن",
-            ];
-          } else if (userMessage.contains('حجز') ||
-              userMessage.contains('رحلة')) {
-            botResponse =
-                "بالطبع! يمكنني مساعدتك في حجز رحلتك 🛫\n\nما نوع الحجز الذي تحتاجه:\n✈️ حجز طيران\n🏨 حجز فنادق\n🚗 تأجير سيارات\n📦 باقات سياحية شاملة";
-            suggestions = [
-              "حجز طيران",
-              "حجز فنادق",
-              "باقات شاملة",
-              "تأجير سيارات",
-            ];
-          } else if (userMessage.contains('نصائح') ||
-              userMessage.contains('مساعدة')) {
-            botResponse =
-                "إليك أهم نصائح السفر 💡\n\n📋 احرص على جواز سفر ساري\n💳 اخطر البنك بسفرك\n🧳 احزم الأساسيات فقط\n📱 حمل التطبيقات المفيدة\n💊 لا تنس الأدوية المهمة";
-            suggestions = [
-              "نصائح الأمان",
-              "نصائح التوفير",
-              "قائمة السفر",
-              "التأمين",
-            ];
-          } else {
-            botResponse =
-                "شكراً لسؤالك! 😊\nأنا هنا لمساعدتك في كل ما يخص السفر والسياحة. يمكنني مساعدتك في العثور على أفضل الوجهات، حجز الرحلات، أو تقديم النصائح المفيدة.";
-            suggestions = [
-              "أماكن سياحية",
-              "حجز رحلات",
-              "نصائح السفر",
-              "عروض خاصة",
-            ];
-          }
-
-          _messages.add({
-            "type": "bot",
-            "message": botResponse,
-            "timestamp": DateTime.now(),
-            "suggestions": suggestions,
-          });
+          _messages.add(response);
         });
-        _scrollToBottom();
+        ChatUtils.scrollToBottom(_scrollController);
       }
-    });
+    } catch (e) {
+      if (mounted) {
+        setState(() {
+          _isTyping = false;
+        });
+        _showErrorSnackbar("حدث خطأ في الحصول على الرد");
+      }
+    }
   }
 
   Future<void> _pickImage() async {
     try {
-      final pickedFile = await _picker.pickImage(
-        source: ImageSource.camera,
-        maxWidth: 1920,
-        maxHeight: 1080,
-        imageQuality: 85,
-      );
-
-      if (pickedFile != null) {
+      final image = await ImagePickerService.pickImageFromCamera();
+      if (image != null) {
         setState(() {
-          _image = File(pickedFile.path);
-          _messages.add({
-            "type": "user",
-            "message": "تم إرسال صورة 📷",
-            "timestamp": DateTime.now(),
-            "image": _image,
-          });
+          _messages.add(
+            ChatMessage(
+              type: "user",
+              message: "تم إرسال صورة 📷",
+              timestamp: DateTime.now(),
+              image: image,
+            ),
+          );
           _isTyping = true;
         });
-        _scrollToBottom();
-        _sendImageToAI(_image!);
+        ChatUtils.scrollToBottom(_scrollController);
+        _sendImageToAI(image);
       }
     } catch (e) {
-      _showErrorSnackbar("حدث خطأ في التقاط الصورة");
+      _showErrorSnackbar(e.toString());
     }
   }
 
-  void _sendImageToAI(File image) {
-    Future.delayed(const Duration(seconds: 2), () {
+  void _sendImageToAI(File image) async {
+    try {
+      final response = await ChatBotService.getImageResponse(image);
       if (mounted) {
         setState(() {
           _isTyping = false;
-          _messages.add({
-            "type": "bot",
-            "message":
-                "صورة رائعة! 📸✨\n\nيبدو أن هذا مكان سياحي مميز. هل تريد معلومات أكثر عن هذا المكان أو أماكن مشابهة؟",
-            "timestamp": DateTime.now(),
-            "suggestions": [
-              "معلومات عن المكان",
-              "أماكن مشابهة",
-              "كيفية الوصول",
-              "أنشطة قريبة",
-            ],
-          });
+          _messages.add(response);
         });
-        _scrollToBottom();
+        ChatUtils.scrollToBottom(_scrollController);
       }
-    });
-  }
-
-  void _scrollToBottom() {
-    Future.delayed(const Duration(milliseconds: 100), () {
-      if (_scrollController.hasClients) {
-        _scrollController.animateTo(
-          _scrollController.position.maxScrollExtent,
-          duration: const Duration(milliseconds: 300),
-          curve: Curves.easeOut,
-        );
+    } catch (e) {
+      if (mounted) {
+        setState(() {
+          _isTyping = false;
+        });
+        _showErrorSnackbar("حدث خطأ في معالجة الصورة");
       }
-    });
+    }
   }
 
   void _sendSuggestion(String suggestion) {
@@ -268,16 +199,9 @@ class ChatBotScreenState extends State<ChatBotScreen>
           position: _slideAnimation,
           child: Column(
             children: [
-              // Status Bar
-              _buildStatusBar(),
-
-              // Messages List
+              ChatWidgets.buildStatusBar(_isOnline, _messages.length),
               Expanded(child: _buildMessagesList()),
-
-              // Typing Indicator
-              if (_isTyping) _buildTypingIndicator(),
-
-              // Input Area
+              if (_isTyping) ChatWidgets.buildTypingIndicator(),
               _buildInputArea(),
             ],
           ),
@@ -312,30 +236,8 @@ class ChatBotScreenState extends State<ChatBotScreen>
       ),
       title: Row(
         children: [
-          // Bot Avatar
-          Container(
-            width: 40,
-            height: 40,
-            decoration: BoxDecoration(
-              gradient: LinearGradient(
-                colors: [const Color(0xFF2FB0C6), Colors.blue[600]!],
-                begin: Alignment.topLeft,
-                end: Alignment.bottomRight,
-              ),
-              shape: BoxShape.circle,
-              boxShadow: [
-                BoxShadow(
-                  color: const Color(0xFF2FB0C6).withOpacity(0.3),
-                  blurRadius: 8,
-                  offset: const Offset(0, 4),
-                ),
-              ],
-            ),
-            child: const Icon(Icons.smart_toy, color: Colors.white, size: 22),
-          ),
+          ChatWidgets.buildBotAvatar(size: 40),
           const SizedBox(width: 12),
-
-          // Bot Info
           Expanded(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -364,285 +266,16 @@ class ChatBotScreenState extends State<ChatBotScreen>
     );
   }
 
-  Widget _buildStatusBar() {
-    return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-      decoration: BoxDecoration(
-        color: Colors.white,
-        border: Border(bottom: BorderSide(color: Colors.grey[200]!, width: 1)),
-      ),
-      child: Row(
-        children: [
-          Container(
-            width: 8,
-            height: 8,
-            decoration: BoxDecoration(
-              color: _isOnline ? Colors.green : Colors.grey,
-              shape: BoxShape.circle,
-            ),
-          ),
-          const SizedBox(width: 8),
-          Text(
-            _isOnline ? "مساعدك الذكي جاهز للمساعدة" : "إعادة الاتصال...",
-            style: TextStyle(
-              fontSize: 12,
-              color: Colors.grey[600],
-              fontWeight: FontWeight.w500,
-            ),
-          ),
-          const Spacer(),
-          Text(
-            "${_messages.length} رسالة",
-            style: TextStyle(fontSize: 12, color: Colors.grey[500]),
-          ),
-        ],
-      ),
-    );
-  }
-
   Widget _buildMessagesList() {
     return ListView.builder(
       controller: _scrollController,
       padding: const EdgeInsets.all(16),
       itemCount: _messages.length,
       itemBuilder: (context, index) {
-        final message = _messages[index];
-        return _buildMessageBubble(message, index);
-      },
-    );
-  }
-
-  Widget _buildMessageBubble(Map<String, dynamic> message, int index) {
-    final isUser = message["type"] == "user";
-    final hasImage = message["image"] != null;
-    final suggestions = message["suggestions"] as List<String>?;
-
-    return Container(
-      margin: const EdgeInsets.only(bottom: 16),
-      child: Column(
-        crossAxisAlignment:
-            isUser ? CrossAxisAlignment.end : CrossAxisAlignment.start,
-        children: [
-          // Message Bubble
-          Row(
-            mainAxisAlignment:
-                isUser ? MainAxisAlignment.end : MainAxisAlignment.start,
-            crossAxisAlignment: CrossAxisAlignment.end,
-            children: [
-              if (!isUser) _buildBotAvatar(),
-              if (!isUser) const SizedBox(width: 8),
-
-              Flexible(
-                child: Container(
-                  constraints: BoxConstraints(
-                    maxWidth: MediaQuery.of(context).size.width * 0.75,
-                  ),
-                  padding: const EdgeInsets.all(16),
-                  decoration: BoxDecoration(
-                    gradient:
-                        isUser
-                            ? LinearGradient(
-                              colors: [
-                                const Color(0xFF2FB0C6),
-                                Colors.blue[600]!,
-                              ],
-                              begin: Alignment.topLeft,
-                              end: Alignment.bottomRight,
-                            )
-                            : null,
-                    color: isUser ? null : Colors.white,
-                    borderRadius: BorderRadius.only(
-                      topLeft: const Radius.circular(20),
-                      topRight: const Radius.circular(20),
-                      bottomLeft: Radius.circular(isUser ? 20 : 8),
-                      bottomRight: Radius.circular(isUser ? 8 : 20),
-                    ),
-                    boxShadow: [
-                      BoxShadow(
-                        color: Colors.black.withOpacity(0.1),
-                        blurRadius: 8,
-                        offset: const Offset(0, 2),
-                      ),
-                    ],
-                  ),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      // Image if exists
-                      if (hasImage)
-                        Container(
-                          margin: const EdgeInsets.only(bottom: 8),
-                          height: 150,
-                          width: double.infinity,
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(12),
-                            image: DecorationImage(
-                              image: FileImage(message["image"]),
-                              fit: BoxFit.cover,
-                            ),
-                          ),
-                        ),
-
-                      // Message Text
-                      Text(
-                        message["message"],
-                        style: TextStyle(
-                          fontSize: 15,
-                          color: isUser ? Colors.white : Colors.black87,
-                          height: 1.4,
-                          fontWeight: FontWeight.w400,
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-              ),
-
-              if (isUser) const SizedBox(width: 8),
-              if (isUser) _buildUserAvatar(),
-            ],
-          ),
-
-          // Timestamp
-          Padding(
-            padding: EdgeInsets.only(
-              top: 4,
-              left: isUser ? 0 : 48,
-              right: isUser ? 48 : 0,
-            ),
-            child: Text(
-              _formatTimestamp(message["timestamp"]),
-              style: TextStyle(fontSize: 11, color: Colors.grey[500]),
-            ),
-          ),
-
-          // Suggestions
-          if (suggestions != null && suggestions.isNotEmpty)
-            Container(
-              margin: const EdgeInsets.only(top: 12, left: 48),
-              child: Wrap(
-                spacing: 8,
-                runSpacing: 8,
-                children:
-                    suggestions.map((suggestion) {
-                      return GestureDetector(
-                        onTap: () => _sendSuggestion(suggestion),
-                        child: Container(
-                          padding: const EdgeInsets.symmetric(
-                            horizontal: 12,
-                            vertical: 8,
-                          ),
-                          decoration: BoxDecoration(
-                            color: Colors.white,
-                            borderRadius: BorderRadius.circular(16),
-                            border: Border.all(
-                              color: const Color(0xFF2FB0C6).withOpacity(0.3),
-                            ),
-                            boxShadow: [
-                              BoxShadow(
-                                color: Colors.black.withOpacity(0.05),
-                                blurRadius: 4,
-                                offset: const Offset(0, 2),
-                              ),
-                            ],
-                          ),
-                          child: Text(
-                            suggestion,
-                            style: const TextStyle(
-                              fontSize: 13,
-                              color: Color(0xFF2FB0C6),
-                              fontWeight: FontWeight.w600,
-                            ),
-                          ),
-                        ),
-                      );
-                    }).toList(),
-              ),
-            ),
-        ],
-      ),
-    );
-  }
-
-  Widget _buildBotAvatar() {
-    return Container(
-      width: 32,
-      height: 32,
-      decoration: BoxDecoration(
-        gradient: LinearGradient(
-          colors: [const Color(0xFF2FB0C6), Colors.blue[600]!],
-          begin: Alignment.topLeft,
-          end: Alignment.bottomRight,
-        ),
-        shape: BoxShape.circle,
-      ),
-      child: const Icon(Icons.smart_toy, color: Colors.white, size: 18),
-    );
-  }
-
-  Widget _buildUserAvatar() {
-    return Container(
-      width: 32,
-      height: 32,
-      decoration: BoxDecoration(
-        color: Colors.grey[300],
-        shape: BoxShape.circle,
-      ),
-      child: Icon(Icons.person, color: Colors.grey[600], size: 18),
-    );
-  }
-
-  Widget _buildTypingIndicator() {
-    return Container(
-      padding: const EdgeInsets.fromLTRB(16, 8, 16, 0),
-      child: Row(
-        children: [
-          _buildBotAvatar(),
-          const SizedBox(width: 8),
-          Container(
-            padding: const EdgeInsets.all(16),
-            decoration: BoxDecoration(
-              color: Colors.white,
-              borderRadius: BorderRadius.circular(20),
-              boxShadow: [
-                BoxShadow(
-                  color: Colors.black.withOpacity(0.1),
-                  blurRadius: 4,
-                  offset: const Offset(0, 2),
-                ),
-              ],
-            ),
-            child: Row(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                _buildTypingDot(0),
-                const SizedBox(width: 4),
-                _buildTypingDot(1),
-                const SizedBox(width: 4),
-                _buildTypingDot(2),
-              ],
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-
-  Widget _buildTypingDot(int index) {
-    return TweenAnimationBuilder<double>(
-      duration: const Duration(milliseconds: 600),
-      tween: Tween(begin: 0.0, end: 1.0),
-      builder: (context, value, child) {
-        return Transform.scale(
-          scale: 0.5 + (0.5 * value),
-          child: Container(
-            width: 8,
-            height: 8,
-            decoration: BoxDecoration(
-              color: Colors.grey[400],
-              shape: BoxShape.circle,
-            ),
-          ),
+        return ChatWidgets.buildMessageBubble(
+          _messages[index],
+          _sendSuggestion,
+          context,
         );
       },
     );
@@ -736,20 +369,5 @@ class ChatBotScreenState extends State<ChatBotScreen>
         ),
       ),
     );
-  }
-
-  String _formatTimestamp(DateTime timestamp) {
-    final now = DateTime.now();
-    final difference = now.difference(timestamp);
-
-    if (difference.inMinutes < 1) {
-      return "الآن";
-    } else if (difference.inHours < 1) {
-      return "منذ ${difference.inMinutes} دقيقة";
-    } else if (difference.inDays < 1) {
-      return "منذ ${difference.inHours} ساعة";
-    } else {
-      return "${timestamp.day}/${timestamp.month}";
-    }
   }
 }

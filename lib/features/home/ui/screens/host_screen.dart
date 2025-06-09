@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import '../../../booking/ui/logic/bookings_cubit.dart';
-import '../../../booking/ui/screens/my_bookings_screen.dart';
-import '../../../favorites/ui/logic/favorites_cubit.dart';
-import '../logic/home_cubit.dart';
 
 import '../../../../core/di/dependency_injection.dart';
+import '../../../booking/ui/logic/bookings_cubit.dart';
+import '../../../booking/ui/screens/my_bookings_screen.dart';
 import '../../../chat/ui/screens/chat_bot_screen.dart';
+import '../../../favorites/ui/logic/favorites_cubit.dart';
 import '../../../favorites/ui/screens/favorites_screen.dart';
 import '../../../profile/ui/logic/profile_cubit.dart';
 import '../../../profile/ui/screens/profile_view_screen.dart';
+import '../logic/home_cubit.dart';
 import 'home_screen.dart';
 
 class HostScreen extends StatefulWidget {
