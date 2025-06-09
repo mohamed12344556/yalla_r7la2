@@ -7,7 +7,7 @@ import 'package:path_provider/path_provider.dart';
 import 'core/di/dependency_injection.dart';
 import 'core/utils/auth_guard.dart';
 import 'core/utils/bloc_setup.dart';
-import 'core/utils/global_error_handler.dart'; // أضيف الـ import ده
+import 'core/utils/global_error_handler.dart';
 import 'travel_app.dart';
 
 void main() async {
@@ -21,7 +21,6 @@ void main() async {
     log('GetIt setup completed successfully');
   } catch (e) {
     log('Error setting up GetIt: $e');
-    // يمكنك إضافة fallback logic هنا
   }
 
   // Initialize BLoC system
