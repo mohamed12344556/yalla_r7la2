@@ -212,6 +212,9 @@ class MessageLookup extends MessageLookupByLibrary {
         MessageLookupByLibrary.simpleMessage(
           "التواريخ المحددة تتعارض مع حجز موجود",
         ),
+    "ai_assistant": MessageLookupByLibrary.simpleMessage(
+      "مساعدك الذكي جاهز للمساعدة",
+    ),
     "for1": MessageLookupByLibrary.simpleMessage("لـ"),
     "people": MessageLookupByLibrary.simpleMessage("أشخاص"),
     "person": MessageLookupByLibrary.simpleMessage("شخص"),

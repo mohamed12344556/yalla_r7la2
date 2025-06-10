@@ -949,6 +949,16 @@ class S {
   String get Details {
     return Intl.message('Details', name: 'Details', desc: '', args: []);
   }
+
+  /// ` Your AI assistant is ready to help`
+  String get ai_assistant {
+    return Intl.message(
+      ' Your AI assistant is ready to help',
+      name: 'ai_assistant',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

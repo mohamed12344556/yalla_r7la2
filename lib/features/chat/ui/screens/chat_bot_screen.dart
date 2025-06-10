@@ -199,7 +199,7 @@ class ChatBotScreenState extends State<ChatBotScreen>
           position: _slideAnimation,
           child: Column(
             children: [
-              ChatWidgets.buildStatusBar(_isOnline, _messages.length),
+              ChatWidgets.buildStatusBar(context,_isOnline, _messages.length),
               Expanded(child: _buildMessagesList()),
               if (_isTyping) ChatWidgets.buildTypingIndicator(),
               _buildInputArea(),

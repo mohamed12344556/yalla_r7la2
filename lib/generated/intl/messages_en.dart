@@ -216,6 +216,9 @@ class MessageLookup extends MessageLookupByLibrary {
         MessageLookupByLibrary.simpleMessage(
           "Your selected dates conflict with existing booking",
         ),
+    "ai_assistant": MessageLookupByLibrary.simpleMessage(
+      " Your AI assistant is ready to help",
+    ),
     "for1": MessageLookupByLibrary.simpleMessage("for"),
     "people": MessageLookupByLibrary.simpleMessage("people"),
     "person": MessageLookupByLibrary.simpleMessage("person"),

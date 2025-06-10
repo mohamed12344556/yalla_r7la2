@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:yalla_r7la2/features/chat/data/models/chat_models.dart';
 import 'package:yalla_r7la2/features/chat/utils/chat_utils.dart';
 
+import '../../../../generated/l10n.dart';
+
 class ChatWidgets {
   static Widget buildBotAvatar({double size = 32}) {
     return Container(
@@ -241,7 +243,7 @@ class ChatWidgets {
     );
   }
 
-  static Widget buildStatusBar(bool isOnline, int messageCount) {
+  static Widget buildStatusBar(BuildContext context,bool isOnline, int messageCount) {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
       decoration: BoxDecoration(
@@ -260,7 +262,7 @@ class ChatWidgets {
           ),
           const SizedBox(width: 8),
           Text(
-            isOnline ? "مساعدك الذكي جاهز للمساعدة" : "إعادة الاتصال...",
+            isOnline ? S.of(context).ai_assistant : "إعادة الاتصال...",
             style: TextStyle(
               fontSize: 12,
               color: Colors.grey[600],
