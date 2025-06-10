@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:yalla_r7la2/generated/l10n.dart';
 
 import '../../../../core/routes/routes.dart';
 import '../../../../core/utils/extensions.dart';
@@ -28,7 +29,7 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
     final cubit = context.read<ForgotPasswordCubit>();
     if (cubit.newPasswordController.text.trim() !=
         cubit.confirmPasswordController.text.trim()) {
-      context.showErrorSnackBar('Passwords do not match');
+      context.showErrorSnackBar(S.of(context).Passwords_do_not_match);
       return;
     }
 
@@ -44,8 +45,8 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
       appBar: AppBar(
         backgroundColor: Colors.transparent,
         elevation: 0,
-        title: const Text(
-          'Reset Password',
+        title: Text(
+          S.of(context).Reset_Password,
           style: TextStyle(color: Colors.black87, fontWeight: FontWeight.bold),
         ),
         iconTheme: const IconThemeData(color: Colors.black87),
@@ -59,7 +60,7 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
                 context.showSuccessSnackBar(
                   state.response.message.isNotEmpty
                       ? state.response.message
-                      : 'Password reset successful',
+                      : S.of(context).Password_reset_successful,
                 );
 
                 // Navigate back to login screen
@@ -92,8 +93,8 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
                     const SizedBox(height: 30),
 
                     // Title
-                    const Text(
-                      'Reset Your Password',
+                    Text(
+                      S.of(context).Reset_Password,
                       style: TextStyle(
                         fontSize: 28,
                         fontWeight: FontWeight.bold,
@@ -104,8 +105,8 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
                     const SizedBox(height: 8),
 
                     // Subtitle
-                    const Text(
-                      'Enter your email and new password to reset your account password',
+                    Text(
+                      S.of(context).Enter_email_and_new_password,
                       style: TextStyle(
                         fontSize: 16,
                         color: Colors.grey,
@@ -118,7 +119,7 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
                     // Email Field
                     AppTextField(
                       controller: cubit.emailController,
-                      hintText: 'Email',
+                      hintText: S.of(context).Email,
                       // labelText: 'Email Address',
                       prefixIcon: const Icon(Icons.email_outlined),
                       keyboardType: TextInputType.emailAddress,
@@ -130,7 +131,7 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
                     // New Password Field
                     AppTextField(
                       controller: cubit.newPasswordController,
-                      hintText: 'New Password',
+                      hintText: S.of(context).New_Password,
                       // labelText: 'New Password',
                       prefixIcon: const Icon(Icons.lock_outline),
                       isPassword: true,
@@ -147,7 +148,7 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
                     // Confirm Password Field
                     AppTextField(
                       controller: cubit.confirmPasswordController,
-                      hintText: 'Confirm New Password',
+                      hintText: S.of(context).Confirm_New_Password,
                       // labelText: 'Confirm New Password',
                       prefixIcon: const Icon(Icons.lock_outline),
                       isPassword: true,
@@ -155,7 +156,7 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
                       keyboardType: TextInputType.visiblePassword,
                       validator: (value) {
                         if (value == null || value.isEmpty) {
-                          return 'Please confirm your password';
+                          return S.of(context).Please_confirm_password;
                         }
                         return null;
                       },
@@ -169,7 +170,7 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
 
                     // Reset Password Button
                     AppButton(
-                      text: 'Reset Password',
+                      text: S.of(context).Reset_Your_Password,
                       isLoading: state is ForgotPasswordLoading,
                       onPressed: () {
                         FocusScope.of(context).unfocus();
@@ -182,7 +183,7 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        const Text("Remember your password? "),
+                        Text(S.of(context).Remember_password),
                         TextButton(
                           onPressed: () {
                             Navigator.pushReplacementNamed(
@@ -190,8 +191,8 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
                               Routes.login,
                             );
                           },
-                          child: const Text(
-                            'Log In',
+                          child: Text(
+                            S.of(context).Log_In,
                             style: TextStyle(fontWeight: FontWeight.bold),
                           ),
                         ),

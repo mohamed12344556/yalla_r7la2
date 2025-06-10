@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:yalla_r7la2/generated/l10n.dart';
 
 import '../logic/register_cubit.dart';
 import 'image_picker_option.dart';
@@ -23,9 +24,9 @@ void showImagePickerBottomSheet(BuildContext context) {
             child: Column(
               mainAxisSize: MainAxisSize.min,
               children: [
-                const Text(
-                  'Select Profile Picture',
-                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                Text(
+                  S.of(context).Select_Profile_Picture,
+                  style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
                 ),
                 const SizedBox(height: 20),
                 Row(
@@ -33,7 +34,7 @@ void showImagePickerBottomSheet(BuildContext context) {
                   children: [
                     ImagePickerOption(
                       icon: Icons.camera_alt,
-                      label: 'Camera',
+                      label: S.of(context).Camera,
                       onTap: () {
                         Navigator.pop(bottomSheetContext);
                         registerCubit.pickImageFromCamera();
@@ -41,7 +42,7 @@ void showImagePickerBottomSheet(BuildContext context) {
                     ),
                     ImagePickerOption(
                       icon: Icons.photo_library,
-                      label: 'Gallery',
+                      label: S.of(context).Gallery,
                       onTap: () {
                         Navigator.pop(bottomSheetContext);
                         registerCubit.pickImageFromGallery();

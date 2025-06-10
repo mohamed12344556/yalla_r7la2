@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:yalla_r7la2/generated/l10n.dart';
 
 import '../logic/register_cubit.dart';
 
@@ -76,8 +77,8 @@ class ProfileImageSection extends StatelessWidget {
             const SizedBox(height: 8),
             Text(
               cubit.selectedImage != null
-                  ? 'Tap the red button to remove'
-                  : 'Tap the camera icon to add photo',
+                  ? S.of(context).Tap_red_button_to_remove
+                  : S.of(context).Tap_camera_icon_to_add,
               style: TextStyle(fontSize: 12, color: Colors.grey[600]),
               textAlign: TextAlign.center,
             ),

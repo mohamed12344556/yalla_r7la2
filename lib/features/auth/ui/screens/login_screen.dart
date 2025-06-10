@@ -8,6 +8,7 @@ import '../../../../core/utils/extensions.dart';
 import '../../../../core/utils/validators.dart';
 import '../../../../core/widgets/app_button.dart';
 import '../../../../core/widgets/app_text_field.dart';
+import '../../../../generated/l10n.dart';
 import '../logic/login_cubit.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -35,7 +36,7 @@ class _LoginScreenState extends State<LoginScreen> {
   Widget build(BuildContext context) {
     final cubit = context.read<LoginCubit>();
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: context.isDark ? Colors.black87 : Colors.white,
       body: SafeArea(
         child: SingleChildScrollView(
           padding: const EdgeInsets.all(24),
@@ -48,7 +49,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   state.authResponse.token,
                 );
 
-                context.showSuccessSnackBar('Login successful');
+                context.showSuccessSnackBar(S.of(context).Login_successful);
 
                 // Navigate to main screen
                 context.pushReplacementNamed(Routes.host);
@@ -71,8 +72,8 @@ class _LoginScreenState extends State<LoginScreen> {
                     const SizedBox(height: 30),
 
                     // Welcome Text
-                    const Text(
-                      'Welcome Back',
+                    Text(
+                      S.of(context).Welcome_Back,
                       style: TextStyle(
                         fontSize: 28,
                         fontWeight: FontWeight.bold,
@@ -80,8 +81,8 @@ class _LoginScreenState extends State<LoginScreen> {
                       ),
                     ),
                     const SizedBox(height: 8),
-                    const Text(
-                      'Sign in to your account',
+                    Text(
+                      S.of(context).Sign_in_to_your_account,
                       style: TextStyle(fontSize: 16, color: Colors.grey),
                     ),
                     const SizedBox(height: 40),
@@ -89,7 +90,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     // Email Field
                     AppTextField(
                       controller: cubit.loginEmailController,
-                      hintText: 'Email',
+                      hintText: S.of(context).Email,
                       prefixIcon: const Icon(Icons.email),
                       keyboardType: TextInputType.emailAddress,
                       validator: Validators.validateEmail,
@@ -99,7 +100,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     // Password Field
                     AppTextField(
                       controller: cubit.loginPasswordController,
-                      hintText: 'Password',
+                      hintText: S.of(context).Password,
                       prefixIcon: const Icon(Icons.lock),
                       isPassword: true,
                       passwordVisible: !cubit.obscurePassword,
@@ -119,14 +120,14 @@ class _LoginScreenState extends State<LoginScreen> {
                         onPressed: () {
                           context.pushNamed(Routes.forgotPassword);
                         },
-                        child: const Text('Forgot Password?'),
+                        child: Text(S.of(context).Forgot_Password),
                       ),
                     ),
                     const SizedBox(height: 30),
 
                     // Login Button
                     AppButton(
-                      text: 'Login',
+                      text: S.of(context).Login,
                       isLoading: state is LoginLoading,
                       onPressed: () {
                         FocusScope.of(context).unfocus();
@@ -139,13 +140,13 @@ class _LoginScreenState extends State<LoginScreen> {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        const Text("Don't have an account? "),
+                        Text(S.of(context).Dont_have_account),
                         TextButton(
                           onPressed: () {
                             Navigator.pushNamed(context, Routes.register);
                           },
-                          child: const Text(
-                            'Sign Up',
+                          child: Text(
+                            S.of(context).Sign_Up,
                             style: TextStyle(fontWeight: FontWeight.bold),
                           ),
                         ),

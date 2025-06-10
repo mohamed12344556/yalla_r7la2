@@ -8,6 +8,7 @@ import '../../../../core/utils/extensions.dart';
 import '../../../../core/utils/validators.dart';
 import '../../../../core/widgets/app_button.dart';
 import '../../../../core/widgets/app_text_field.dart';
+import '../../../../generated/l10n.dart';
 import '../logic/register_cubit.dart';
 import '../widgets/image_picker_bottom_sheet.dart';
 import '../widgets/profile_image_section.dart';
@@ -30,7 +31,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
     // Check if preferred city is selected
     final cubit = context.read<RegisterCubit>();
     if (cubit.selectedPreferredCity == null) {
-      context.showErrorSnackBar('Please select your preferred city');
+      context.showErrorSnackBar(S.of(context).Please_select_your_preferred_city);
       return;
     }
 
@@ -60,7 +61,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
           child: BlocConsumer<RegisterCubit, RegisterState>(
             listener: (context, state) {
               if (state is RegisterSuccess) {
-                context.showSuccessSnackBar('Account created successfully');
+                context.showSuccessSnackBar(S.of(context).Account_created_successfully);
                 context.pushReplacementNamed(Routes.host);
               } else if (state is RegisterError) {
                 context.showErrorSnackBar(state.errorMessage);
@@ -76,18 +77,18 @@ class _RegisterScreenState extends State<RegisterScreen> {
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     // Welcome Text
-                    const Text(
-                      'Sign Up',
-                      style: TextStyle(
+                    Text(
+                      S.of(context).Sign_Up,
+                      style: const TextStyle(
                         fontSize: 28,
                         fontWeight: FontWeight.bold,
                         color: Colors.black87,
                       ),
                     ),
                     const SizedBox(height: 8),
-                    const Text(
-                      'Please enter your details to create an account.',
-                      style: TextStyle(fontSize: 16, color: Colors.grey),
+                    Text(
+                      S.of(context).Please_enter_details,
+                      style: const TextStyle(fontSize: 16, color: Colors.grey),
                     ),
                     const SizedBox(height: 24),
 
@@ -98,18 +99,18 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     // Full Name Field
                     AppTextField(
                       controller: cubit.registerFullNameController,
-                      hintText: 'Full Name',
+                      hintText: S.of(context).Full_Name,
                       prefixIcon: const Icon(Icons.person),
                       validator:
                           (value) =>
-                              Validators.validateRequired(value, "Full Name"),
+                              Validators.validateRequired(value, S.of(context).Full_Name),
                     ),
                     const SizedBox(height: 16),
 
                     // Email Field
                     AppTextField(
                       controller: cubit.registerEmailController,
-                      hintText: 'Email',
+                      hintText: S.of(context).Email,
                       prefixIcon: const Icon(Icons.email),
                       validator: Validators.validateEmail,
                       keyboardType: TextInputType.emailAddress,
@@ -119,7 +120,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     // Phone Number Field
                     AppTextField(
                       controller: cubit.registerPhoneController,
-                      hintText: 'Phone Number',
+                      hintText: S.of(context).Phone_Number,
                       prefixIcon: const Icon(Icons.phone),
                       validator: Validators.validatePhone,
                       keyboardType: TextInputType.phone,
@@ -129,12 +130,12 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     // Date of Birth Field
                     AppTextField(
                       controller: cubit.registerDobController,
-                      hintText: 'Date of Birth',
+                      hintText: S.of(context).Date_of_Birth,
                       prefixIcon: const Icon(Icons.calendar_today),
                       validator:
                           (value) => Validators.validateRequired(
                             value,
-                            "Date of Birth",
+                            S.of(context).Date_of_Birth,
                           ),
                       readOnly: true,
                       onTap: () => cubit.selectDate(context),
@@ -145,10 +146,10 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     // City Field
                     AppTextField(
                       controller: cubit.registerCityController,
-                      hintText: 'City',
+                      hintText: S.of(context).City,
                       prefixIcon: const Icon(Icons.location_city),
                       validator:
-                          (value) => Validators.validateRequired(value, "City"),
+                          (value) => Validators.validateRequired(value, S.of(context).City),
                     ),
                     const SizedBox(height: 16),
 
@@ -162,11 +163,11 @@ class _RegisterScreenState extends State<RegisterScreen> {
                           ),
                           child: DropdownButtonFormField<String>(
                             value: cubit.selectedPreferredCity,
-                            decoration: const InputDecoration(
-                              hintText: 'Select Preferred City',
-                              prefixIcon: Icon(Icons.favorite),
+                            decoration: InputDecoration(
+                              hintText: S.of(context).Select_Preferred_City,
+                              prefixIcon: const Icon(Icons.favorite),
                               border: InputBorder.none,
-                              contentPadding: EdgeInsets.symmetric(
+                              contentPadding: const EdgeInsets.symmetric(
                                 horizontal: 16,
                                 vertical: 12,
                               ),
@@ -183,7 +184,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                             },
                             validator: (value) {
                               if (value == null || value.isEmpty) {
-                                return 'Please select your preferred city';
+                                return S.of(context).Please_select_preferred_city;
                               }
                               return null;
                             },
@@ -200,7 +201,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                       builder: (context, state) {
                         return AppTextField(
                           controller: cubit.registerPasswordController,
-                          hintText: 'Password',
+                          hintText: S.of(context).Password,
                           prefixIcon: const Icon(Icons.lock),
                           validator: Validators.validatePassword,
                           isPassword: true,
@@ -218,7 +219,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                       builder: (context, state) {
                         return AppTextField(
                           controller: cubit.registerConfirmPasswordController,
-                          hintText: 'Confirm Password',
+                          hintText: S.of(context).Confirm_Password,
                           prefixIcon: const Icon(Icons.lock_outline),
                           validator: (value) {
                             final passwordError = Validators.validatePassword(
@@ -239,7 +240,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
 
                     // Sign Up Button
                     AppButton(
-                      text: 'Sign Up',
+                      text: S.of(context).Sign_Up,
                       isLoading: state is RegisterLoading,
                       onPressed: () {
                         log('Signing up...');
@@ -253,16 +254,16 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        const Text('Already have an account? '),
+                        Text(S.of(context).Already_have_account),
                         GestureDetector(
                           onTap:
                               () => Navigator.pushReplacementNamed(
                                 context,
                                 Routes.login,
                               ),
-                          child: const Text(
-                            'Login',
-                            style: TextStyle(
+                          child: Text(
+                            S.of(context).Login,
+                            style: const TextStyle(
                               color: Colors.blue,
                               fontWeight: FontWeight.bold,
                             ),
