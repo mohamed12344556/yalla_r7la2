@@ -31,7 +31,9 @@ class _RegisterScreenState extends State<RegisterScreen> {
     // Check if preferred city is selected
     final cubit = context.read<RegisterCubit>();
     if (cubit.selectedPreferredCity == null) {
-      context.showErrorSnackBar(S.of(context).Please_select_your_preferred_city);
+      context.showErrorSnackBar(
+        S.of(context).Please_select_your_preferred_city,
+      );
       return;
     }
 
@@ -53,15 +55,20 @@ class _RegisterScreenState extends State<RegisterScreen> {
   @override
   Widget build(BuildContext context) {
     final cubit = context.watch<RegisterCubit>();
+    final theme = Theme.of(context);
+    final colorScheme = theme.colorScheme;
+
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: colorScheme.surface,
       body: SafeArea(
         child: SingleChildScrollView(
           padding: const EdgeInsets.all(24),
           child: BlocConsumer<RegisterCubit, RegisterState>(
             listener: (context, state) {
               if (state is RegisterSuccess) {
-                context.showSuccessSnackBar(S.of(context).Account_created_successfully);
+                context.showSuccessSnackBar(
+                  S.of(context).Account_created_successfully,
+                );
                 context.pushReplacementNamed(Routes.host);
               } else if (state is RegisterError) {
                 context.showErrorSnackBar(state.errorMessage);
@@ -79,16 +86,17 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     // Welcome Text
                     Text(
                       S.of(context).Sign_Up,
-                      style: const TextStyle(
-                        fontSize: 28,
+                      style: theme.textTheme.headlineMedium?.copyWith(
                         fontWeight: FontWeight.bold,
-                        color: Colors.black87,
+                        color: colorScheme.onSurface,
                       ),
                     ),
                     const SizedBox(height: 8),
                     Text(
                       S.of(context).Please_enter_details,
-                      style: const TextStyle(fontSize: 16, color: Colors.grey),
+                      style: theme.textTheme.bodyLarge?.copyWith(
+                        color: colorScheme.onSurface.withOpacity(0.6),
+                      ),
                     ),
                     const SizedBox(height: 24),
 
@@ -102,8 +110,10 @@ class _RegisterScreenState extends State<RegisterScreen> {
                       hintText: S.of(context).Full_Name,
                       prefixIcon: const Icon(Icons.person),
                       validator:
-                          (value) =>
-                              Validators.validateRequired(value, S.of(context).Full_Name),
+                          (value) => Validators.validateRequired(
+                            value,
+                            S.of(context).Full_Name,
+                          ),
                     ),
                     const SizedBox(height: 16),
 
@@ -149,7 +159,10 @@ class _RegisterScreenState extends State<RegisterScreen> {
                       hintText: S.of(context).City,
                       prefixIcon: const Icon(Icons.location_city),
                       validator:
-                          (value) => Validators.validateRequired(value, S.of(context).City),
+                          (value) => Validators.validateRequired(
+                            value,
+                            S.of(context).City,
+                          ),
                     ),
                     const SizedBox(height: 16),
 
@@ -158,14 +171,25 @@ class _RegisterScreenState extends State<RegisterScreen> {
                       builder: (context, state) {
                         return Container(
                           decoration: BoxDecoration(
-                            border: Border.all(color: Colors.grey[300]!),
-                            borderRadius: BorderRadius.circular(8),
+                            border: Border.all(
+                              color:
+                                  context.isDark
+                                      ? Colors.grey[600]!
+                                      : Colors.grey[300]!,
+                            ),
+                            borderRadius: BorderRadius.circular(12),
                           ),
                           child: DropdownButtonFormField<String>(
                             value: cubit.selectedPreferredCity,
                             decoration: InputDecoration(
                               hintText: S.of(context).Select_Preferred_City,
-                              prefixIcon: const Icon(Icons.favorite),
+                              hintStyle: TextStyle(
+                                color: colorScheme.onSurface.withOpacity(0.6),
+                              ),
+                              prefixIcon: Icon(
+                                Icons.favorite,
+                                color: colorScheme.primary,
+                              ),
                               border: InputBorder.none,
                               contentPadding: const EdgeInsets.symmetric(
                                 horizontal: 16,
@@ -176,7 +200,12 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                 cubit.preferredCities.map((String city) {
                                   return DropdownMenuItem<String>(
                                     value: city,
-                                    child: Text(city),
+                                    child: Text(
+                                      city,
+                                      style: TextStyle(
+                                        color: colorScheme.onSurface,
+                                      ),
+                                    ),
                                   );
                                 }).toList(),
                             onChanged: (String? value) {
@@ -184,12 +213,19 @@ class _RegisterScreenState extends State<RegisterScreen> {
                             },
                             validator: (value) {
                               if (value == null || value.isEmpty) {
-                                return S.of(context).Please_select_preferred_city;
+                                return S
+                                    .of(context)
+                                    .Please_select_preferred_city;
                               }
                               return null;
                             },
                             isExpanded: true,
-                            icon: const Icon(Icons.arrow_drop_down),
+                            icon: Icon(
+                              Icons.arrow_drop_down,
+                              color: colorScheme.onSurface,
+                            ),
+                            dropdownColor: colorScheme.surface,
+                            style: TextStyle(color: colorScheme.onSurface),
                           ),
                         );
                       },
@@ -254,7 +290,12 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        Text(S.of(context).Already_have_account),
+                        Text(
+                          S.of(context).Already_have_account,
+                          style: theme.textTheme.bodyMedium?.copyWith(
+                            color: colorScheme.onSurface.withOpacity(0.7),
+                          ),
+                        ),
                         GestureDetector(
                           onTap:
                               () => Navigator.pushReplacementNamed(
@@ -263,8 +304,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
                               ),
                           child: Text(
                             S.of(context).Login,
-                            style: const TextStyle(
-                              color: Colors.blue,
+                            style: TextStyle(
+                              color: colorScheme.primary,
                               fontWeight: FontWeight.bold,
                             ),
                           ),

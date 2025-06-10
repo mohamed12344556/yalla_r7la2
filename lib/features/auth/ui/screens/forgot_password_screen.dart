@@ -39,17 +39,19 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
   @override
   Widget build(BuildContext context) {
     final cubit = context.read<ForgotPasswordCubit>();
+    final theme = Theme.of(context);
+    final colorScheme = theme.colorScheme;
 
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: colorScheme.surface,
       appBar: AppBar(
         backgroundColor: Colors.transparent,
         elevation: 0,
         title: Text(
           S.of(context).Reset_Password,
-          style: TextStyle(color: Colors.black87, fontWeight: FontWeight.bold),
+          style: theme.appBarTheme.titleTextStyle,
         ),
-        iconTheme: const IconThemeData(color: Colors.black87),
+        iconTheme: theme.appBarTheme.iconTheme,
       ),
       body: SafeArea(
         child: SingleChildScrollView(
@@ -81,13 +83,13 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
                     Container(
                       padding: const EdgeInsets.all(20),
                       decoration: BoxDecoration(
-                        color: Colors.blue.shade50,
+                        color: colorScheme.primary.withOpacity(0.1),
                         shape: BoxShape.circle,
                       ),
                       child: Icon(
                         Icons.lock_reset,
                         size: 80,
-                        color: Colors.blue.shade600,
+                        color: colorScheme.primary,
                       ),
                     ),
                     const SizedBox(height: 30),
@@ -95,10 +97,9 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
                     // Title
                     Text(
                       S.of(context).Reset_Password,
-                      style: TextStyle(
-                        fontSize: 28,
+                      style: theme.textTheme.headlineMedium?.copyWith(
                         fontWeight: FontWeight.bold,
-                        color: Colors.black87,
+                        color: colorScheme.onSurface,
                       ),
                       textAlign: TextAlign.center,
                     ),
@@ -107,9 +108,8 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
                     // Subtitle
                     Text(
                       S.of(context).Enter_email_and_new_password,
-                      style: TextStyle(
-                        fontSize: 16,
-                        color: Colors.grey,
+                      style: theme.textTheme.bodyLarge?.copyWith(
+                        color: colorScheme.onSurface.withOpacity(0.6),
                         height: 1.4,
                       ),
                       textAlign: TextAlign.center,
@@ -120,7 +120,6 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
                     AppTextField(
                       controller: cubit.emailController,
                       hintText: S.of(context).Email,
-                      // labelText: 'Email Address',
                       prefixIcon: const Icon(Icons.email_outlined),
                       keyboardType: TextInputType.emailAddress,
                       validator: Validators.validateEmail,
@@ -132,7 +131,6 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
                     AppTextField(
                       controller: cubit.newPasswordController,
                       hintText: S.of(context).New_Password,
-                      // labelText: 'New Password',
                       prefixIcon: const Icon(Icons.lock_outline),
                       isPassword: true,
                       passwordVisible: !cubit.obscureNewPassword,
@@ -149,7 +147,6 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
                     AppTextField(
                       controller: cubit.confirmPasswordController,
                       hintText: S.of(context).Confirm_New_Password,
-                      // labelText: 'Confirm New Password',
                       prefixIcon: const Icon(Icons.lock_outline),
                       isPassword: true,
                       passwordVisible: !cubit.obscureConfirmPassword,
@@ -183,7 +180,12 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        Text(S.of(context).Remember_password),
+                        Text(
+                          S.of(context).Remember_password,
+                          style: theme.textTheme.bodyMedium?.copyWith(
+                            color: colorScheme.onSurface.withOpacity(0.7),
+                          ),
+                        ),
                         TextButton(
                           onPressed: () {
                             Navigator.pushReplacementNamed(
@@ -193,7 +195,10 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
                           },
                           child: Text(
                             S.of(context).Log_In,
-                            style: TextStyle(fontWeight: FontWeight.bold),
+                            style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              color: colorScheme.primary,
+                            ),
                           ),
                         ),
                       ],

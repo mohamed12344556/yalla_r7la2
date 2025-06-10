@@ -11,6 +11,9 @@ class ProfileImageSection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    final colorScheme = theme.colorScheme;
+
     return BlocBuilder<RegisterCubit, RegisterState>(
       builder: (context, state) {
         final cubit = context.read<RegisterCubit>();
@@ -24,8 +27,11 @@ class ProfileImageSection extends StatelessWidget {
                     height: 120,
                     decoration: BoxDecoration(
                       shape: BoxShape.circle,
-                      color: Colors.grey[200],
-                      border: Border.all(color: Colors.grey[300]!, width: 2),
+                      color: colorScheme.surface,
+                      border: Border.all(
+                        color: colorScheme.outline.withOpacity(0.3),
+                        width: 2,
+                      ),
                     ),
                     child:
                         cubit.selectedImage != null
@@ -37,10 +43,10 @@ class ProfileImageSection extends StatelessWidget {
                                 fit: BoxFit.cover,
                               ),
                             )
-                            : const Icon(
+                            : Icon(
                               Icons.person,
                               size: 50,
-                              color: Colors.grey,
+                              color: colorScheme.onSurface.withOpacity(0.5),
                             ),
                   ),
                   Positioned(
@@ -56,17 +62,23 @@ class ProfileImageSection extends StatelessWidget {
                         decoration: BoxDecoration(
                           color:
                               cubit.selectedImage != null
-                                  ? Colors.red
-                                  : Colors.blue,
+                                  ? colorScheme.error
+                                  : colorScheme.primary,
                           shape: BoxShape.circle,
-                          border: Border.all(color: Colors.white, width: 2),
+                          border: Border.all(
+                            color: colorScheme.surface,
+                            width: 2,
+                          ),
                         ),
                         child: Icon(
                           cubit.selectedImage != null
                               ? Icons.delete
                               : Icons.camera_alt,
                           size: 20,
-                          color: Colors.white,
+                          color:
+                              cubit.selectedImage != null
+                                  ? colorScheme.onError
+                                  : colorScheme.onPrimary,
                         ),
                       ),
                     ),
@@ -79,7 +91,9 @@ class ProfileImageSection extends StatelessWidget {
               cubit.selectedImage != null
                   ? S.of(context).Tap_red_button_to_remove
                   : S.of(context).Tap_camera_icon_to_add,
-              style: TextStyle(fontSize: 12, color: Colors.grey[600]),
+              style: theme.textTheme.bodySmall?.copyWith(
+                color: colorScheme.onSurface.withOpacity(0.6),
+              ),
               textAlign: TextAlign.center,
             ),
           ],

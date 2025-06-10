@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+
 import '../../../../core/utils/image_helper.dart';
 import '../../data/models/user_model.dart';
 
@@ -22,14 +23,27 @@ class ProfileImageWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final isDark = Theme.of(context).brightness == Brightness.dark;
+
     return GestureDetector(
       onTap: onTap,
       child: CircleAvatar(
         radius: radius,
+        backgroundColor:
+            isDark ? Theme.of(context).colorScheme.surface : Colors.grey[200],
         backgroundImage: _getImageProvider(),
         child:
             _getImageProvider() == null
-                ? Icon(Icons.person, size: radius)
+                ? Icon(
+                  Icons.person,
+                  size: radius,
+                  color:
+                      isDark
+                          ? Theme.of(
+                            context,
+                          ).colorScheme.onSurface.withOpacity(0.7)
+                          : Colors.grey[600],
+                )
                 : null,
       ),
     );

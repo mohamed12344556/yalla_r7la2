@@ -35,8 +35,11 @@ class _LoginScreenState extends State<LoginScreen> {
   @override
   Widget build(BuildContext context) {
     final cubit = context.read<LoginCubit>();
+    final theme = Theme.of(context);
+    final colorScheme = theme.colorScheme;
+
     return Scaffold(
-      backgroundColor: context.isDark ? Colors.black87 : Colors.white,
+      backgroundColor: colorScheme.surface,
       body: SafeArea(
         child: SingleChildScrollView(
           padding: const EdgeInsets.all(24),
@@ -74,16 +77,17 @@ class _LoginScreenState extends State<LoginScreen> {
                     // Welcome Text
                     Text(
                       S.of(context).Welcome_Back,
-                      style: TextStyle(
-                        fontSize: 28,
+                      style: theme.textTheme.headlineMedium?.copyWith(
                         fontWeight: FontWeight.bold,
-                        color: Colors.black87,
+                        color: colorScheme.onSurface,
                       ),
                     ),
                     const SizedBox(height: 8),
                     Text(
                       S.of(context).Sign_in_to_your_account,
-                      style: TextStyle(fontSize: 16, color: Colors.grey),
+                      style: theme.textTheme.bodyLarge?.copyWith(
+                        color: colorScheme.onSurface.withOpacity(0.6),
+                      ),
                     ),
                     const SizedBox(height: 40),
 
@@ -106,7 +110,6 @@ class _LoginScreenState extends State<LoginScreen> {
                       passwordVisible: !cubit.obscurePassword,
                       keyboardType: TextInputType.visiblePassword,
                       validator: Validators.validatePassword,
-
                       onTogglePasswordVisibility: () {
                         cubit.togglePasswordVisibility();
                       },
@@ -140,14 +143,22 @@ class _LoginScreenState extends State<LoginScreen> {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        Text(S.of(context).Dont_have_account),
+                        Text(
+                          S.of(context).Dont_have_account,
+                          style: theme.textTheme.bodyMedium?.copyWith(
+                            color: colorScheme.onSurface.withOpacity(0.7),
+                          ),
+                        ),
                         TextButton(
                           onPressed: () {
                             Navigator.pushNamed(context, Routes.register);
                           },
                           child: Text(
                             S.of(context).Sign_Up,
-                            style: TextStyle(fontWeight: FontWeight.bold),
+                            style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              color: colorScheme.primary,
+                            ),
                           ),
                         ),
                       ],

@@ -4,18 +4,19 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import '../../../../core/di/dependency_injection.dart';
-import '../../../../core/themes/cubit/locale_cubit.dart';
-import '../../../../core/themes/cubit/theme_cubit.dart';
-import '../../../../core/widgets/app_update_widget.dart';
-import '../../../../core/widgets/language_selection_dialog.dart';
 
 import '../../../../core/api/api_constants.dart';
 import '../../../../core/cache/shared_pref_helper.dart';
+import '../../../../core/di/dependency_injection.dart';
 import '../../../../core/routes/routes.dart';
+import '../../../../core/themes/app_colors.dart'; // تأكد من import الصحيح
+import '../../../../core/themes/cubit/locale_cubit.dart';
+import '../../../../core/themes/cubit/theme_cubit.dart';
 import '../../../../core/utils/extensions.dart';
 import '../../../../core/utils/image_helper.dart';
 import '../../../../core/widgets/app_loading_indicator.dart';
+import '../../../../core/widgets/app_update_widget.dart';
+import '../../../../core/widgets/language_selection_dialog.dart';
 import '../../../../generated/l10n.dart';
 import '../../data/models/user_model.dart';
 import '../logic/profile_cubit.dart';
@@ -30,22 +31,7 @@ class ProfileViewScreen extends StatefulWidget {
 
 class _ProfileViewScreenState extends State<ProfileViewScreen> {
   bool _notificationsEnabled = false;
-  final bool _isDarkMode = false;
-  final bool _hasLoadedProfile = false;
   File? _selectedImage;
-
-  // @override
-  // void didChangeDependencies() {
-  //   super.didChangeDependencies();
-  //   // Load profile data only once when dependencies are available
-  //   if (!_hasLoadedProfile && mounted) {
-  //     final cubit = context.read<ProfileCubit>();
-  //     if (!cubit.isClosed) {
-  //       cubit.loadUserProfile();
-  //       _hasLoadedProfile = true;
-  //     }
-  //   }
-  // }
 
   @override
   void initState() {
@@ -62,7 +48,6 @@ class _ProfileViewScreenState extends State<ProfileViewScreen> {
 
     try {
       final cubit = context.read<ProfileCubit>();
-      // التحقق من أن الـ cubit لم يتم إغلاقه
       if (!cubit.isClosed) {
         await cubit.loadUserProfile();
       }
@@ -81,10 +66,13 @@ class _ProfileViewScreenState extends State<ProfileViewScreen> {
     return Container(
       decoration: BoxDecoration(
         shape: BoxShape.circle,
-        border: Border.all(color: Colors.white, width: 4),
+        border: Border.all(
+          color: Theme.of(context).colorScheme.surface,
+          width: 4,
+        ),
         boxShadow: [
           BoxShadow(
-            color: Colors.black.withOpacity(0.2),
+            color: Theme.of(context).shadowColor.withOpacity(0.2),
             spreadRadius: 2,
             blurRadius: 10,
             offset: const Offset(0, 4),
@@ -93,11 +81,15 @@ class _ProfileViewScreenState extends State<ProfileViewScreen> {
       ),
       child: CircleAvatar(
         radius: 60,
-        backgroundColor: Colors.grey[300],
+        backgroundColor: Theme.of(context).colorScheme.surfaceContainerHighest,
         backgroundImage: _getProfileImageProvider(user, cachedImage),
         child:
             _getProfileImageProvider(user, cachedImage) == null
-                ? const Icon(Icons.person, size: 40, color: Colors.grey)
+                ? Icon(
+                  Icons.person,
+                  size: 40,
+                  color: Theme.of(context).colorScheme.onSurfaceVariant,
+                )
                 : null,
       ),
     );
@@ -126,7 +118,6 @@ class _ProfileViewScreenState extends State<ProfileViewScreen> {
     if (user?.imageData != null && user!.imageData!.isNotEmpty) {
       try {
         String base64String = user.imageData!;
-        // إزالة البادئة إن وجدت
         if (base64String.contains(',')) {
           base64String = base64String.split(',')[1];
         }
@@ -137,7 +128,6 @@ class _ProfileViewScreenState extends State<ProfileViewScreen> {
       }
     }
 
-    // 5. لا توجد صورة
     return null;
   }
 
@@ -145,29 +135,14 @@ class _ProfileViewScreenState extends State<ProfileViewScreen> {
     final user = context.read<ProfileCubit>().currentUser;
     final cachedImage = context.read<ProfileCubit>().cachedProfileImage;
 
-    // // 1. أولوية للصورة المحددة محلياً
-    // if (_selectedImage != null) {
-    //   return FileImage(_selectedImage!);
-    // }
-
-    // // 2. الصورة المحفوظة محلياً
-    // if (cachedImage != null && cachedImage.existsSync()) {
-    //   return FileImage(cachedImage);
-    // }
-
-    // // 3. معالجة البيانات من الـ API
-    // if (user?.imageBytes != null) {
-    //   return MemoryImage(user!.imageBytes!);
-    // }
-
-    // 4. إذا كانت الصورة URL
+    // إذا كانت الصورة URL
     if (user?.imageData != null &&
         user!.imageData!.isNotEmpty &&
         user.imageData!.startsWith('http')) {
       return NetworkImage(user.imageData!);
     }
 
-    // 5. إذا كانت الصورة Base64
+    // إذا كانت الصورة Base64
     if (user?.imageData != null && user!.imageData!.isNotEmpty) {
       try {
         final bytes = ImageHelper.base64ToBytes(user.imageData!);
@@ -177,7 +152,7 @@ class _ProfileViewScreenState extends State<ProfileViewScreen> {
       }
     }
 
-    // 6. Default image
+    // Default image
     return const AssetImage('assets/default_profile.png');
   }
 
@@ -186,8 +161,15 @@ class _ProfileViewScreenState extends State<ProfileViewScreen> {
       context: context,
       builder:
           (context) => AlertDialog(
-            title: const Text('Logout'),
-            content: const Text('Are you sure you want to logout?'),
+            backgroundColor: Theme.of(context).colorScheme.surface,
+            title: Text(
+              'Logout',
+              style: TextStyle(color: Theme.of(context).colorScheme.onSurface),
+            ),
+            content: Text(
+              'Are you sure you want to logout?',
+              style: TextStyle(color: Theme.of(context).colorScheme.onSurface),
+            ),
             actions: [
               TextButton(
                 onPressed: () => Navigator.pop(context),
@@ -216,11 +198,9 @@ class _ProfileViewScreenState extends State<ProfileViewScreen> {
         "Logging out : ${await SharedPrefHelper.getSecuredString(SharedPrefKeys.token)}",
       );
 
-      // Clear cached data
       await SharedPrefHelper.clearAllData();
       await SharedPrefHelper.clearAllSecuredData();
 
-      // Clear profile cache - التحقق من أن الـ cubit لم يتم إغلاقه
       final cubit = context.read<ProfileCubit>();
       if (!cubit.isClosed) {
         cubit.reset();
@@ -229,7 +209,6 @@ class _ProfileViewScreenState extends State<ProfileViewScreen> {
       if (mounted) {
         context.showSuccessSnackBar("Logged out successfully");
 
-        // Navigate to login
         context.pushNamedAndRemoveUntil(
           Routes.login,
           predicate: (route) => false,
@@ -247,15 +226,20 @@ class _ProfileViewScreenState extends State<ProfileViewScreen> {
     required String title,
     required String subtitle,
   }) {
+    final isDarkMode = Theme.of(context).brightness == Brightness.dark;
+
     return Container(
       margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 4),
       padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
-        color: Colors.white,
+        color:
+            isDarkMode
+                ? AppColors.surfaceContainerDark
+                : AppColors.surfaceContainer,
         borderRadius: BorderRadius.circular(12),
         boxShadow: [
           BoxShadow(
-            color: Colors.grey.withOpacity(0.1),
+            color: Theme.of(context).shadowColor.withOpacity(0.1),
             spreadRadius: 1,
             blurRadius: 5,
             offset: const Offset(0, 2),
@@ -267,10 +251,10 @@ class _ProfileViewScreenState extends State<ProfileViewScreen> {
           Container(
             padding: const EdgeInsets.all(8),
             decoration: BoxDecoration(
-              color: const Color(0xFF30B0C7).withOpacity(0.1),
+              color: AppColors.primary.withOpacity(0.1),
               borderRadius: BorderRadius.circular(8),
             ),
-            child: Icon(icon, color: const Color(0xFF30B0C7), size: 20),
+            child: Icon(icon, color: AppColors.primary, size: 20),
           ),
           const SizedBox(width: 12),
           Expanded(
@@ -279,18 +263,25 @@ class _ProfileViewScreenState extends State<ProfileViewScreen> {
               children: [
                 Text(
                   title,
-                  style: const TextStyle(
+                  style: TextStyle(
                     fontSize: 14,
-                    color: Colors.grey,
+                    color:
+                        isDarkMode
+                            ? AppColors.textSecondaryDark
+                            : AppColors.textSecondary,
                     fontWeight: FontWeight.w500,
                   ),
                 ),
                 const SizedBox(height: 2),
                 Text(
                   subtitle,
-                  style: const TextStyle(
+                  style: TextStyle(
                     fontSize: 16,
                     fontWeight: FontWeight.w600,
+                    color:
+                        isDarkMode
+                            ? AppColors.textPrimaryDark
+                            : AppColors.textPrimary,
                   ),
                 ),
               ],
@@ -301,13 +292,62 @@ class _ProfileViewScreenState extends State<ProfileViewScreen> {
     );
   }
 
+  Widget _buildSettingsContainer({
+    required String title,
+    required List<Widget> children,
+  }) {
+    final isDarkMode = Theme.of(context).brightness == Brightness.dark;
+
+    return Container(
+      margin: const EdgeInsets.symmetric(horizontal: 16),
+      decoration: BoxDecoration(
+        color:
+            isDarkMode
+                ? AppColors.surfaceContainerDark
+                : AppColors.surfaceContainer,
+        borderRadius: BorderRadius.circular(15),
+        boxShadow: [
+          BoxShadow(
+            color: Theme.of(context).shadowColor.withOpacity(0.1),
+            spreadRadius: 1,
+            blurRadius: 5,
+            offset: const Offset(0, 2),
+          ),
+        ],
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Padding(
+            padding: const EdgeInsets.all(16),
+            child: Text(
+              title,
+              style: TextStyle(
+                fontWeight: FontWeight.bold,
+                fontSize: 18,
+                color:
+                    isDarkMode
+                        ? AppColors.textPrimaryDark
+                        : AppColors.textPrimary,
+              ),
+            ),
+          ),
+          ...children,
+        ],
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
+    final isDarkMode = Theme.of(context).brightness == Brightness.dark;
+
     return Scaffold(
-      backgroundColor: Colors.grey[50],
+      backgroundColor:
+          isDarkMode ? AppColors.backgroundDark : AppColors.background,
       appBar: AppBar(
         scrolledUnderElevation: 0,
-        backgroundColor: const Color(0xFF30B0C7),
+        backgroundColor: AppColors.primary,
         centerTitle: true,
         title: const Text(
           "My Profile",
@@ -366,8 +406,11 @@ class _ProfileViewScreenState extends State<ProfileViewScreen> {
 
           return RefreshIndicator(
             onRefresh: _onRefresh,
-            color: const Color(0xFF30B0C7),
-            backgroundColor: Colors.white,
+            color: AppColors.primary,
+            backgroundColor:
+                isDarkMode
+                    ? AppColors.surfaceContainerDark
+                    : AppColors.surfaceContainer,
             child: SingleChildScrollView(
               physics: const AlwaysScrollableScrollPhysics(),
               child: Column(
@@ -376,7 +419,7 @@ class _ProfileViewScreenState extends State<ProfileViewScreen> {
                   Container(
                     width: double.infinity,
                     decoration: const BoxDecoration(
-                      color: Color(0xFF30B0C7),
+                      color: AppColors.primary,
                       borderRadius: BorderRadius.only(
                         bottomLeft: Radius.circular(30),
                         bottomRight: Radius.circular(30),
@@ -447,12 +490,15 @@ class _ProfileViewScreenState extends State<ProfileViewScreen> {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        const Text(
+                        Text(
                           'Personal Information',
                           style: TextStyle(
                             fontSize: 18,
                             fontWeight: FontWeight.bold,
-                            color: Colors.black87,
+                            color:
+                                isDarkMode
+                                    ? AppColors.textPrimaryDark
+                                    : AppColors.textPrimary,
                           ),
                         ),
                         const SizedBox(height: 12),
@@ -499,229 +545,197 @@ class _ProfileViewScreenState extends State<ProfileViewScreen> {
                   const SizedBox(height: 30),
 
                   // Settings Section
-                  Container(
-                    margin: const EdgeInsets.symmetric(horizontal: 16),
-                    decoration: BoxDecoration(
-                      color: Colors.white,
-                      borderRadius: BorderRadius.circular(15),
-                      boxShadow: [
-                        BoxShadow(
-                          color: Colors.grey.withOpacity(0.1),
-                          spreadRadius: 1,
-                          blurRadius: 5,
-                          offset: const Offset(0, 2),
-                        ),
-                      ],
-                    ),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        const Padding(
-                          padding: EdgeInsets.all(16),
-                          child: Text(
-                            "Settings",
-                            style: TextStyle(
-                              fontWeight: FontWeight.bold,
-                              fontSize: 18,
-                              color: Colors.black87,
-                            ),
+                  _buildSettingsContainer(
+                    title: "Settings",
+                    children: [
+                      SwitchListTile(
+                        title: Text(
+                          S.of(context).Push_Notifications,
+                          style: TextStyle(
+                            color:
+                                isDarkMode
+                                    ? AppColors.textPrimaryDark
+                                    : AppColors.textPrimary,
                           ),
                         ),
-
-                        SwitchListTile(
-                          title: Text(S.of(context).Push_Notifications),
-                          subtitle: const Text("Receive app notifications"),
-                          value: _notificationsEnabled,
-                          activeColor: Colors.white,
-                          onChanged: (value) {
-                            setState(() {
-                              _notificationsEnabled = value;
-                            });
-                            if (value) {
-                              context.showComingSoonFeature();
-                            }
-                          },
-                        ),
-
-                        ListTile(
-                          leading: const Icon(
-                            Icons.language,
-                            color: Color(0xFF30B0C7),
+                        subtitle: Text(
+                          "Receive app notifications",
+                          style: TextStyle(
+                            color:
+                                isDarkMode
+                                    ? AppColors.textSecondaryDark
+                                    : AppColors.textSecondary,
                           ),
-                          title: const Text("Language"),
-                          subtitle: const Text("App language preference"),
-                          trailing: Row(
-                            mainAxisSize: MainAxisSize.min,
-                            children: [
-                              BlocBuilder<LocaleCubit, Locale>(
-                                builder: (context, locale) {
-                                  // استخدام Extension للحصول على اسم اللغة المناسب
-                                  final currentLanguageName =
-                                      context
-                                          .read<LocaleCubit>()
-                                          .getCurrentLanguageDisplayName();
-
-                                  return Container(
-                                    padding: const EdgeInsets.symmetric(
-                                      horizontal: 8,
-                                      vertical: 4,
-                                    ),
-                                    decoration: BoxDecoration(
-                                      color: const Color(
-                                        0xFF30B0C7,
-                                      ).withOpacity(0.1),
-                                      borderRadius: BorderRadius.circular(12),
-                                    ),
-                                    child: Text(
-                                      currentLanguageName,
-                                      style: const TextStyle(
-                                        color: Color(0xFF30B0C7),
-                                        fontSize: 12,
-                                        fontWeight: FontWeight.w500,
-                                      ),
-                                    ),
-                                  );
-                                },
-                              ),
-                              const SizedBox(width: 8),
-                              const Icon(
-                                Icons.chevron_right,
-                                color: Colors.grey,
-                              ),
-                            ],
-                          ),
-                          onTap: () {
-                            // عرض dialog اختيار اللغة
-                            LanguageSelectionDialog.show(context);
-                          },
                         ),
+                        value: _notificationsEnabled,
+                        activeColor: AppColors.primary,
+                        onChanged: (value) {
+                          setState(() {
+                            _notificationsEnabled = value;
+                          });
+                          if (value) {
+                            context.showComingSoonFeature();
+                          }
+                        },
+                      ),
 
-                        BlocBuilder<ThemeCubit, ThemeMode>(
-                          bloc: sl<ThemeCubit>(),
-                          builder: (context, themeMode) {
-                            // فحص إذا كان الثيم مظلم (مع مراعاة النظام)
-                            final isDarkMode =
-                                themeMode == ThemeMode.dark ||
-                                (themeMode == ThemeMode.system &&
-                                    MediaQuery.of(context).platformBrightness ==
-                                        Brightness.dark);
+                      ListTile(
+                        leading: Icon(Icons.language, color: AppColors.primary),
+                        title: Text(
+                          "Language",
+                          style: TextStyle(
+                            color:
+                                isDarkMode
+                                    ? AppColors.textPrimaryDark
+                                    : AppColors.textPrimary,
+                          ),
+                        ),
+                        subtitle: Text(
+                          "App language preference",
+                          style: TextStyle(
+                            color:
+                                isDarkMode
+                                    ? AppColors.textSecondaryDark
+                                    : AppColors.textSecondary,
+                          ),
+                        ),
+                        trailing: Row(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            BlocBuilder<LocaleCubit, Locale>(
+                              builder: (context, locale) {
+                                final currentLanguageName =
+                                    context
+                                        .read<LocaleCubit>()
+                                        .getCurrentLanguageDisplayName();
 
-                            return SwitchListTile(
-                              title: const Text("Dark Mode"),
-                              subtitle: Text(
-                                themeMode == ThemeMode.system
-                                    ? "Following system theme (${isDarkMode ? 'Dark' : 'Light'})"
-                                    : "Switch to ${isDarkMode ? 'light' : 'dark'} theme",
-                              ),
-                              value: isDarkMode,
-                              activeColor:
-                                  Theme.of(
-                                    context,
-                                  ).primaryColor, // أفضل من Colors.white
-                              onChanged: (value) {
-                                sl<ThemeCubit>().changeTheme(
-                                  value ? ThemeMode.dark : ThemeMode.light,
+                                return Container(
+                                  padding: const EdgeInsets.symmetric(
+                                    horizontal: 8,
+                                    vertical: 4,
+                                  ),
+                                  decoration: BoxDecoration(
+                                    color: AppColors.primary.withOpacity(0.1),
+                                    borderRadius: BorderRadius.circular(12),
+                                  ),
+                                  child: Text(
+                                    currentLanguageName,
+                                    style: TextStyle(
+                                      color: AppColors.primary,
+                                      fontSize: 12,
+                                      fontWeight: FontWeight.w500,
+                                    ),
+                                  ),
                                 );
                               },
-                            );
-                          },
+                            ),
+                            const SizedBox(width: 8),
+                            Icon(
+                              Icons.chevron_right,
+                              color:
+                                  isDarkMode
+                                      ? AppColors.textSecondaryDark
+                                      : AppColors.textSecondary,
+                            ),
+                          ],
                         ),
-                      ],
-                    ),
+                        onTap: () {
+                          LanguageSelectionDialog.show(context);
+                        },
+                      ),
+
+                      BlocBuilder<ThemeCubit, ThemeMode>(
+                        bloc: sl<ThemeCubit>(),
+                        builder: (context, themeMode) {
+                          final isDarkMode =
+                              themeMode == ThemeMode.dark ||
+                              (themeMode == ThemeMode.system &&
+                                  MediaQuery.of(context).platformBrightness ==
+                                      Brightness.dark);
+
+                          return SwitchListTile(
+                            title: Text(
+                              "Dark Mode",
+                              style: TextStyle(
+                                color:
+                                    Theme.of(context).brightness ==
+                                            Brightness.dark
+                                        ? AppColors.textPrimaryDark
+                                        : AppColors.textPrimary,
+                              ),
+                            ),
+                            subtitle: Text(
+                              themeMode == ThemeMode.system
+                                  ? "Following system theme (${isDarkMode ? 'Dark' : 'Light'})"
+                                  : "Switch to ${isDarkMode ? 'light' : 'dark'} theme",
+                              style: TextStyle(
+                                color:
+                                    Theme.of(context).brightness ==
+                                            Brightness.dark
+                                        ? AppColors.textSecondaryDark
+                                        : AppColors.textSecondary,
+                              ),
+                            ),
+                            value: isDarkMode,
+                            activeColor: AppColors.primary,
+                            onChanged: (value) {
+                              sl<ThemeCubit>().changeTheme(
+                                value ? ThemeMode.dark : ThemeMode.light,
+                              );
+                            },
+                          );
+                        },
+                      ),
+                    ],
                   ),
 
                   const SizedBox(height: 20),
 
                   // Account Section
-                  Container(
-                    margin: const EdgeInsets.symmetric(horizontal: 16),
-                    decoration: BoxDecoration(
-                      color: Colors.white,
-                      borderRadius: BorderRadius.circular(15),
-                      boxShadow: [
-                        BoxShadow(
-                          color: Colors.grey.withOpacity(0.1),
-                          spreadRadius: 1,
-                          blurRadius: 5,
-                          offset: const Offset(0, 2),
-                        ),
-                      ],
-                    ),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        const Padding(
-                          padding: EdgeInsets.all(16),
-                          child: Text(
-                            "Account",
-                            style: TextStyle(
-                              fontWeight: FontWeight.bold,
-                              fontSize: 18,
-                              color: Colors.black87,
-                            ),
-                          ),
-                        ),
+                  _buildSettingsContainer(
+                    title: "Account",
+                    children: [
+                      _buildAccountListTile(
+                        icon: Icons.privacy_tip,
+                        title: "Privacy Policy",
+                        onTap: () {
+                          // Navigate to privacy policy
+                        },
+                      ),
 
-                        ListTile(
-                          leading: const Icon(
-                            Icons.privacy_tip,
-                            color: Color(0xFF30B0C7),
-                          ),
-                          title: const Text("Privacy Policy"),
-                          trailing: const Icon(
-                            Icons.chevron_right,
-                            color: Colors.grey,
-                          ),
-                          onTap: () {
-                            // Navigate to privacy policy
-                          },
-                        ),
+                      _buildAccountListTile(
+                        icon: Icons.description,
+                        title: "Terms of Service",
+                        onTap: () {
+                          // Navigate to terms of service
+                        },
+                      ),
 
-                        ListTile(
-                          leading: const Icon(
-                            Icons.description,
-                            color: Color(0xFF30B0C7),
-                          ),
-                          title: const Text("Terms of Service"),
-                          trailing: const Icon(
-                            Icons.chevron_right,
-                            color: Colors.grey,
-                          ),
-                          onTap: () {
-                            // Navigate to terms of service
-                          },
-                        ),
+                      _buildAccountListTile(
+                        icon: Icons.help,
+                        title: "Help & Support",
+                        onTap: () {
+                          // Navigate to help & support
+                        },
+                      ),
 
-                        ListTile(
-                          leading: const Icon(
-                            Icons.help,
-                            color: Color(0xFF30B0C7),
-                          ),
-                          title: const Text("Help & Support"),
-                          trailing: const Icon(
-                            Icons.chevron_right,
-                            color: Colors.grey,
-                          ),
-                          onTap: () {
-                            // Navigate to help & support
-                          },
-                        ),
+                      const AppUpdateWidget(),
 
-                        const AppUpdateWidget(),
-
-                        ListTile(
-                          leading: const Icon(Icons.logout, color: Colors.red),
-                          title: const Text(
-                            "Log out",
-                            style: TextStyle(
-                              color: Colors.red,
-                              fontWeight: FontWeight.w500,
-                            ),
-                          ),
-                          onTap: _handleLogout,
+                      ListTile(
+                        leading: const Icon(
+                          Icons.logout,
+                          color: AppColors.error,
                         ),
-                      ],
-                    ),
+                        title: Text(
+                          "Log out",
+                          style: TextStyle(
+                            color: AppColors.error,
+                            fontWeight: FontWeight.w500,
+                          ),
+                        ),
+                        onTap: _handleLogout,
+                      ),
+                    ],
                   ),
 
                   const SizedBox(height: 30),
@@ -731,6 +745,30 @@ class _ProfileViewScreenState extends State<ProfileViewScreen> {
           );
         },
       ),
+    );
+  }
+
+  Widget _buildAccountListTile({
+    required IconData icon,
+    required String title,
+    required VoidCallback onTap,
+  }) {
+    final isDarkMode = Theme.of(context).brightness == Brightness.dark;
+
+    return ListTile(
+      leading: Icon(icon, color: AppColors.primary),
+      title: Text(
+        title,
+        style: TextStyle(
+          color: isDarkMode ? AppColors.textPrimaryDark : AppColors.textPrimary,
+        ),
+      ),
+      trailing: Icon(
+        Icons.chevron_right,
+        color:
+            isDarkMode ? AppColors.textSecondaryDark : AppColors.textSecondary,
+      ),
+      onTap: onTap,
     );
   }
 }

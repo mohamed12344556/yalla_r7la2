@@ -14,6 +14,8 @@ class ImagePickerOption extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    final colorScheme = theme.colorScheme;
     return GestureDetector(
       onTap: onTap,
       child: Column(
@@ -22,10 +24,10 @@ class ImagePickerOption extends StatelessWidget {
           Container(
             padding: const EdgeInsets.all(20),
             decoration: BoxDecoration(
-              color: Colors.blue.withOpacity(0.1),
+              color: colorScheme.primary.withOpacity(0.1),
               shape: BoxShape.circle,
             ),
-            child: Icon(icon, size: 30, color: Colors.blue),
+            child: Icon(icon, size: 30, color: colorScheme.primary),
           ),
           const SizedBox(height: 8),
           Text(
