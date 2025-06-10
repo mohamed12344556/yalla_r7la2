@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:yalla_r7la2/generated/l10n.dart';
 import '../../../../core/routes/routes.dart';
 import '../../../../core/utils/extensions.dart';
 
@@ -44,7 +45,7 @@ class _MyBookingsScreenState extends State<MyBookingsScreen>
     return Scaffold(
       backgroundColor: Colors.grey[50],
       appBar: BookingAppBar(
-        title: 'My Bookings',
+        title: S.of(context).My_Bookings,
         onBackPressed: () => context.pushNamed(Routes.host),
         onRefresh: () => context.read<BookingsCubit>().loadBookings(),
         bottom: BookingTabs(controller: _tabController),
@@ -63,7 +64,7 @@ class _MyBookingsScreenState extends State<MyBookingsScreen>
           content: Text(state.message),
           backgroundColor: Colors.red,
           action: SnackBarAction(
-            label: 'Retry',
+            label: S.of(context).Retry,
             textColor: Colors.white,
             onPressed: () => context.read<BookingsCubit>().loadBookings(),
           ),
@@ -71,15 +72,15 @@ class _MyBookingsScreenState extends State<MyBookingsScreen>
       );
     } else if (state is BookingCancelled) {
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(
-          content: Text('Booking cancelled successfully'),
+        SnackBar(
+          content: Text(S.of(context).Booking_cancelled_successfully),
           backgroundColor: Colors.orange,
         ),
       );
     } else if (state is BookingDeleted) {
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(
-          content: Text('Booking deleted successfully'),
+        SnackBar(
+          content: Text(S.of(context).Booking_deleted_successfully),
           backgroundColor: Colors.green,
         ),
       );
@@ -109,17 +110,17 @@ class _MyBookingsScreenState extends State<MyBookingsScreen>
         children: [
           BookingList(
             bookings: cubit.bookings,
-            tabName: 'All Bookings',
+            tabName: S.of(context).All_Bookings,
             onRefresh: () => context.read<BookingsCubit>().loadBookings(),
           ),
           BookingList(
             bookings: cubit.getUpcomingBookings(),
-            tabName: 'Upcoming Bookings',
+            tabName: S.of(context).Upcoming_Bookings,
             onRefresh: () => context.read<BookingsCubit>().loadBookings(),
           ),
           BookingList(
             bookings: cubit.getPastBookings(),
-            tabName: 'Past Bookings',
+            tabName: S.of(context).Past_Bookings,
             onRefresh: () => context.read<BookingsCubit>().loadBookings(),
           ),
         ],
@@ -127,8 +128,8 @@ class _MyBookingsScreenState extends State<MyBookingsScreen>
     }
 
     return BookingEmptyState(
-      message: 'Something went wrong',
-      subMessage: 'Please try again later',
+      message: S.of(context).Something_went_wrong_message,
+      subMessage: S.of(context).Please_try_again_later,
       icon: Icons.error,
       onActionPressed: () => Navigator.of(context).pushNamed(Routes.host),
     );

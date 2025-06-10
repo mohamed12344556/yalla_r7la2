@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import '../../../../../core/themes/booking_constants.dart';
+import '../../../../../generated/l10n.dart';
 import '../../../../home/data/model/destination_model.dart';
-
-
 
 class BookingFlightDetails extends StatelessWidget {
   final DestinationModel destination;
@@ -14,9 +13,9 @@ class BookingFlightDetails extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        const Text(
-          'Flight Details',
-          style: TextStyle(
+        Text(
+          S.of(context).Flight_Details,
+          style: const TextStyle(
             fontSize: 20,
             fontWeight: FontWeight.bold,
             color: Colors.black87,
@@ -41,26 +40,28 @@ class BookingFlightDetails extends StatelessWidget {
             children: [
               // Outbound Flight
               _buildFlightRoute(
-                'Outbound Flight',
+                S.of(context).Outbound_Flight,
                 'Cairo, Egypt',
-                destination.location ?? 'Unknown Location',
+                destination.location ?? S.of(context).Unknown_Location,
                 BookingConstants.defaultDepartureTime,
                 BookingConstants.defaultArrivalTime,
                 BookingConstants.defaultFlightDuration,
                 true,
+                context,
               ),
               const SizedBox(height: 24),
               const Divider(),
               const SizedBox(height: 24),
               // Return Flight
               _buildFlightRoute(
-                'Return Flight',
-                destination.location ?? 'Unknown Location',
+                S.of(context).Return_Flight,
+                destination.location ?? S.of(context).Unknown_Location,
                 'Cairo, Egypt',
                 BookingConstants.defaultReturnDepartureTime,
                 BookingConstants.defaultReturnArrivalTime,
                 BookingConstants.defaultFlightDuration,
                 false,
+                context,
               ),
             ],
           ),
@@ -77,6 +78,7 @@ class BookingFlightDetails extends StatelessWidget {
     String arriveTime,
     String duration,
     bool isOutbound,
+    BuildContext context,
   ) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -131,10 +133,7 @@ class BookingFlightDetails extends StatelessWidget {
                         color: Colors.blueAccent.withOpacity(0.3),
                       ),
                       Transform.rotate(
-                        angle:
-                            isOutbound
-                                ? 0
-                                : 3.14159, // Rotate 180 degrees for return
+                        angle: isOutbound ? 0 : 3.14159, // Rotate 180 degrees for return
                         child: const Icon(
                           Icons.flight,
                           color: Colors.blueAccent,
@@ -145,7 +144,7 @@ class BookingFlightDetails extends StatelessWidget {
                   ),
                   const SizedBox(height: 8),
                   Text(
-                    'Direct',
+                    S.of(context).Direct,
                     style: TextStyle(fontSize: 12, color: Colors.grey[600]),
                   ),
                 ],

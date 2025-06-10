@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:yalla_r7la2/generated/l10n.dart';
 
 class BookingBottomBar extends StatelessWidget {
   final double totalPrice;
@@ -39,7 +40,7 @@ class BookingBottomBar extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  'Total Price',
+                  S.of(context).Total_Price,
                   style: TextStyle(
                     fontSize: 14,
                     color: Colors.grey[600],
@@ -60,7 +61,7 @@ class BookingBottomBar extends StatelessWidget {
                       ),
                       TextSpan(
                         text:
-                            ' for $passengers ${passengers == 1 ? 'person' : 'people'}',
+                            ' ${S.of(context).for1} $passengers ${passengers == 1 ? S.of(context).person : S.of(context).people}',
                         style: TextStyle(
                           fontSize: 14,
                           color: Colors.grey[600],
@@ -104,14 +105,14 @@ class BookingBottomBar extends StatelessWidget {
                 ),
                 padding: const EdgeInsets.symmetric(horizontal: 24),
               ),
-              child: const Row(
+              child: Row(
                 mainAxisSize: MainAxisSize.min,
                 children: [
-                  Icon(Icons.payment, color: Colors.white, size: 20),
-                  SizedBox(width: 8),
+                  const Icon(Icons.payment, color: Colors.white, size: 20),
+                  const SizedBox(width: 8),
                   Text(
-                    'Proceed to Payment',
-                    style: TextStyle(
+                    S.of(context).Proceed_to_Payment,
+                    style: const TextStyle(
                       color: Colors.white,
                       fontSize: 16,
                       fontWeight: FontWeight.bold,

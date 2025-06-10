@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../../../../../generated/l10n.dart';
+
 const double kTabBarHeight = 48.0;
 
 class BookingTabs extends StatelessWidget implements PreferredSizeWidget {
@@ -16,7 +18,11 @@ class BookingTabs extends StatelessWidget implements PreferredSizeWidget {
       indicatorColor: Colors.blueAccent,
       indicatorWeight: 3,
       labelStyle: const TextStyle(fontWeight: FontWeight.bold),
-      tabs: const [Tab(text: 'All'), Tab(text: 'Upcoming'), Tab(text: 'Past')],
+      tabs: [
+        Tab(text: S.of(context).All_Bookings),
+        Tab(text: S.of(context).Upcoming_Bookings),
+        Tab(text: S.of(context).Past_Bookings),
+      ],
     );
   }
 

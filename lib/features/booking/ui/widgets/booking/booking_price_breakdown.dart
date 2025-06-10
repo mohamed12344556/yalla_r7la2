@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import '../../../../../core/utils/booking_utils.dart';
+import '../../../../../generated/l10n.dart'; // Import the localization file
 
 class BookingPriceBreakdown extends StatelessWidget {
   final double basePrice;
@@ -20,9 +21,9 @@ class BookingPriceBreakdown extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        const Text(
-          'Price Breakdown',
-          style: TextStyle(
+        Text(
+          S.of(context).Price_Breakdown,
+          style: const TextStyle(
             fontSize: 20,
             fontWeight: FontWeight.bold,
             color: Colors.black87,
@@ -39,13 +40,13 @@ class BookingPriceBreakdown extends StatelessWidget {
           child: Column(
             children: [
               _buildPriceRow(
-                'Base Price',
+                S.of(context).Base_Price,
                 '\$${basePrice.toStringAsFixed(0)} x $passengers ${BookingUtils.getPassengerText(passengers)}',
                 '\$${subtotal.toStringAsFixed(0)}',
               ),
               const SizedBox(height: 12),
               _buildPriceRow(
-                'Taxes & Fees',
+                S.of(context).Taxes_and_Fees,
                 '15%',
                 '\$${taxes.toStringAsFixed(0)}',
               ),
@@ -53,7 +54,7 @@ class BookingPriceBreakdown extends StatelessWidget {
               const Divider(),
               const SizedBox(height: 16),
               _buildPriceRow(
-                'Total Amount',
+                S.of(context).Total_Amount,
                 '',
                 '\$${totalPrice.toStringAsFixed(0)}',
                 isTotal: true,

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:yalla_r7la2/generated/l10n.dart';
 
 import '../../../../../core/utils/booking_utils.dart';
 
@@ -19,9 +20,9 @@ class BookingTravelDates extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        const Text(
-          'Travel Dates',
-          style: TextStyle(
+        Text(
+          S.of(context).Travel_Dates,
+          style: const TextStyle(
             fontSize: 20,
             fontWeight: FontWeight.bold,
             color: Colors.black87,
@@ -33,7 +34,7 @@ class BookingTravelDates extends StatelessWidget {
             Expanded(
               child: _buildDateCard(
                 context,
-                'Departure',
+                S.of(context).Departure,
                 selectedDate,
                 Icons.flight_takeoff,
                 () => _selectDate(context, true),
@@ -43,7 +44,7 @@ class BookingTravelDates extends StatelessWidget {
             Expanded(
               child: _buildDateCard(
                 context,
-                'Return',
+                S.of(context).Return,
                 returnDate,
                 Icons.flight_land,
                 () => _selectDate(context, false),

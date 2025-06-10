@@ -1,27 +1,28 @@
 import 'package:flutter/material.dart';
+import 'package:yalla_r7la2/generated/l10n.dart';
 import '../../../data/models/booking_models.dart';
 
 class BookingStatusHelper {
-  static Widget buildStatusChip(BookingStatus status) {
+  static Widget buildStatusChip(BuildContext context, BookingStatus status) {
     Color color;
     String text;
 
     switch (status) {
       case BookingStatus.confirmed:
         color = Colors.green;
-        text = 'Confirmed';
+        text = S.of(context).Confirmed;
         break;
       case BookingStatus.cancelled:
         color = Colors.red;
-        text = 'Cancelled';
+        text = S.of(context).Cancelled;
         break;
       case BookingStatus.completed:
         color = Colors.blue;
-        text = 'Completed';
+        text = S.of(context).Completed;
         break;
       case BookingStatus.pending:
         color = Colors.orange;
-        text = 'Pending';
+        text = S.of(context).Pending;
         break;
     }
 
@@ -55,16 +56,16 @@ class BookingStatusHelper {
     }
   }
 
-  static String getStatusText(BookingStatus status) {
+  static String getStatusText(BuildContext context, BookingStatus status) {
     switch (status) {
       case BookingStatus.confirmed:
-        return 'Confirmed';
+        return S.of(context).Confirmed;
       case BookingStatus.cancelled:
-        return 'Cancelled';
+        return S.of(context).Cancelled;
       case BookingStatus.completed:
-        return 'Completed';
+        return S.of(context).Completed;
       case BookingStatus.pending:
-        return 'Pending';
+        return S.of(context).Pending;
     }
   }
 }

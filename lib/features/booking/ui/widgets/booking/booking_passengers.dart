@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:yalla_r7la2/generated/l10n.dart';
 import '../../../../../core/themes/booking_constants.dart';
 
 class BookingPassengers extends StatelessWidget {
@@ -16,9 +17,9 @@ class BookingPassengers extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        const Text(
-          'Passengers',
-          style: TextStyle(
+        Text(
+          S.of(context).Passengers,
+          style: const TextStyle(
             fontSize: 20,
             fontWeight: FontWeight.bold,
             color: Colors.black87,
@@ -36,10 +37,10 @@ class BookingPassengers extends StatelessWidget {
             children: [
               const Icon(Icons.person, color: Colors.blueAccent, size: 24),
               const SizedBox(width: 12),
-              const Expanded(
+              Expanded(
                 child: Text(
-                  'Number of Passengers',
-                  style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
+                  S.of(context).Number_of_Passengers,
+                  style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
                 ),
               ),
               Row(

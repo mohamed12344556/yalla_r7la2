@@ -369,6 +369,586 @@ class S {
       args: [],
     );
   }
+
+  /// `Cancel Booking`
+  String get Cancel_Booking {
+    return Intl.message(
+      'Cancel Booking',
+      name: 'Cancel_Booking',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Are you sure you want to cancel your booking to`
+  String get Are_you_sure_cancel_booking {
+    return Intl.message(
+      'Are you sure you want to cancel your booking to',
+      name: 'Are_you_sure_cancel_booking',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `This action cannot be undone. You may be subject to cancellation fees.`
+  String get This_action_cannot_be_undone {
+    return Intl.message(
+      'This action cannot be undone. You may be subject to cancellation fees.',
+      name: 'This_action_cannot_be_undone',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Keep Booking`
+  String get Keep_Booking {
+    return Intl.message(
+      'Keep Booking',
+      name: 'Keep_Booking',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Delete Booking`
+  String get Delete_Booking {
+    return Intl.message(
+      'Delete Booking',
+      name: 'Delete_Booking',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Are you sure you want to permanently delete this booking record? This action cannot be undone.`
+  String get Are_you_sure_delete_booking {
+    return Intl.message(
+      'Are you sure you want to permanently delete this booking record? This action cannot be undone.',
+      name: 'Are_you_sure_delete_booking',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Cancel`
+  String get Cancel {
+    return Intl.message('Cancel', name: 'Cancel', desc: '', args: []);
+  }
+
+  /// `Delete`
+  String get Delete {
+    return Intl.message('Delete', name: 'Delete', desc: '', args: []);
+  }
+
+  /// `OK`
+  String get OK {
+    return Intl.message('OK', name: 'OK', desc: '', args: []);
+  }
+
+  /// `Retry`
+  String get Retry {
+    return Intl.message('Retry', name: 'Retry', desc: '', args: []);
+  }
+
+  /// `Confirmed`
+  String get Confirmed {
+    return Intl.message('Confirmed', name: 'Confirmed', desc: '', args: []);
+  }
+
+  /// `Cancelled`
+  String get Cancelled {
+    return Intl.message('Cancelled', name: 'Cancelled', desc: '', args: []);
+  }
+
+  /// `Completed`
+  String get Completed {
+    return Intl.message('Completed', name: 'Completed', desc: '', args: []);
+  }
+
+  /// `Pending`
+  String get Pending {
+    return Intl.message('Pending', name: 'Pending', desc: '', args: []);
+  }
+
+  /// `Total Price`
+  String get Total_Price {
+    return Intl.message('Total Price', name: 'Total_Price', desc: '', args: []);
+  }
+
+  /// `for`
+  String get for1 {
+    return Intl.message('for', name: 'for1', desc: '', args: []);
+  }
+
+  /// `person`
+  String get person {
+    return Intl.message('person', name: 'person', desc: '', args: []);
+  }
+
+  /// `people`
+  String get people {
+    return Intl.message('people', name: 'people', desc: '', args: []);
+  }
+
+  /// `Proceed to Payment`
+  String get Proceed_to_Payment {
+    return Intl.message(
+      'Proceed to Payment',
+      name: 'Proceed_to_Payment',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Unknown Location`
+  String get Unknown_Location {
+    return Intl.message(
+      'Unknown Location',
+      name: 'Unknown_Location',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `No description available`
+  String get No_description_available {
+    return Intl.message(
+      'No description available',
+      name: 'No_description_available',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Flight Details`
+  String get Flight_Details {
+    return Intl.message(
+      'Flight Details',
+      name: 'Flight_Details',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Outbound Flight`
+  String get Outbound_Flight {
+    return Intl.message(
+      'Outbound Flight',
+      name: 'Outbound_Flight',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Return Flight`
+  String get Return_Flight {
+    return Intl.message(
+      'Return Flight',
+      name: 'Return_Flight',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Direct`
+  String get Direct {
+    return Intl.message('Direct', name: 'Direct', desc: '', args: []);
+  }
+
+  /// `What's Included`
+  String get Whats_Included {
+    return Intl.message(
+      'What\'s Included',
+      name: 'Whats_Included',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Passengers`
+  String get Passengers {
+    return Intl.message('Passengers', name: 'Passengers', desc: '', args: []);
+  }
+
+  /// `Number of Passengers`
+  String get Number_of_Passengers {
+    return Intl.message(
+      'Number of Passengers',
+      name: 'Number_of_Passengers',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Price Breakdown`
+  String get Price_Breakdown {
+    return Intl.message(
+      'Price Breakdown',
+      name: 'Price_Breakdown',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Base Price`
+  String get Base_Price {
+    return Intl.message('Base Price', name: 'Base_Price', desc: '', args: []);
+  }
+
+  /// `Taxes & Fees`
+  String get Taxes_and_Fees {
+    return Intl.message(
+      'Taxes & Fees',
+      name: 'Taxes_and_Fees',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Total Amount`
+  String get Total_Amount {
+    return Intl.message(
+      'Total Amount',
+      name: 'Total_Amount',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Passenger`
+  String get Passenger {
+    return Intl.message('Passenger', name: 'Passenger', desc: '', args: []);
+  }
+
+  /// `Travel Dates`
+  String get Travel_Dates {
+    return Intl.message(
+      'Travel Dates',
+      name: 'Travel_Dates',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Departure`
+  String get Departure {
+    return Intl.message('Departure', name: 'Departure', desc: '', args: []);
+  }
+
+  /// `Return`
+  String get Return {
+    return Intl.message('Return', name: 'Return', desc: '', args: []);
+  }
+
+  /// `Loading...`
+  String get Loading {
+    return Intl.message('Loading...', name: 'Loading', desc: '', args: []);
+  }
+
+  /// `Something went wrong`
+  String get Something_went_wrong {
+    return Intl.message(
+      'Something went wrong',
+      name: 'Something_went_wrong',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Try Again`
+  String get Try_Again {
+    return Intl.message('Try Again', name: 'Try_Again', desc: '', args: []);
+  }
+
+  /// `Explore Destinations`
+  String get Explore_Destinations {
+    return Intl.message(
+      'Explore Destinations',
+      name: 'Explore_Destinations',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Monday`
+  String get Monday {
+    return Intl.message('Monday', name: 'Monday', desc: '', args: []);
+  }
+
+  /// `Tuesday`
+  String get Tuesday {
+    return Intl.message('Tuesday', name: 'Tuesday', desc: '', args: []);
+  }
+
+  /// `Wednesday`
+  String get Wednesday {
+    return Intl.message('Wednesday', name: 'Wednesday', desc: '', args: []);
+  }
+
+  /// `Thursday`
+  String get Thursday {
+    return Intl.message('Thursday', name: 'Thursday', desc: '', args: []);
+  }
+
+  /// `Friday`
+  String get Friday {
+    return Intl.message('Friday', name: 'Friday', desc: '', args: []);
+  }
+
+  /// `Saturday`
+  String get Saturday {
+    return Intl.message('Saturday', name: 'Saturday', desc: '', args: []);
+  }
+
+  /// `Sunday`
+  String get Sunday {
+    return Intl.message('Sunday', name: 'Sunday', desc: '', args: []);
+  }
+
+  /// `Book`
+  String get Book {
+    return Intl.message('Book', name: 'Book', desc: '', args: []);
+  }
+
+  /// `Booking Successful!`
+  String get Booking_Successful {
+    return Intl.message(
+      'Booking Successful!',
+      name: 'Booking_Successful',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Your booking has been confirmed for`
+  String get Your_booking_has_been_confirmed_for {
+    return Intl.message(
+      'Your booking has been confirmed for',
+      name: 'Your_booking_has_been_confirmed_for',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `slots remaining`
+  String get slots_remaining {
+    return Intl.message(
+      'slots remaining',
+      name: 'slots_remaining',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `View Bookings`
+  String get View_Bookings {
+    return Intl.message(
+      'View Bookings',
+      name: 'View_Bookings',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Done`
+  String get Done {
+    return Intl.message('Done', name: 'Done', desc: '', args: []);
+  }
+
+  /// `Booking Failed`
+  String get Booking_Failed {
+    return Intl.message(
+      'Booking Failed',
+      name: 'Booking_Failed',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Confirm Booking`
+  String get Confirm_Booking {
+    return Intl.message(
+      'Confirm Booking',
+      name: 'Confirm_Booking',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Destination`
+  String get Destination {
+    return Intl.message('Destination', name: 'Destination', desc: '', args: []);
+  }
+
+  /// `Confirm`
+  String get Confirm {
+    return Intl.message('Confirm', name: 'Confirm', desc: '', args: []);
+  }
+
+  /// `Booking...`
+  String get Booking {
+    return Intl.message('Booking...', name: 'Booking', desc: '', args: []);
+  }
+
+  /// `Already Booked`
+  String get Already_Booked {
+    return Intl.message(
+      'Already Booked',
+      name: 'Already_Booked',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `You have already booked this destination`
+  String get You_have_already_booked_this_destination {
+    return Intl.message(
+      'You have already booked this destination',
+      name: 'You_have_already_booked_this_destination',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Date Conflict`
+  String get Date_Conflict {
+    return Intl.message(
+      'Date Conflict',
+      name: 'Date_Conflict',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Your selected dates conflict with existing booking`
+  String get Your_selected_dates_conflict_with_existing_booking {
+    return Intl.message(
+      'Your selected dates conflict with existing booking',
+      name: 'Your_selected_dates_conflict_with_existing_booking',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `You have already booked`
+  String get You_have_already_booked {
+    return Intl.message(
+      'You have already booked',
+      name: 'You_have_already_booked',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Check your bookings to view details.`
+  String get Check_your_bookings_to_view_details {
+    return Intl.message(
+      'Check your bookings to view details.',
+      name: 'Check_your_bookings_to_view_details',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Bookmark feature coming soon!`
+  String get Bookmark_feature_coming_soon {
+    return Intl.message(
+      'Bookmark feature coming soon!',
+      name: 'Bookmark_feature_coming_soon',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `My Bookings`
+  String get My_Bookings {
+    return Intl.message('My Bookings', name: 'My_Bookings', desc: '', args: []);
+  }
+
+  /// `All Bookings`
+  String get All_Bookings {
+    return Intl.message(
+      'All Bookings',
+      name: 'All_Bookings',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Upcoming Bookings`
+  String get Upcoming_Bookings {
+    return Intl.message(
+      'Upcoming Bookings',
+      name: 'Upcoming_Bookings',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Past Bookings`
+  String get Past_Bookings {
+    return Intl.message(
+      'Past Bookings',
+      name: 'Past_Bookings',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Booking cancelled successfully`
+  String get Booking_cancelled_successfully {
+    return Intl.message(
+      'Booking cancelled successfully',
+      name: 'Booking_cancelled_successfully',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Booking deleted successfully`
+  String get Booking_deleted_successfully {
+    return Intl.message(
+      'Booking deleted successfully',
+      name: 'Booking_deleted_successfully',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Something went wrong`
+  String get Something_went_wrong_message {
+    return Intl.message(
+      'Something went wrong',
+      name: 'Something_went_wrong_message',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Please try again later`
+  String get Please_try_again_later {
+    return Intl.message(
+      'Please try again later',
+      name: 'Please_try_again_later',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Booking ID`
+  String get Booking_ID {
+    return Intl.message('Booking ID', name: 'Booking_ID', desc: '', args: []);
+  }
+
+  /// `Booked`
+  String get Booked {
+    return Intl.message('Booked', name: 'Booked', desc: '', args: []);
+  }
+
+  /// `Details`
+  String get Details {
+    return Intl.message('Details', name: 'Details', desc: '', args: []);
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

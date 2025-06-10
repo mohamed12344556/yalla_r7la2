@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import '../../../../home/data/model/destination_model.dart';
+import 'package:yalla_r7la2/generated/l10n.dart';
 
+import '../../../../home/data/model/destination_model.dart';
 
 class BookingDestinationInfo extends StatelessWidget {
   final DestinationModel destination;
@@ -9,6 +10,8 @@ class BookingDestinationInfo extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final localization = S.of(context);
+
     return Container(
       padding: const EdgeInsets.all(20),
       decoration: BoxDecoration(
@@ -44,7 +47,7 @@ class BookingDestinationInfo extends StatelessWidget {
                     ),
                     const SizedBox(height: 4),
                     Text(
-                      destination.location ?? 'Unknown Location',
+                      destination.location ?? localization.Unknown_Location,
                       style: TextStyle(
                         fontSize: 16,
                         color: Colors.grey[600],
@@ -89,7 +92,7 @@ class BookingDestinationInfo extends StatelessWidget {
           ),
           const SizedBox(height: 16),
           Text(
-            destination.description ?? 'No description available',
+            destination.description ?? localization.No_description_available,
             style: TextStyle(
               fontSize: 16,
               color: Colors.grey[700],

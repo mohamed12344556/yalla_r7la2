@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:yalla_r7la2/generated/l10n.dart';
+
 import '../../../data/models/booking_models.dart';
+import '../../logic/bookings_cubit.dart';
 import '../booking_dialogs.dart';
 import 'booking_date_helper.dart';
-import 'booking_status_helper.dart';
-
-import '../../logic/bookings_cubit.dart';
 import 'booking_details_sheet.dart';
+import 'booking_status_helper.dart';
 
 class BookingCard extends StatelessWidget {
   final BookingModel booking;
@@ -92,7 +93,7 @@ class BookingCard extends StatelessWidget {
                       ],
                     ),
                   ),
-                  BookingStatusHelper.buildStatusChip(booking.status),
+                  BookingStatusHelper.buildStatusChip(context, booking.status),
                 ],
               ),
             ],
@@ -112,7 +113,7 @@ class BookingCard extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Text(
-                'Booking ID: ${_truncateBookingId(booking.bookingId)}',
+                '${S.of(context).Booking_ID}: ${_truncateBookingId(booking.bookingId)}',
                 style: TextStyle(
                   fontSize: 12,
                   color: Colors.grey[600],
@@ -120,7 +121,7 @@ class BookingCard extends StatelessWidget {
                 ),
               ),
               Text(
-                'Booked: ${booking.formattedBookingDate}',
+                '${S.of(context).Booked}: ${booking.formattedBookingDate}',
                 style: TextStyle(fontSize: 12, color: Colors.grey[600]),
               ),
             ],
@@ -133,7 +134,7 @@ class BookingCard extends StatelessWidget {
             children: [
               Expanded(
                 child: BookingDateHelper.buildDateInfo(
-                  'Departure',
+                  S.of(context).Departure,
                   booking.formattedDepartureDate,
                   booking.departureTime,
                   Icons.flight_takeoff,
@@ -142,7 +143,7 @@ class BookingCard extends StatelessWidget {
               const SizedBox(width: 16),
               Expanded(
                 child: BookingDateHelper.buildDateInfo(
-                  'Return',
+                  S.of(context).Return,
                   booking.formattedReturnDate,
                   booking.returnArrivalTime,
                   Icons.flight_land,
@@ -162,7 +163,7 @@ class BookingCard extends StatelessWidget {
                   const Icon(Icons.person, size: 16, color: Colors.blueAccent),
                   const SizedBox(width: 4),
                   Text(
-                    '${booking.passengers} ${booking.passengers == 1 ? 'Passenger' : 'Passengers'}',
+                    '${booking.passengers} ${booking.passengers == 1 ? S.of(context).Passenger : S.of(context).Passengers}',
                     style: const TextStyle(
                       fontSize: 14,
                       fontWeight: FontWeight.w500,
@@ -198,7 +199,7 @@ class BookingCard extends StatelessWidget {
             child: OutlinedButton.icon(
               onPressed: () => _showCancelDialog(context),
               icon: const Icon(Icons.cancel, size: 16),
-              label: const Text('Cancel'),
+              label: Text(S.of(context).Cancel),
               style: OutlinedButton.styleFrom(
                 foregroundColor: Colors.orange,
                 side: const BorderSide(color: Colors.orange),
@@ -210,7 +211,7 @@ class BookingCard extends StatelessWidget {
             child: ElevatedButton.icon(
               onPressed: () => _showBookingDetails(context),
               icon: const Icon(Icons.info, size: 16),
-              label: const Text('Details'),
+              label: Text(S.of(context).Details),
               style: ElevatedButton.styleFrom(
                 backgroundColor: Colors.blueAccent,
                 foregroundColor: Colors.white,
@@ -227,7 +228,7 @@ class BookingCard extends StatelessWidget {
         child: OutlinedButton.icon(
           onPressed: () => _showDeleteDialog(context),
           icon: const Icon(Icons.delete, size: 16),
-          label: const Text('Delete'),
+          label: Text(S.of(context).Delete),
           style: OutlinedButton.styleFrom(
             foregroundColor: Colors.red,
             side: const BorderSide(color: Colors.red),

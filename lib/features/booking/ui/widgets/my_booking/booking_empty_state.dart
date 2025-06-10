@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:yalla_r7la2/generated/l10n.dart';
 
 class BookingEmptyState extends StatelessWidget {
   final String message;
   final String subMessage;
   final IconData icon;
   final VoidCallback? onActionPressed;
-  final String actionText;
+  final String? actionText;
 
   const BookingEmptyState({
     super.key,
@@ -13,7 +14,7 @@ class BookingEmptyState extends StatelessWidget {
     required this.subMessage,
     required this.icon,
     this.onActionPressed,
-    this.actionText = 'Explore Destinations',
+    this.actionText,
   });
 
   @override
@@ -58,7 +59,7 @@ class BookingEmptyState extends StatelessWidget {
                     ),
                     const SizedBox(width: 8),
                     Text(
-                      actionText,
+                      actionText ?? S.of(context).Explore_Destinations,
                       style: const TextStyle(
                         color: Colors.blueAccent,
                         fontWeight: FontWeight.w600,

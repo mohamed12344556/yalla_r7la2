@@ -25,18 +25,62 @@ class MessageLookup extends MessageLookupByLibrary {
     "Account_created_successfully": MessageLookupByLibrary.simpleMessage(
       "Account created successfully",
     ),
+    "All_Bookings": MessageLookupByLibrary.simpleMessage("All Bookings"),
+    "Already_Booked": MessageLookupByLibrary.simpleMessage("Already Booked"),
     "Already_have_account": MessageLookupByLibrary.simpleMessage(
       "Already have an account?",
     ),
+    "Are_you_sure_cancel_booking": MessageLookupByLibrary.simpleMessage(
+      "Are you sure you want to cancel your booking to",
+    ),
+    "Are_you_sure_delete_booking": MessageLookupByLibrary.simpleMessage(
+      "Are you sure you want to permanently delete this booking record? This action cannot be undone.",
+    ),
+    "Base_Price": MessageLookupByLibrary.simpleMessage("Base Price"),
+    "Book": MessageLookupByLibrary.simpleMessage("Book"),
+    "Booked": MessageLookupByLibrary.simpleMessage("Booked"),
+    "Booking": MessageLookupByLibrary.simpleMessage("Booking..."),
+    "Booking_Failed": MessageLookupByLibrary.simpleMessage("Booking Failed"),
+    "Booking_ID": MessageLookupByLibrary.simpleMessage("Booking ID"),
+    "Booking_Successful": MessageLookupByLibrary.simpleMessage(
+      "Booking Successful!",
+    ),
+    "Booking_cancelled_successfully": MessageLookupByLibrary.simpleMessage(
+      "Booking cancelled successfully",
+    ),
+    "Booking_deleted_successfully": MessageLookupByLibrary.simpleMessage(
+      "Booking deleted successfully",
+    ),
+    "Bookmark_feature_coming_soon": MessageLookupByLibrary.simpleMessage(
+      "Bookmark feature coming soon!",
+    ),
     "Camera": MessageLookupByLibrary.simpleMessage("Camera"),
+    "Cancel": MessageLookupByLibrary.simpleMessage("Cancel"),
+    "Cancel_Booking": MessageLookupByLibrary.simpleMessage("Cancel Booking"),
+    "Cancelled": MessageLookupByLibrary.simpleMessage("Cancelled"),
+    "Check_your_bookings_to_view_details": MessageLookupByLibrary.simpleMessage(
+      "Check your bookings to view details.",
+    ),
     "City": MessageLookupByLibrary.simpleMessage("City"),
+    "Completed": MessageLookupByLibrary.simpleMessage("Completed"),
+    "Confirm": MessageLookupByLibrary.simpleMessage("Confirm"),
+    "Confirm_Booking": MessageLookupByLibrary.simpleMessage("Confirm Booking"),
     "Confirm_New_Password": MessageLookupByLibrary.simpleMessage(
       "Confirm New Password",
     ),
     "Confirm_Password": MessageLookupByLibrary.simpleMessage(
       "Confirm Password",
     ),
+    "Confirmed": MessageLookupByLibrary.simpleMessage("Confirmed"),
+    "Date_Conflict": MessageLookupByLibrary.simpleMessage("Date Conflict"),
     "Date_of_Birth": MessageLookupByLibrary.simpleMessage("Date of Birth"),
+    "Delete": MessageLookupByLibrary.simpleMessage("Delete"),
+    "Delete_Booking": MessageLookupByLibrary.simpleMessage("Delete Booking"),
+    "Departure": MessageLookupByLibrary.simpleMessage("Departure"),
+    "Destination": MessageLookupByLibrary.simpleMessage("Destination"),
+    "Details": MessageLookupByLibrary.simpleMessage("Details"),
+    "Direct": MessageLookupByLibrary.simpleMessage("Direct"),
+    "Done": MessageLookupByLibrary.simpleMessage("Done"),
     "Dont_have_account": MessageLookupByLibrary.simpleMessage(
       "Don\'t have an account?",
     ),
@@ -44,15 +88,34 @@ class MessageLookup extends MessageLookupByLibrary {
     "Enter_email_and_new_password": MessageLookupByLibrary.simpleMessage(
       "Enter your email and new password to reset your account password",
     ),
+    "Explore_Destinations": MessageLookupByLibrary.simpleMessage(
+      "Explore Destinations",
+    ),
+    "Flight_Details": MessageLookupByLibrary.simpleMessage("Flight Details"),
     "Forgot_Password": MessageLookupByLibrary.simpleMessage("Forgot Password?"),
+    "Friday": MessageLookupByLibrary.simpleMessage("Friday"),
     "Full_Name": MessageLookupByLibrary.simpleMessage("Full Name"),
     "Gallery": MessageLookupByLibrary.simpleMessage("Gallery"),
+    "Keep_Booking": MessageLookupByLibrary.simpleMessage("Keep Booking"),
+    "Loading": MessageLookupByLibrary.simpleMessage("Loading..."),
     "Log_In": MessageLookupByLibrary.simpleMessage("Log In"),
     "Login": MessageLookupByLibrary.simpleMessage("Login"),
     "Login_successful": MessageLookupByLibrary.simpleMessage(
       "Login successful",
     ),
+    "Monday": MessageLookupByLibrary.simpleMessage("Monday"),
+    "My_Bookings": MessageLookupByLibrary.simpleMessage("My Bookings"),
     "New_Password": MessageLookupByLibrary.simpleMessage("New Password"),
+    "No_description_available": MessageLookupByLibrary.simpleMessage(
+      "No description available",
+    ),
+    "Number_of_Passengers": MessageLookupByLibrary.simpleMessage(
+      "Number of Passengers",
+    ),
+    "OK": MessageLookupByLibrary.simpleMessage("OK"),
+    "Outbound_Flight": MessageLookupByLibrary.simpleMessage("Outbound Flight"),
+    "Passenger": MessageLookupByLibrary.simpleMessage("Passenger"),
+    "Passengers": MessageLookupByLibrary.simpleMessage("Passengers"),
     "Password": MessageLookupByLibrary.simpleMessage("Password"),
     "Password_reset_successful": MessageLookupByLibrary.simpleMessage(
       "Password reset successful",
@@ -60,6 +123,8 @@ class MessageLookup extends MessageLookupByLibrary {
     "Passwords_do_not_match": MessageLookupByLibrary.simpleMessage(
       "Passwords do not match",
     ),
+    "Past_Bookings": MessageLookupByLibrary.simpleMessage("Past Bookings"),
+    "Pending": MessageLookupByLibrary.simpleMessage("Pending"),
     "Phone_Number": MessageLookupByLibrary.simpleMessage("Phone Number"),
     "Please_confirm_password": MessageLookupByLibrary.simpleMessage(
       "Please confirm your password",
@@ -73,6 +138,13 @@ class MessageLookup extends MessageLookupByLibrary {
     "Please_select_your_preferred_city": MessageLookupByLibrary.simpleMessage(
       "Please select your preferred city",
     ),
+    "Please_try_again_later": MessageLookupByLibrary.simpleMessage(
+      "Please try again later",
+    ),
+    "Price_Breakdown": MessageLookupByLibrary.simpleMessage("Price Breakdown"),
+    "Proceed_to_Payment": MessageLookupByLibrary.simpleMessage(
+      "Proceed to Payment",
+    ),
     "Push_Notifications": MessageLookupByLibrary.simpleMessage(
       "Push Notifications",
     ),
@@ -83,6 +155,10 @@ class MessageLookup extends MessageLookupByLibrary {
     "Reset_Your_Password": MessageLookupByLibrary.simpleMessage(
       "Reset Your Password",
     ),
+    "Retry": MessageLookupByLibrary.simpleMessage("Retry"),
+    "Return": MessageLookupByLibrary.simpleMessage("Return"),
+    "Return_Flight": MessageLookupByLibrary.simpleMessage("Return Flight"),
+    "Saturday": MessageLookupByLibrary.simpleMessage("Saturday"),
     "Select_Preferred_City": MessageLookupByLibrary.simpleMessage(
       "Select Preferred City",
     ),
@@ -93,12 +169,56 @@ class MessageLookup extends MessageLookupByLibrary {
     "Sign_in_to_your_account": MessageLookupByLibrary.simpleMessage(
       "Sign in to your account",
     ),
+    "Something_went_wrong": MessageLookupByLibrary.simpleMessage(
+      "Something went wrong",
+    ),
+    "Something_went_wrong_message": MessageLookupByLibrary.simpleMessage(
+      "Something went wrong",
+    ),
+    "Sunday": MessageLookupByLibrary.simpleMessage("Sunday"),
     "Tap_camera_icon_to_add": MessageLookupByLibrary.simpleMessage(
       "Tap the camera icon to add photo",
     ),
     "Tap_red_button_to_remove": MessageLookupByLibrary.simpleMessage(
       "Tap the red button to remove",
     ),
+    "Taxes_and_Fees": MessageLookupByLibrary.simpleMessage("Taxes & Fees"),
+    "This_action_cannot_be_undone": MessageLookupByLibrary.simpleMessage(
+      "This action cannot be undone. You may be subject to cancellation fees.",
+    ),
+    "Thursday": MessageLookupByLibrary.simpleMessage("Thursday"),
+    "Total_Amount": MessageLookupByLibrary.simpleMessage("Total Amount"),
+    "Total_Price": MessageLookupByLibrary.simpleMessage("Total Price"),
+    "Travel_Dates": MessageLookupByLibrary.simpleMessage("Travel Dates"),
+    "Try_Again": MessageLookupByLibrary.simpleMessage("Try Again"),
+    "Tuesday": MessageLookupByLibrary.simpleMessage("Tuesday"),
+    "Unknown_Location": MessageLookupByLibrary.simpleMessage(
+      "Unknown Location",
+    ),
+    "Upcoming_Bookings": MessageLookupByLibrary.simpleMessage(
+      "Upcoming Bookings",
+    ),
+    "View_Bookings": MessageLookupByLibrary.simpleMessage("View Bookings"),
+    "Wednesday": MessageLookupByLibrary.simpleMessage("Wednesday"),
     "Welcome_Back": MessageLookupByLibrary.simpleMessage("Welcome Back"),
+    "Whats_Included": MessageLookupByLibrary.simpleMessage("What\'s Included"),
+    "You_have_already_booked": MessageLookupByLibrary.simpleMessage(
+      "You have already booked",
+    ),
+    "You_have_already_booked_this_destination":
+        MessageLookupByLibrary.simpleMessage(
+          "You have already booked this destination",
+        ),
+    "Your_booking_has_been_confirmed_for": MessageLookupByLibrary.simpleMessage(
+      "Your booking has been confirmed for",
+    ),
+    "Your_selected_dates_conflict_with_existing_booking":
+        MessageLookupByLibrary.simpleMessage(
+          "Your selected dates conflict with existing booking",
+        ),
+    "for1": MessageLookupByLibrary.simpleMessage("for"),
+    "people": MessageLookupByLibrary.simpleMessage("people"),
+    "person": MessageLookupByLibrary.simpleMessage("person"),
+    "slots_remaining": MessageLookupByLibrary.simpleMessage("slots remaining"),
   };
 }

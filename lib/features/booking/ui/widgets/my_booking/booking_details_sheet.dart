@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
+
 import '../../../../../core/themes/booking_constants.dart';
 import '../../../data/models/booking_models.dart';
-
 import 'booking_date_helper.dart';
 import 'booking_status_helper.dart';
 
@@ -49,7 +49,7 @@ class BookingDetailsSheet extends StatelessWidget {
                   const SizedBox(height: 24),
                   _buildPriceBreakdown(),
                   const SizedBox(height: 24),
-                  _buildBookingInfo(),
+                  _buildBookingInfo(context),
                 ],
               ),
             ),
@@ -122,7 +122,7 @@ class BookingDetailsSheet extends StatelessWidget {
                   ),
                 ],
               ),
-              BookingStatusHelper.buildStatusChip(booking.status),
+              BookingStatusHelper.buildStatusChip(context, booking.status),
             ],
           ),
         ],
@@ -337,7 +337,7 @@ class BookingDetailsSheet extends StatelessWidget {
     );
   }
 
-  Widget _buildBookingInfo() {
+  Widget _buildBookingInfo(BuildContext context) {
     return _buildSection(
       title: 'Booking Information',
       child: Column(
@@ -356,7 +356,7 @@ class BookingDetailsSheet extends StatelessWidget {
           const SizedBox(height: 12),
           _buildInfoRow(
             'Status',
-            BookingStatusHelper.getStatusText(booking.status),
+            BookingStatusHelper.getStatusText(context, booking.status),
             Icons.info_outline,
           ),
         ],
