@@ -42,7 +42,7 @@ class BookingCard extends StatelessWidget {
           topRight: Radius.circular(16),
         ),
         image: DecorationImage(
-          image: MemoryImage(booking.imageBytes!),
+          image: NetworkImage(booking.imageUrl),
           fit: BoxFit.cover,
           onError: (exception, stackTrace) {
             // Handle image loading error

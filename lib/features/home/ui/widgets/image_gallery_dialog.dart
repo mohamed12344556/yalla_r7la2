@@ -1,9 +1,7 @@
-import 'dart:typed_data';
-
 import 'package:flutter/material.dart';
 
 class ImageGalleryDialog extends StatefulWidget {
-  final List<Uint8List> images; // Changed to Uint8List for memory images
+  final List<String> images; 
   final int initialIndex;
   final String destinationId;
   final ValueChanged<int>? onPageChanged;
@@ -52,7 +50,7 @@ class _ImageGalleryDialogState extends State<ImageGalleryDialog> {
                     tag: 'destination_${widget.destinationId}_$index',
                     child:
                         widget.images[index].isNotEmpty
-                            ? Image.memory(
+                            ? Image.network(
                               widget.images[index],
                               fit: BoxFit.contain,
                               errorBuilder: (context, error, stackTrace) {

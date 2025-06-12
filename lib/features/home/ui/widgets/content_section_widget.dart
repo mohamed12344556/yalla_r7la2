@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import '../../data/model/destination_model.dart';
-import 'image_thumbnails_widget.dart';
 
+import '../../data/model/destination_model.dart';
 import 'image_gallery_dialog.dart';
+import 'image_thumbnails_widget.dart';
 
 class ContentSectionWidget extends StatelessWidget {
   final DestinationModel card;
@@ -24,7 +24,7 @@ class ContentSectionWidget extends StatelessWidget {
       barrierColor: Colors.black,
       builder:
           (context) => ImageGalleryDialog(
-            images: card.allImageBytes, // Using memory bytes
+            images: card.imageUrls,
             initialIndex: currentImageIndex,
             destinationId: card.destinationId,
           ),
@@ -33,7 +33,7 @@ class ContentSectionWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final imageBytes = card.allImageBytes; // Using memory bytes
+    final imageBytes = card.imageUrls;
     final hasMultipleImages = imageBytes.length > 1;
 
     return Container(
@@ -168,7 +168,7 @@ class ContentSectionWidget extends StatelessWidget {
   }
 
   Widget _buildPhotoGalleryButton(BuildContext context) {
-    final imageBytes = card.allImageBytes;
+    final imageBytes = card.imageUrls;
     return Container(
       margin: const EdgeInsets.only(bottom: 24),
       child: InkWell(

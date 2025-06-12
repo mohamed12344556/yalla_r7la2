@@ -258,7 +258,7 @@ class DestinationRepo {
       final List<Future<DestinationImage>> imageFutures = [];
 
       for (final image in destination.images!) {
-        if (image.imageBase64.isEmpty) {
+        if (image.imageUrl.isEmpty) {
           // Create future for loading this image
           final future = _loadSingleImage(image);
           imageFutures.add(future);
@@ -272,7 +272,7 @@ class DestinationRepo {
       if (imageFutures.isNotEmpty) {
         final loadedImages = await Future.wait(imageFutures, eagerError: false);
         updatedImages.addAll(
-          loadedImages.where((img) => img.imageBase64.isNotEmpty),
+          loadedImages.where((img) => img.imageUrl.isNotEmpty),
         );
       }
 
@@ -295,7 +295,7 @@ class DestinationRepo {
       final imageData = await getImageById(originalImage.imageId);
       return DestinationImage(
         imageId: originalImage.imageId,
-        imageBase64: imageData,
+        imageUrl: imageData,
       );
     } catch (e) {
       print('Failed to load image ${originalImage.imageId}: $e');
@@ -355,7 +355,7 @@ class DestinationRepo {
     for (final destination in destinations) {
       if (destination.images != null) {
         for (final image in destination.images!) {
-          if (image.imageBase64.isEmpty) {
+          if (image.imageUrl.isEmpty) {
             imageIdsToLoad.add(image.imageId);
           }
         }
@@ -375,12 +375,11 @@ class DestinationRepo {
         final List<DestinationImage> updatedImages = [];
 
         for (final image in destination.images!) {
-          if (image.imageBase64.isEmpty &&
-              imageData.containsKey(image.imageId)) {
+          if (image.imageUrl.isEmpty && imageData.containsKey(image.imageId)) {
             updatedImages.add(
               DestinationImage(
                 imageId: image.imageId,
-                imageBase64: imageData[image.imageId]!,
+                imageUrl: imageData[image.imageId]!,
               ),
             );
           } else {

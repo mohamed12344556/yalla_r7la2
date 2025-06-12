@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+
 import '../../../favorites/ui/logic/favorites_cubit.dart';
 import '../../data/model/destination_model.dart';
-
 import 'image_gallery_dialog.dart';
 
 class ImageCarouselWidget extends StatelessWidget {
@@ -35,7 +35,7 @@ class ImageCarouselWidget extends StatelessWidget {
       barrierColor: Colors.black,
       builder:
           (context) => ImageGalleryDialog(
-            images: card.allImageBytes, // Using memory bytes
+            images: card.imageUrls,
             initialIndex: currentImageIndex,
             destinationId: card.destinationId,
           ),
@@ -44,7 +44,7 @@ class ImageCarouselWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final imageBytes = card.allImageBytes; // Using memory bytes
+    final imageBytes = card.imageUrls; // Using memory bytes
     final hasMultipleImages = imageBytes.length > 1;
 
     return SliverAppBar(
@@ -150,7 +150,7 @@ class ImageCarouselWidget extends StatelessWidget {
                     child: Container(
                       decoration: BoxDecoration(
                         image: DecorationImage(
-                          image: MemoryImage(
+                          image: NetworkImage(
                             imageBytes[index],
                           ), // Using Memory Image
                           fit: BoxFit.cover,

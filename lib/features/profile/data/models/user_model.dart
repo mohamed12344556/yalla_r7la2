@@ -31,8 +31,8 @@ class UserModel {
     String? imageDataString;
 
     // معالجة البيانات المختلفة للصورة
-    if (json['imageBase64'] != null) {
-      final imageValue = json['imageBase64'];
+    if (json['imageData'] != null) {
+      final imageValue = json['imageData'];
 
       if (imageValue is String) {
         imageDataString = imageValue;
@@ -78,7 +78,7 @@ class UserModel {
       'city': city,
       'age': age,
       'prefrance': preference,
-      'imageBase64': imageData,
+      'imageData': imageData,
       'phoneNumber': phoneNumber,
       'password': password,
       // لا نرسل imageBytes في JSON

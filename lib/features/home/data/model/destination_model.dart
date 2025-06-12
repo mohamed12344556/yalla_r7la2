@@ -1,6 +1,3 @@
-import 'dart:convert';
-import 'dart:typed_data';
-
 class DestinationModel {
   final String destinationId;
   final String name;
@@ -34,82 +31,23 @@ class DestinationModel {
     this.images,
   });
 
-  // Helper getters for UI display
   String get imageUrl {
     if (images != null && images!.isNotEmpty) {
-      final base64String = images!.first.imageBase64;
-      // Remove any data URL prefix if exists
-      final cleanBase64 =
-          base64String.startsWith('data:')
-              ? base64String.split(',').last
-              : base64String;
-      return 'data:image/jpeg;base64,$cleanBase64';
+      return images!.first.imageUrl;
     }
     return 'https://via.placeholder.com/400x300?text=No+Image';
   }
 
   List<String> get imageUrls {
     if (images != null && images!.isNotEmpty) {
-      return images!.map((img) {
-        final base64String = img.imageBase64;
-        // Remove any data URL prefix if exists
-        final cleanBase64 =
-            base64String.startsWith('data:')
-                ? base64String.split(',').last
-                : base64String;
-        return 'data:image/jpeg;base64,$cleanBase64';
-      }).toList();
+      return images!.map((img) => img.imageUrl).toList();
     }
     return ['https://via.placeholder.com/400x300?text=No+Image'];
-  }
-
-  // Get image as Uint8List for Image.memory()
-  Uint8List? get imageBytes {
-    if (images != null && images!.isNotEmpty) {
-      try {
-        final base64String = images!.first.imageBase64;
-        // Remove any data URL prefix if exists
-        final cleanBase64 =
-            base64String.startsWith('data:')
-                ? base64String.split(',').last
-                : base64String;
-        return base64Decode(cleanBase64);
-      } catch (e) {
-        print('Error decoding base64 image: $e');
-        return null;
-      }
-    }
-    return null;
-  }
-
-  // Get all images as Uint8List
-  List<Uint8List> get allImageBytes {
-    if (images != null && images!.isNotEmpty) {
-      return images!
-          .map((img) {
-            try {
-              final base64String = img.imageBase64;
-              // Remove any data URL prefix if exists
-              final cleanBase64 =
-                  base64String.startsWith('data:')
-                      ? base64String.split(',').last
-                      : base64String;
-              return base64Decode(cleanBase64);
-            } catch (e) {
-              print('Error decoding base64 image: $e');
-              return Uint8List(0);
-            }
-          })
-          .where((bytes) => bytes.isNotEmpty)
-          .toList();
-    }
-    return [];
   }
 
   double get rating => averageRating ?? 4.5;
   double get price => cost ?? 0.0;
 
-  // Get display category name
   String get displayCategory {
     if (category == null) return 'Tourism';
 
@@ -133,7 +71,6 @@ class DestinationModel {
     }
   }
 
-  // Helper for features
   List<String>? get features {
     List<String> featuresList = [];
 
@@ -146,7 +83,7 @@ class DestinationModel {
     }
 
     if (availableNumber != null && availableNumber! > 0) {
-      featuresList.add('${availableNumber!} Spots Available');
+      featuresList.add('$availableNumber Spots Available');
     }
 
     if (startDate != null && endDate != null) {
@@ -169,7 +106,6 @@ class DestinationModel {
     }
   }
 
-  // Factory for GetDestinationDetails response (full details)
   factory DestinationModel.fromJson(Map<String, dynamic> json) {
     return DestinationModel(
       destinationId: json['destinationId'] ?? '',
@@ -180,14 +116,11 @@ class DestinationModel {
       averageRating: json['averageRating']?.toDouble(),
       discount: json['discount']?.toDouble(),
       cost: json['cost']?.toDouble(),
-      availableNumber: json['avilableNumber'], // Keep API typo for consistency
+      availableNumber: json['availableNumber'],
       startDate:
           json['startDate'] != null ? DateTime.parse(json['startDate']) : null,
-      endDate:
-          json['endtDate'] != null
-              ? DateTime.parse(json['endtDate'])
-              : null, // Keep API typo for consistency
-      isAvailable: json['isAvelable'], // Keep API typo for consistency
+      endDate: json['endDate'] != null ? DateTime.parse(json['endDate']) : null,
+      isAvailable: json['isAvailable'],
       businessOwnerId: json['businessOwnerId'],
       images:
           json['images'] != null
@@ -198,7 +131,6 @@ class DestinationModel {
     );
   }
 
-  // Factory for GetAllDestinations response (limited fields, no imageData)
   factory DestinationModel.fromListJson(Map<String, dynamic> json) {
     return DestinationModel(
       destinationId: json['destinationId'] ?? '',
@@ -209,23 +141,15 @@ class DestinationModel {
       averageRating: json['averageRating']?.toDouble(),
       discount: json['discount']?.toDouble(),
       cost: json['cost']?.toDouble(),
-      // These fields are not present in list responses
-      availableNumber: null,
-      startDate: null,
-      endDate: null,
-      isAvailable: null,
-      businessOwnerId: null,
-      // For GetAllDestinations, images only contain imageId
       images:
           json['images'] != null
               ? (json['images'] as List)
-                  .map((img) => DestinationImage.fromJson(img))
+                  .map((img) => DestinationImage.fromListJson(img))
                   .toList()
               : null,
     );
   }
 
-  // Factory for GetByCategory response (includes imageData)
   factory DestinationModel.fromCategoryJson(Map<String, dynamic> json) {
     return DestinationModel(
       destinationId: json['destinationId'] ?? '',
@@ -236,13 +160,6 @@ class DestinationModel {
       averageRating: json['averageRating']?.toDouble(),
       discount: json['discount']?.toDouble(),
       cost: json['cost']?.toDouble(),
-      // These fields are not present in category responses
-      availableNumber: null,
-      startDate: null,
-      endDate: null,
-      isAvailable: null,
-      businessOwnerId: null,
-      // For GetByCategory, images contain both imageId and imageData
       images:
           json['images'] != null
               ? (json['images'] as List)
@@ -262,10 +179,10 @@ class DestinationModel {
       'averageRating': averageRating,
       'discount': discount,
       'cost': cost,
-      'avilableNumber': availableNumber,
+      'availableNumber': availableNumber,
       'startDate': startDate?.toIso8601String(),
-      'endtDate': endDate?.toIso8601String(),
-      'isAvelable': isAvailable,
+      'endDate': endDate?.toIso8601String(),
+      'isAvailable': isAvailable,
       'businessOwnerId': businessOwnerId,
       'images': images?.map((img) => img.toJson()).toList(),
     };
@@ -308,42 +225,25 @@ class DestinationModel {
 
 class DestinationImage {
   final String imageId;
-  final String imageBase64;
+  final String imageUrl;
 
-  DestinationImage({required this.imageId, required this.imageBase64});
+  DestinationImage({required this.imageId, required this.imageUrl});
 
-  // Get image as Uint8List for Image.memory()
-  Uint8List? get imageBytes {
-    try {
-      // Remove any data URL prefix if exists
-      final cleanBase64 =
-          imageBase64.startsWith('data:')
-              ? imageBase64.split(',').last
-              : imageBase64;
-      return base64Decode(cleanBase64);
-    } catch (e) {
-      print('Error decoding base64 image: $e');
-      return null;
-    }
-  }
-
-  // Factory for detailed responses (GetDestinationDetails, GetByCategory)
   factory DestinationImage.fromJson(Map<String, dynamic> json) {
     return DestinationImage(
       imageId: json['imageId'] ?? '',
-      imageBase64: json['imageData'] ?? '',
+      imageUrl: json['imagePath'] ?? '',
     );
   }
 
-  // Factory for list responses (GetAllDestinations) - no imageData included
   factory DestinationImage.fromListJson(Map<String, dynamic> json) {
     return DestinationImage(
       imageId: json['imageId'] ?? '',
-      imageBase64: '', // Empty as GetAllDestinations doesn't include imageData
+      imageUrl: json['imagePath'] ?? '',
     );
   }
 
   Map<String, dynamic> toJson() {
-    return {'imageId': imageId, 'imageData': imageBase64};
+    return {'imageId': imageId, 'imagePath': imageUrl};
   }
 }

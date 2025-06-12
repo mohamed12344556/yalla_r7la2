@@ -1,6 +1,3 @@
-import 'dart:convert';
-import 'dart:typed_data';
-
 import '../../../home/data/model/destination_model.dart';
 
 class BookingModel {
@@ -39,69 +36,6 @@ class BookingModel {
     this.returnDepartureTime = '16:00',
     this.returnArrivalTime = '22:00',
   });
-
-  // Helper getter for displaying base64 image
-  String get displayImageUrl {
-    // Check if imageUrl is already a base64 data URL
-    if (imageUrl.startsWith('data:image')) {
-      return imageUrl;
-    }
-
-    // Check if imageUrl is a base64 string without data URL prefix
-    if (_isBase64String(imageUrl)) {
-      return 'data:image/jpeg;base64,$imageUrl';
-    }
-
-    // Return original URL or placeholder
-    return imageUrl.isNotEmpty
-        ? imageUrl
-        : 'https://via.placeholder.com/400x300?text=No+Image';
-  }
-
-  // Get image as Uint8List for Image.memory()
-  Uint8List? get imageBytes {
-    try {
-      String base64String = imageUrl;
-
-      // Remove any data URL prefix if exists
-      if (base64String.startsWith('data:')) {
-        base64String = base64String.split(',').last;
-      }
-
-      // Check if it's a valid base64 string
-      if (_isBase64String(base64String)) {
-        return base64Decode(base64String);
-      }
-
-      return null;
-    } catch (e) {
-      print('Error decoding base64 image: $e');
-      return null;
-    }
-  }
-
-  // Helper method to check if string is base64
-  bool _isBase64String(String str) {
-    try {
-      // Basic check for base64 pattern
-      if (str.isEmpty) return false;
-
-      // Remove padding and check if length is valid
-      final withoutPadding = str.replaceAll('=', '');
-      if (withoutPadding.length % 4 == 1) return false;
-
-      // Try to decode to verify it's valid base64
-      base64Decode(str);
-      return true;
-    } catch (e) {
-      return false;
-    }
-  }
-
-  // Check if image is base64 format
-  bool get isBase64Image {
-    return _isBase64String(imageUrl) || imageUrl.startsWith('data:image');
-  }
 
   // Convert to JSON for storage
   Map<String, dynamic> toJson() {
@@ -170,7 +104,7 @@ class BookingModel {
       destinationId: destinationId,
       destinationName: destinationName,
       destinationLocation: destinationLocation,
-      imageUrl: imageUrl, // This will now support base64 images
+      imageUrl: imageUrl,
       price: price,
       passengers: passengers,
       departureDate: departureDate,
@@ -197,9 +131,7 @@ class BookingModel {
       destinationId: destination.destinationId,
       destinationName: destination.name,
       destinationLocation: destination.location ?? '',
-      imageUrl:
-          destination
-              .imageUrl, // This gets the base64 image from DestinationModel
+      imageUrl: destination.imageUrl,
       price: destination.price,
       passengers: passengers,
       departureDate: departureDate,

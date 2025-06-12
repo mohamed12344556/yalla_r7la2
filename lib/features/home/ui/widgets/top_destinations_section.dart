@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import '../../../../core/widgets/app_loading_indicator.dart';
 
+import '../../../../core/widgets/app_loading_indicator.dart';
 import '../../data/model/destination_model.dart';
 import '../logic/home_cubit.dart';
 import 'destination_card.dart';
@@ -117,9 +117,7 @@ class _TopDestinationsSectionState extends State<TopDestinationsSection> {
 
   Widget _buildDestinationsList(HomeState state) {
     return SizedBox(
-      height:
-          MediaQuery.of(context).size.height *
-          0.6, // Increased height for pagination
+      height: MediaQuery.of(context).size.height * 0.6,
       child: ListView.builder(
         controller: _scrollController,
         scrollDirection: Axis.vertical,

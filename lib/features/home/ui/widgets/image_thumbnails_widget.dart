@@ -3,7 +3,7 @@ import 'dart:typed_data';
 import 'package:flutter/material.dart';
 
 class ImageThumbnailsWidget extends StatelessWidget {
-  final List<Uint8List> images; // Changed to Uint8List for memory images
+  final List<String> images; // Changed to Uint8List for memory images
   final int currentImageIndex;
   final PageController pageController;
 
@@ -60,7 +60,7 @@ class ImageThumbnailsWidget extends StatelessWidget {
                 borderRadius: BorderRadius.circular(10),
                 child:
                     images[index].isNotEmpty
-                        ? Image.memory(
+                        ? Image.network(
                           images[index], // Using Memory Image
                           fit: BoxFit.cover,
                           errorBuilder: (context, error, stackTrace) {

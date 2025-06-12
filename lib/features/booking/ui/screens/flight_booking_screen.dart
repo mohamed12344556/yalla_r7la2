@@ -1,17 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+
 import '../../../../core/routes/routes.dart';
 import '../../../../core/utils/extensions.dart';
+import '../../../home/data/model/destination_model.dart';
 import '../../data/models/booking_models.dart';
+import '../logic/bookings_cubit.dart';
 import '../widgets/booking/booking_destination_info.dart';
 import '../widgets/booking/booking_flight_details.dart';
 import '../widgets/booking/booking_included_features.dart';
 import '../widgets/booking/booking_passengers.dart';
 import '../widgets/booking/booking_price_breakdown.dart';
 import '../widgets/booking/booking_travel_dates.dart';
-
-import '../../../home/data/model/destination_model.dart';
-import '../logic/bookings_cubit.dart';
 
 class FlightBookingScreen extends StatefulWidget {
   final DestinationModel destination;
@@ -85,15 +85,10 @@ class _FlightBookingScreenState extends State<FlightBookingScreen>
       widget.destination.destinationId,
     );
 
-    if (isAlreadyBooked) {
-      WidgetsBinding.instance.addPostFrameCallback((_) {
-        _showAlreadyBookedDialog();
-      });
-    }
-    // final cubit = context.read<BookingsCubit>();
-    // final already = cubit.isDestinationBooked(widget.destination.destinationId);
-    // if (already) {
-    //   _showAlreadyBookedDialog();
+    // if (isAlreadyBooked) {
+    //   WidgetsBinding.instance.addPostFrameCallback((_) {
+    //     _showAlreadyBookedDialog();
+    //   });
     // }
   }
 
@@ -273,7 +268,7 @@ class _FlightBookingScreenState extends State<FlightBookingScreen>
               child: Container(
                 decoration: BoxDecoration(
                   image: DecorationImage(
-                    image: MemoryImage(widget.destination.imageBytes!),
+                    image: NetworkImage(widget.destination.imageUrl),
                     fit: BoxFit.cover,
                   ),
                 ),

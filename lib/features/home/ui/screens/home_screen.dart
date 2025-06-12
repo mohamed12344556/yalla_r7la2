@@ -116,12 +116,6 @@ class _HomeScreenState extends State<HomeScreen> {
                             context.read<HomeCubit>().searchDestinations(query);
                           }
                         },
-                        // onImageSearch: (imageResult) {
-                        //   // Handle image search result
-                        //   context
-                        //       .read<HomeCubit>()
-                        //       .searchDestinationsByImageResult(imageResult);
-                        // },
                       ),
                     ),
 

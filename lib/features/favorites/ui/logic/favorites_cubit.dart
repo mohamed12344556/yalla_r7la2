@@ -112,7 +112,7 @@ class FavoritesCubit extends Cubit<FavoritesState> {
               ?.map(
                 (img) => {
                   'imageId': img.imageId,
-                  'imageBase64': img.imageBase64,
+                  'imageBase64': img.imageUrl,
                 },
               )
               .toList(),
@@ -141,7 +141,7 @@ class FavoritesCubit extends Cubit<FavoritesState> {
                   .map(
                     (img) => DestinationImage(
                       imageId: img['imageId'] ?? '',
-                      imageBase64: img['imageBase64'] ?? '',
+                      imageUrl: img['imageBase64'] ?? '',
                     ),
                   )
                   .toList()

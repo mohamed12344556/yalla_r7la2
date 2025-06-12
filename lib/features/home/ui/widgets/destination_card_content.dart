@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import '../../../favorites/ui/logic/favorites_cubit.dart';
 
+import '../../../favorites/ui/logic/favorites_cubit.dart';
 import '../../data/model/category_model.dart';
 import '../../data/model/destination_model.dart';
 
@@ -249,10 +249,10 @@ class DestinationCardContent extends StatelessWidget {
 
   Widget _buildImageWidget() {
     // Use imageBytes getter from DestinationModel
-    final imageBytes = cardData.imageBytes;
+    final imageBytes = cardData.imageUrl;
 
-    if (imageBytes != null && imageBytes.isNotEmpty) {
-      return Image.memory(
+    if (imageBytes.isNotEmpty) {
+      return Image.network(
         imageBytes,
         width: double.infinity,
         height: double.infinity,

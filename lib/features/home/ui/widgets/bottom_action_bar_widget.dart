@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+
 import '../../../../core/routes/routes.dart';
 import '../../../favorites/ui/logic/favorites_cubit.dart';
-
 import '../../data/model/destination_model.dart';
 
 class BottomActionBarWidget extends StatelessWidget {
