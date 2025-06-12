@@ -949,14 +949,549 @@ class S {
     return Intl.message('Details', name: 'Details', desc: '', args: []);
   }
 
-  /// ` Your AI assistant is ready to help`
+  /// `Your AI assistant is ready to help`
   String get ai_assistant {
     return Intl.message(
-      ' Your AI assistant is ready to help',
+      'Your AI assistant is ready to help',
       name: 'ai_assistant',
       desc: '',
       args: [],
     );
+  }
+
+  /// `My Favorites`
+  String get favoritesTitle {
+    return Intl.message(
+      'My Favorites',
+      name: 'favoritesTitle',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Location`
+  String get homeLocationLabel {
+    return Intl.message(
+      'Location',
+      name: 'homeLocationLabel',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Welcome to Yalla R7la!`
+  String get homeWelcomeTitle {
+    return Intl.message(
+      'Welcome to Yalla R7la!',
+      name: 'homeWelcomeTitle',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `No favorites yet`
+  String get noFavoritesYet {
+    return Intl.message(
+      'No favorites yet',
+      name: 'noFavoritesYet',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Add some destinations to your favorites`
+  String get addFavoritesPrompt {
+    return Intl.message(
+      'Add some destinations to your favorites',
+      name: 'addFavoritesPrompt',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Language`
+  String get Language {
+    return Intl.message('Language', name: 'Language', desc: '', args: []);
+  }
+
+  /// `English`
+  String get English {
+    return Intl.message('English', name: 'English', desc: '', args: []);
+  }
+
+  /// `Arabic`
+  String get Arabic {
+    return Intl.message('Arabic', name: 'Arabic', desc: '', args: []);
+  }
+
+  /// `Log Out`
+  String get LogOut {
+    return Intl.message('Log Out', name: 'LogOut', desc: '', args: []);
+  }
+
+  /// `Clear`
+  String get Clear {
+    return Intl.message('Clear', name: 'Clear', desc: '', args: []);
+  }
+
+  /// `Search results`
+  String get searchResults {
+    return Intl.message(
+      'Search results',
+      name: 'searchResults',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Added to favorites`
+  String get addedToFavorites {
+    return Intl.message(
+      'Added to favorites',
+      name: 'addedToFavorites',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Removed from favorites`
+  String get removedFromFavorites {
+    return Intl.message(
+      'Removed from favorites',
+      name: 'removedFromFavorites',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Home`
+  String get homeTabLabel {
+    return Intl.message('Home', name: 'homeTabLabel', desc: '', args: []);
+  }
+
+  /// `Favorites`
+  String get favoritesTabLabel {
+    return Intl.message(
+      'Favorites',
+      name: 'favoritesTabLabel',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Bookings`
+  String get bookingsTabLabel {
+    return Intl.message(
+      'Bookings',
+      name: 'bookingsTabLabel',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Chat`
+  String get chatTabLabel {
+    return Intl.message('Chat', name: 'chatTabLabel', desc: '', args: []);
+  }
+
+  /// `Profile`
+  String get profileTabLabel {
+    return Intl.message('Profile', name: 'profileTabLabel', desc: '', args: []);
+  }
+
+  /// `1/2`
+  String get imageCounter {
+    return Intl.message('1/2', name: 'imageCounter', desc: '', args: []);
+  }
+
+  /// `Search destinations...`
+  String get searchHint {
+    return Intl.message(
+      'Search destinations...',
+      name: 'searchHint',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Categories`
+  String get categoriesLabel {
+    return Intl.message(
+      'Categories',
+      name: 'categoriesLabel',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `See All`
+  String get seeAllButton {
+    return Intl.message('See All', name: 'seeAllButton', desc: '', args: []);
+  }
+
+  /// `AI Search`
+  String get aiSearchTitle {
+    return Intl.message('AI Search', name: 'aiSearchTitle', desc: '', args: []);
+  }
+
+  /// `Upload an image and add description to find similar destinations`
+  String get aiSearchDescription {
+    return Intl.message(
+      'Upload an image and add description to find similar destinations',
+      name: 'aiSearchDescription',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Tap to add image`
+  String get addImagePrompt {
+    return Intl.message(
+      'Tap to add image',
+      name: 'addImagePrompt',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Describe what you're looking for...`
+  String get aiSearchTextHint {
+    return Intl.message(
+      'Describe what you\'re looking for...',
+      name: 'aiSearchTextHint',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Search with AI`
+  String get searchWithAIButton {
+    return Intl.message(
+      'Search with AI',
+      name: 'searchWithAIButton',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Select Image Source`
+  String get selectImageSourceTitle {
+    return Intl.message(
+      'Select Image Source',
+      name: 'selectImageSourceTitle',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Gallery`
+  String get galleryOption {
+    return Intl.message('Gallery', name: 'galleryOption', desc: '', args: []);
+  }
+
+  /// `Camera`
+  String get cameraOption {
+    return Intl.message('Camera', name: 'cameraOption', desc: '', args: []);
+  }
+
+  /// `Error picking image`
+  String get errorPickingImage {
+    return Intl.message(
+      'Error picking image',
+      name: 'errorPickingImage',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Searching for`
+  String get searchingFor {
+    return Intl.message(
+      'Searching for',
+      name: 'searchingFor',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Search failed`
+  String get searchFailed {
+    return Intl.message(
+      'Search failed',
+      name: 'searchFailed',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Top Trips`
+  String get topTripsLabel {
+    return Intl.message('Top Trips', name: 'topTripsLabel', desc: '', args: []);
+  }
+
+  /// `trips`
+  String get tripsCount {
+    return Intl.message('trips', name: 'tripsCount', desc: '', args: []);
+  }
+
+  /// `Loading more destinations...`
+  String get loadingMoreDestinations {
+    return Intl.message(
+      'Loading more destinations...',
+      name: 'loadingMoreDestinations',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `No trips found`
+  String get noTripsFound {
+    return Intl.message(
+      'No trips found',
+      name: 'noTripsFound',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Try selecting a different category or refresh`
+  String get noTripsFoundPrompt {
+    return Intl.message(
+      'Try selecting a different category or refresh',
+      name: 'noTripsFoundPrompt',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Page 1`
+  String get pageInfo {
+    return Intl.message('Page 1', name: 'pageInfo', desc: '', args: []);
+  }
+
+  /// `Load More`
+  String get loadMoreButton {
+    return Intl.message(
+      'Load More',
+      name: 'loadMoreButton',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Loading...`
+  String get loadingLabel {
+    return Intl.message('Loading...', name: 'loadingLabel', desc: '', args: []);
+  }
+
+  /// `Refresh`
+  String get refreshButton {
+    return Intl.message('Refresh', name: 'refreshButton', desc: '', args: []);
+  }
+
+  /// `Image failed to load`
+  String get imageFailedToLoad {
+    return Intl.message(
+      'Image failed to load',
+      name: 'imageFailedToLoad',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `No Image Available`
+  String get noImageAvailable {
+    return Intl.message(
+      'No Image Available',
+      name: 'noImageAvailable',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `/person`
+  String get perPerson {
+    return Intl.message('/person', name: 'perPerson', desc: '', args: []);
+  }
+
+  /// `spots available`
+  String get spotsAvailable {
+    return Intl.message(
+      'spots available',
+      name: 'spotsAvailable',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Price on request`
+  String get priceOnRequest {
+    return Intl.message(
+      'Price on request',
+      name: 'priceOnRequest',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `% OFF`
+  String get discountBadge {
+    return Intl.message('% OFF', name: 'discountBadge', desc: '', args: []);
+  }
+
+  /// `POPULAR`
+  String get popularBadge {
+    return Intl.message('POPULAR', name: 'popularBadge', desc: '', args: []);
+  }
+
+  /// `Added to favorites!`
+  String get addedToFavoritesWithExclamation {
+    return Intl.message(
+      'Added to favorites!',
+      name: 'addedToFavoritesWithExclamation',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Removed from favorites!`
+  String get removedFromFavoritesWithExclamation {
+    return Intl.message(
+      'Removed from favorites!',
+      name: 'removedFromFavoritesWithExclamation',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `View All`
+  String get viewAllFavorites {
+    return Intl.message(
+      'View All',
+      name: 'viewAllFavorites',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Error loading destination`
+  String get errorLoadingDestination {
+    return Intl.message(
+      'Error loading destination',
+      name: 'errorLoadingDestination',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `No destination data found`
+  String get noDestinationDataFound {
+    return Intl.message(
+      'No destination data found',
+      name: 'noDestinationDataFound',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `View Photo Gallery`
+  String get viewPhotoGallery {
+    return Intl.message(
+      'View Photo Gallery',
+      name: 'viewPhotoGallery',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `photos available`
+  String get photosAvailable {
+    return Intl.message(
+      'photos available',
+      name: 'photosAvailable',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Starting Price`
+  String get startingPrice {
+    return Intl.message(
+      'Starting Price',
+      name: 'startingPrice',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `About This Destination`
+  String get aboutThisDestination {
+    return Intl.message(
+      'About This Destination',
+      name: 'aboutThisDestination',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `What's Included`
+  String get whatsIncluded {
+    return Intl.message(
+      'What\'s Included',
+      name: 'whatsIncluded',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Location`
+  String get location {
+    return Intl.message('Location', name: 'location', desc: '', args: []);
+  }
+
+  /// `Interactive Map`
+  String get interactiveMap {
+    return Intl.message(
+      'Interactive Map',
+      name: 'interactiveMap',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Coming Soon`
+  String get comingSoon {
+    return Intl.message('Coming Soon', name: 'comingSoon', desc: '', args: []);
+  }
+
+  /// `View`
+  String get viewMap {
+    return Intl.message('View', name: 'viewMap', desc: '', args: []);
+  }
+
+  /// `Discover this amazing destination with breathtaking views and unforgettable experiences. Perfect for travelers seeking adventure and natural beauty.`
+  String get defaultDescription {
+    return Intl.message(
+      'Discover this amazing destination with breathtaking views and unforgettable experiences. Perfect for travelers seeking adventure and natural beauty.',
+      name: 'defaultDescription',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Destination`
+  String get defaultDestination {
+    return Intl.message(
+      'Destination',
+      name: 'defaultDestination',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Book Now`
+  String get bookNow {
+    return Intl.message('Book Now', name: 'bookNow', desc: '', args: []);
   }
 }
 

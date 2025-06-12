@@ -30,6 +30,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "Already_have_account": MessageLookupByLibrary.simpleMessage(
       "Already have an account?",
     ),
+    "Arabic": MessageLookupByLibrary.simpleMessage("Arabic"),
     "Are_you_sure_cancel_booking": MessageLookupByLibrary.simpleMessage(
       "Are you sure you want to cancel your booking to",
     ),
@@ -62,6 +63,7 @@ class MessageLookup extends MessageLookupByLibrary {
       "Check your bookings to view details.",
     ),
     "City": MessageLookupByLibrary.simpleMessage("City"),
+    "Clear": MessageLookupByLibrary.simpleMessage("Clear"),
     "Completed": MessageLookupByLibrary.simpleMessage("Completed"),
     "Confirm": MessageLookupByLibrary.simpleMessage("Confirm"),
     "Confirm_Booking": MessageLookupByLibrary.simpleMessage("Confirm Booking"),
@@ -85,6 +87,7 @@ class MessageLookup extends MessageLookupByLibrary {
       "Don\'t have an account?",
     ),
     "Email": MessageLookupByLibrary.simpleMessage("Email"),
+    "English": MessageLookupByLibrary.simpleMessage("English"),
     "Enter_email_and_new_password": MessageLookupByLibrary.simpleMessage(
       "Enter your email and new password to reset your account password",
     ),
@@ -97,7 +100,9 @@ class MessageLookup extends MessageLookupByLibrary {
     "Full_Name": MessageLookupByLibrary.simpleMessage("Full Name"),
     "Gallery": MessageLookupByLibrary.simpleMessage("Gallery"),
     "Keep_Booking": MessageLookupByLibrary.simpleMessage("Keep Booking"),
+    "Language": MessageLookupByLibrary.simpleMessage("Language"),
     "Loading": MessageLookupByLibrary.simpleMessage("Loading..."),
+    "LogOut": MessageLookupByLibrary.simpleMessage("Log Out"),
     "Log_In": MessageLookupByLibrary.simpleMessage("Log In"),
     "Login": MessageLookupByLibrary.simpleMessage("Login"),
     "Login_successful": MessageLookupByLibrary.simpleMessage(
@@ -216,12 +221,115 @@ class MessageLookup extends MessageLookupByLibrary {
         MessageLookupByLibrary.simpleMessage(
           "Your selected dates conflict with existing booking",
         ),
-    "ai_assistant": MessageLookupByLibrary.simpleMessage(
-      " Your AI assistant is ready to help",
+    "aboutThisDestination": MessageLookupByLibrary.simpleMessage(
+      "About This Destination",
     ),
+    "addFavoritesPrompt": MessageLookupByLibrary.simpleMessage(
+      "Add some destinations to your favorites",
+    ),
+    "addImagePrompt": MessageLookupByLibrary.simpleMessage("Tap to add image"),
+    "addedToFavorites": MessageLookupByLibrary.simpleMessage(
+      "Added to favorites",
+    ),
+    "addedToFavoritesWithExclamation": MessageLookupByLibrary.simpleMessage(
+      "Added to favorites!",
+    ),
+    "aiSearchDescription": MessageLookupByLibrary.simpleMessage(
+      "Upload an image and add description to find similar destinations",
+    ),
+    "aiSearchTextHint": MessageLookupByLibrary.simpleMessage(
+      "Describe what you\'re looking for...",
+    ),
+    "aiSearchTitle": MessageLookupByLibrary.simpleMessage("AI Search"),
+    "ai_assistant": MessageLookupByLibrary.simpleMessage(
+      "Your AI assistant is ready to help",
+    ),
+    "bookNow": MessageLookupByLibrary.simpleMessage("Book Now"),
+    "bookingsTabLabel": MessageLookupByLibrary.simpleMessage("Bookings"),
+    "cameraOption": MessageLookupByLibrary.simpleMessage("Camera"),
+    "categoriesLabel": MessageLookupByLibrary.simpleMessage("Categories"),
+    "chatTabLabel": MessageLookupByLibrary.simpleMessage("Chat"),
+    "comingSoon": MessageLookupByLibrary.simpleMessage("Coming Soon"),
+    "defaultDescription": MessageLookupByLibrary.simpleMessage(
+      "Discover this amazing destination with breathtaking views and unforgettable experiences. Perfect for travelers seeking adventure and natural beauty.",
+    ),
+    "defaultDestination": MessageLookupByLibrary.simpleMessage("Destination"),
+    "discountBadge": MessageLookupByLibrary.simpleMessage("% OFF"),
+    "errorLoadingDestination": MessageLookupByLibrary.simpleMessage(
+      "Error loading destination",
+    ),
+    "errorPickingImage": MessageLookupByLibrary.simpleMessage(
+      "Error picking image",
+    ),
+    "favoritesTabLabel": MessageLookupByLibrary.simpleMessage("Favorites"),
+    "favoritesTitle": MessageLookupByLibrary.simpleMessage("My Favorites"),
     "for1": MessageLookupByLibrary.simpleMessage("for"),
+    "galleryOption": MessageLookupByLibrary.simpleMessage("Gallery"),
+    "homeLocationLabel": MessageLookupByLibrary.simpleMessage("Location"),
+    "homeTabLabel": MessageLookupByLibrary.simpleMessage("Home"),
+    "homeWelcomeTitle": MessageLookupByLibrary.simpleMessage(
+      "Welcome to Yalla R7la!",
+    ),
+    "imageCounter": MessageLookupByLibrary.simpleMessage("1/2"),
+    "imageFailedToLoad": MessageLookupByLibrary.simpleMessage(
+      "Image failed to load",
+    ),
+    "interactiveMap": MessageLookupByLibrary.simpleMessage("Interactive Map"),
+    "loadMoreButton": MessageLookupByLibrary.simpleMessage("Load More"),
+    "loadingLabel": MessageLookupByLibrary.simpleMessage("Loading..."),
+    "loadingMoreDestinations": MessageLookupByLibrary.simpleMessage(
+      "Loading more destinations...",
+    ),
+    "location": MessageLookupByLibrary.simpleMessage("Location"),
+    "noDestinationDataFound": MessageLookupByLibrary.simpleMessage(
+      "No destination data found",
+    ),
+    "noFavoritesYet": MessageLookupByLibrary.simpleMessage("No favorites yet"),
+    "noImageAvailable": MessageLookupByLibrary.simpleMessage(
+      "No Image Available",
+    ),
+    "noTripsFound": MessageLookupByLibrary.simpleMessage("No trips found"),
+    "noTripsFoundPrompt": MessageLookupByLibrary.simpleMessage(
+      "Try selecting a different category or refresh",
+    ),
+    "pageInfo": MessageLookupByLibrary.simpleMessage("Page 1"),
     "people": MessageLookupByLibrary.simpleMessage("people"),
+    "perPerson": MessageLookupByLibrary.simpleMessage("/person"),
     "person": MessageLookupByLibrary.simpleMessage("person"),
+    "photosAvailable": MessageLookupByLibrary.simpleMessage("photos available"),
+    "popularBadge": MessageLookupByLibrary.simpleMessage("POPULAR"),
+    "priceOnRequest": MessageLookupByLibrary.simpleMessage("Price on request"),
+    "profileTabLabel": MessageLookupByLibrary.simpleMessage("Profile"),
+    "refreshButton": MessageLookupByLibrary.simpleMessage("Refresh"),
+    "removedFromFavorites": MessageLookupByLibrary.simpleMessage(
+      "Removed from favorites",
+    ),
+    "removedFromFavoritesWithExclamation": MessageLookupByLibrary.simpleMessage(
+      "Removed from favorites!",
+    ),
+    "searchFailed": MessageLookupByLibrary.simpleMessage("Search failed"),
+    "searchHint": MessageLookupByLibrary.simpleMessage(
+      "Search destinations...",
+    ),
+    "searchResults": MessageLookupByLibrary.simpleMessage("Search results"),
+    "searchWithAIButton": MessageLookupByLibrary.simpleMessage(
+      "Search with AI",
+    ),
+    "searchingFor": MessageLookupByLibrary.simpleMessage("Searching for"),
+    "seeAllButton": MessageLookupByLibrary.simpleMessage("See All"),
+    "selectImageSourceTitle": MessageLookupByLibrary.simpleMessage(
+      "Select Image Source",
+    ),
     "slots_remaining": MessageLookupByLibrary.simpleMessage("slots remaining"),
+    "spotsAvailable": MessageLookupByLibrary.simpleMessage("spots available"),
+    "startingPrice": MessageLookupByLibrary.simpleMessage("Starting Price"),
+    "topTripsLabel": MessageLookupByLibrary.simpleMessage("Top Trips"),
+    "tripsCount": MessageLookupByLibrary.simpleMessage("trips"),
+    "viewAllFavorites": MessageLookupByLibrary.simpleMessage("View All"),
+    "viewMap": MessageLookupByLibrary.simpleMessage("View"),
+    "viewPhotoGallery": MessageLookupByLibrary.simpleMessage(
+      "View Photo Gallery",
+    ),
+    "whatsIncluded": MessageLookupByLibrary.simpleMessage("What\'s Included"),
   };
 }
