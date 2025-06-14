@@ -35,6 +35,7 @@ dependencies:
     sdk: flutter
   flutter_bloc: ^9.1.1
   flutter_credit_card: ^4.1.0
+  flutter_gemini: ^3.0.0
   flutter_inappwebview: ^6.1.5
   flutter_localizations:
     sdk: flutter
@@ -43,10 +44,11 @@ dependencies:
   get_it: ^8.0.3
   hive: ^2.2.3
   hive_flutter: ^1.1.0
+  hive_generator: ^2.0.1
   hydrated_bloc: ^10.0.0
   image_picker: ^1.1.2
   intl: ^0.20.2
-  intl_utils: ^2.8.10
+  intl_utils: ^2.8.8
   lottie: ^3.3.1
   meta: ^1.16.0
   path_provider: ^2.1.5

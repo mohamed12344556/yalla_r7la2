@@ -4,6 +4,8 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:hydrated_bloc/hydrated_bloc.dart';
 import 'package:path_provider/path_provider.dart';
+import 'package:yalla_r7la2/core/api/api_config.dart';
+import 'package:yalla_r7la2/features/chat/services/chat_bot_service.dart';
 
 import 'core/di/dependency_injection.dart';
 import 'core/utils/auth_guard.dart';
@@ -13,6 +15,22 @@ import 'travel_app.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+
+  // تهيئة ChatBotService باستخدام ApiConfig
+  final geminiApiKey = ApiConfig.getGeminiApiKey();
+
+  if (geminiApiKey != null) {
+    ChatBotService.initialize(geminiApiKey: geminiApiKey);
+    log('✅ ChatBotService initialized with Gemini API');
+  } else {
+    ChatBotService.initialize();
+    log('⚠️ ChatBotService initialized without Gemini API');
+  }
+
+  // طباعة حالة مفاتيح الـ API (اختياري)
+  if (ApiConfig.isDevelopment) {
+    ApiConfig.printApiKeysStatus();
+  }
 
   // Initialize global error handler
   GlobalErrorHandler.initialize();
@@ -51,7 +69,6 @@ class MyHttpOverrides extends HttpOverrides {
           (X509Certificate cert, String host, int port) => true;
   }
 }
-
 
 // Test credentials:
 // Email: a123@gmail.com
