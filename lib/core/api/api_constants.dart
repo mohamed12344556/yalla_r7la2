@@ -8,7 +8,8 @@ class ApiConstants {
   static const String resetPassword = 'api/Users/ResetPassword';
 
   // Destinations Endpoints
-  static const String destinations = 'api/Destinations/GetAllDestinations';
+  static const String destinations =
+      'api/Destinations/GetAllDestinationsAsPageination';
   static const String destinationDetails =
       'api/Destinations/GetDestinationDetails';
   static const String destinationsByCategory = 'api/Destinations/GetByCategory';
@@ -22,9 +23,9 @@ class ApiConstants {
   static const String bookDestination = 'api/Destinations/Booking';
   static const String unbookDestination = 'api/Destinations/UnBookDestination';
 
-
   // AI Endpoints
-  static const String predictAndSearchByImage = 'https://20.74.208.111/api2/predict';
+  static const String predictAndSearchByImage =
+      'https://20.74.208.111/api2/predict';
 }
 
 class SharedPrefKeys {

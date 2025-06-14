@@ -50,16 +50,19 @@ class _ProfileEditScreenState extends State<ProfileEditScreen> {
       _phoneController.text = user.phoneNumber?.toString() ?? '';
       _cityController.text = user.city ?? '';
       _preferenceCityController.text = user.preference ?? '';
-      // حط الباسورد الحالي (لو موجود)
       _passwordController.text = user.password?.toString() ?? '';
 
-      // Handle age/birthdate logic properly
-      if (user.age != null && user.age! > 0) {
+      // Fix: Handle age/birthdate logic properly with validation
+      if (user.age != null && user.age! > 0 && user.age! < 100) {
         final currentYear = DateTime.now().year;
         final birthYear = currentYear - user.age!;
-        _selectedDate = DateTime(birthYear, 1, 1);
-        _birthDateController.text =
-            _selectedDate!.toLocal().toString().split(' ')[0];
+
+        // Validate the birth year is reasonable
+        if (birthYear >= 1900 && birthYear <= currentYear) {
+          _selectedDate = DateTime(birthYear, 1, 1);
+          _birthDateController.text =
+              _selectedDate!.toLocal().toString().split(' ')[0];
+        }
       }
     }
   }
@@ -260,9 +263,21 @@ class _ProfileEditScreenState extends State<ProfileEditScreen> {
   }
 
   Future<void> _selectBirthDate() async {
+    // Fix: Use a safe default date and validate _selectedDate
+    DateTime initialDate;
+
+    if (_selectedDate != null &&
+        _selectedDate!.year >= 1950 &&
+        _selectedDate!.isBefore(DateTime.now())) {
+      initialDate = _selectedDate!;
+    } else {
+      // Default to 25 years old if no valid date
+      initialDate = DateTime(DateTime.now().year - 25, 1, 1);
+    }
+
     final DateTime? picked = await showDatePicker(
       context: context,
-      initialDate: _selectedDate ?? DateTime(2000),
+      initialDate: initialDate,
       firstDate: DateTime(1950),
       lastDate: DateTime.now().subtract(
         const Duration(days: 365 * 13),

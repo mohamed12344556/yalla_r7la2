@@ -69,7 +69,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                 context.showSuccessSnackBar(
                   S.of(context).Account_created_successfully,
                 );
-                context.pushReplacementNamed(Routes.host);
+                context.pushReplacementNamed(Routes.login);
               } else if (state is RegisterError) {
                 context.showErrorSnackBar(state.errorMessage);
               }

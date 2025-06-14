@@ -42,6 +42,50 @@ class _ProfileViewScreenState extends State<ProfileViewScreen> {
     }
   }
 
+  // دالة حساب العمر
+  int calculateAge(DateTime birthDate) {
+    final now = DateTime.now();
+    int age = now.year - birthDate.year;
+
+    if (now.month < birthDate.month ||
+        (now.month == birthDate.month && now.day < birthDate.day)) {
+      age--;
+    }
+
+    return age;
+  }
+
+  // دالة تحويل العمر إلى تاريخ ميلاد تقريبي
+  DateTime? getBirthDateFromAge(int? age) {
+    if (age == null || age <= 0) return null;
+
+    final now = DateTime.now();
+    return DateTime(now.year - age, 1, 1);
+  }
+
+  // دالة تنسيق عرض العمر
+  String formatAgeDisplay(UserModel? user) {
+    if (user?.age != null && user!.age! > 0) {
+      final birthDate = getBirthDateFromAge(user.age);
+      if (birthDate != null) {
+        final calculatedAge = calculateAge(birthDate);
+        return '$calculatedAge years old';
+      }
+    }
+    return 'Age not specified';
+  }
+
+  // دالة تنسيق عرض تاريخ الميلاد
+  String formatBirthDateDisplay(UserModel? user) {
+    if (user?.age != null && user!.age! > 0) {
+      final birthDate = getBirthDateFromAge(user.age);
+      if (birthDate != null) {
+        return '${birthDate.year}';
+      }
+    }
+    return 'Not specified';
+  }
+
   // دالة الـ refresh
   Future<void> _onRefresh() async {
     if (!mounted) return;
@@ -510,13 +554,12 @@ class _ProfileViewScreenState extends State<ProfileViewScreen> {
                             subtitle: user.name!,
                           ),
 
-                        if (user?.age != null)
-                          _buildInfoCard(
-                            icon: Icons.cake,
-                            title: 'Date of Birth',
-                            subtitle: user?.age?.toString() ?? 'N/A',
-                          ),
-
+                        // if (user?.age != null)
+                        //   _buildInfoCard(
+                        //     icon: Icons.cake,
+                        //     title: 'Date of Birth',
+                        //     subtitle: formatBirthDateDisplay(user),
+                        //   ),
                         if (user?.city != null && user!.city!.isNotEmpty)
                           _buildInfoCard(
                             icon: Icons.location_on,
@@ -528,7 +571,7 @@ class _ProfileViewScreenState extends State<ProfileViewScreen> {
                           _buildInfoCard(
                             icon: Icons.calendar_today,
                             title: 'Age',
-                            subtitle: '${user!.age} years old',
+                            subtitle: formatAgeDisplay(user),
                           ),
 
                         if (user?.preference != null &&
